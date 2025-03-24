@@ -41,7 +41,7 @@ const ProposalSigning = ({ onClose, className, request, onSuccess }: SigningModa
   const { api, chainInfo } = useApi()
   const { currentNamespace, isLoading: isNamespaceLoading } = useGetWalletConnectNamespace()
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const { web3wallet } = useWalletConnect()
+  const { walletKit } = useWalletConnect()
   const {
     getMultisigByAddress,
     selectedMultiProxy,
@@ -162,7 +162,7 @@ const ProposalSigning = ({ onClose, className, request, onSuccess }: SigningModa
         request.id,
         'Multix multisig transaction ongoing...'
       )
-      web3wallet?.respondSessionRequest({
+      walletKit?.respondSessionRequest({
         topic: request.topic,
         response
       })
@@ -223,14 +223,14 @@ const ProposalSigning = ({ onClose, className, request, onSuccess }: SigningModa
   const onReject = useCallback(() => {
     const response = getWalletConnectErrorResponse(request.id, 'User rejected request on Multix')
 
-    web3wallet
+    walletKit
       ?.respondSessionRequest({
         topic: request.topic,
         response
       })
       .catch(console.error)
       .finally(() => onClose())
-  }, [onClose, request, web3wallet])
+  }, [onClose, request, walletKit])
 
   return (
     <Dialog

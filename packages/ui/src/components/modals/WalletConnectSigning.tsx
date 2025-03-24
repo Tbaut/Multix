@@ -339,7 +339,7 @@ const ProposalSigning = ({ onClose, className, request, onSuccess }: SigningModa
             )}
             {isGettingCallInfo && (
               <Button disabled>
-                <CircularProgress />
+                <CircularProgress size={20} />
               </Button>
             )}
           </ButtonContainerStyled>

@@ -527,7 +527,7 @@ const MultisigCreation = ({ className }: Props) => {
               disabled={true}
               data-cy="button-creating-loader"
             >
-              <LoaderStyled />
+              <LoaderStyled size={20} />
               Creating...
             </ButtonWithIcon>
           )}
@@ -538,8 +538,6 @@ const MultisigCreation = ({ className }: Props) => {
 }
 
 const LoaderStyled = styled(CircularProgress)`
-  width: 1.5rem !important;
-  height: 1.5rem !important;
   margin-right: 4px;
 
   & > svg {

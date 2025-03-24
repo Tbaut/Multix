@@ -73,7 +73,7 @@ export const WalletConnectActiveSessions = () => {
                 onClick={() => onDeleteSession(session.topic)}
                 disabled={isLoading}
               >
-                {isLoading ? <CircularProgress size={24} /> : 'Delete session'}
+                {isLoading ? <CircularProgress size={20} /> : 'Delete session'}
               </Button>
             </div>
           </ContentBoxStyled>

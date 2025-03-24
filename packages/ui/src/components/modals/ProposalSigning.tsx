@@ -24,7 +24,9 @@ import { getAsMultiTx } from '../../utils/getAsMultiTx'
 import { CallDataInfoFromChain } from '../../contexts/PendingTxContext'
 import { debounce } from '../../utils/debounce'
 import { FixedSizeBinary, HexString, Transaction } from 'polkadot-api'
-import { useAnyApi } from '../../hooks/useAnyApi'
+import { TeleportFundsAlert } from '../TeleportFundsAlert'
+import { usePplApi } from '../../contexts/PeopleChainApiContext'
+import { useApi } from '../../contexts/ApiContext'
 
 export interface SigningModalProps {
   onClose: () => void
@@ -43,7 +45,8 @@ const ProposalSigning = ({
   onSuccess,
   isPplChainTx
 }: SigningModalProps) => {
-  const { api, compatibilityToken } = useAnyApi({ withPplApi: isPplChainTx })
+  const { pplApi, pplCompatibilityToken } = usePplApi()
+  const { api: originApi, compatibilityToken: originCompatibilityToken } = useApi()
   const [isSubmitting, setIsSubmitting] = useState(false)
   const { getMultisigByAddress, setRefetchMultisigTimeoutMinutes } = useMultiProxy()
   const { selectedAccount } = useAccounts()
@@ -65,10 +68,25 @@ const ProposalSigning = ({
     callData: proposalData.callData || debouncedAddedCallData
   })
 
+  // check if the signer has enough funds to pay for the transaction fees
+  // in case of a ppl chain tx, we need to check the balance on the ppl chain
   const { hasEnoughFreeBalance: hasSignerEnoughFunds } = useCheckTransferableBalance({
     min: 0n,
     address: selectedAccount?.address,
     withPplApi: isPplChainTx
+  })
+
+  const amountToTeleport = useMemo(() => {
+    if (!isPplChainTx || !pplApi || !pplCompatibilityToken) return 0n
+    // This is what we transfer to the ppl chain in case the sender doesn't have enough
+    // to be safe, we send 10x the existential deposit to pay for fees
+    return 10n * pplApi.constants.Balances.ExistentialDeposit(pplCompatibilityToken)
+  }, [isPplChainTx, pplApi, pplCompatibilityToken])
+
+  const { hasEnoughFreeBalance: hasSignerEnoughOriginFunds } = useCheckTransferableBalance({
+    min: amountToTeleport,
+    address: selectedAccount?.address,
+    withPplApi: false
   })
 
   const hasReachedThreshold = useMemo(
@@ -144,6 +162,9 @@ const ProposalSigning = ({
       const otherSigners = getSortAddress(
         signatories.filter((signer) => signer !== selectedAccount?.address)
       )
+
+      const api = isPplChainTx ? pplApi : originApi
+      const compatibilityToken = isPplChainTx ? pplCompatibilityToken : originCompatibilityToken
 
       if (!threshold) {
         const error = 'Threshold is undefined'
@@ -271,17 +292,20 @@ const ProposalSigning = ({
     [
       getSortAddress,
       signatories,
+      isPplChainTx,
+      pplApi,
+      originApi,
+      pplCompatibilityToken,
+      originCompatibilityToken,
       threshold,
       proposalData,
-      api,
       selectedAccount,
       multisig,
       mustProvideCallData,
       callInfo,
       hasReachedThreshold,
       signCallback,
-      addedCallData,
-      compatibilityToken
+      addedCallData
     ]
   )
 
@@ -315,6 +339,18 @@ const ProposalSigning = ({
             />
           </Grid>
           <Grid size={{ xs: 0, md: 5 }} />
+          {!!isPplChainTx && hasSignerEnoughOriginFunds && !hasSignerEnoughFunds && (
+            <>
+              <Grid size={{ xs: 0, md: 1 }} />
+              <Grid size={{ xs: 12, md: 6 }}>
+                <TeleportFundsAlert
+                  receivingAddress={selectedAccount?.address || ''}
+                  sendingAmount={amountToTeleport}
+                />
+              </Grid>
+              <Grid size={{ xs: 0, md: 5 }} />
+            </>
+          )}
           <>
             <Grid size={{ xs: 0, md: 1 }} />
             <HashGridStyled size={{ xs: 12, md: 11 }}>
@@ -367,6 +403,21 @@ const ProposalSigning = ({
               </Grid>
             </>
           )}
+          {!!isPplChainTx && !hasSignerEnoughOriginFunds && !hasSignerEnoughFunds && (
+            <>
+              <Grid size={{ xs: 0, md: 1 }} />
+              <Grid
+                size={{ xs: 12, md: 11 }}
+                className="errorMessage"
+              >
+                <Alert severity="error">
+                  The &quot;Signing with&quot; account doesn&apos;t have enough funds on the People
+                  Chain to pay for the transaction, and not enough on the origin chain either to
+                  teleport.
+                </Alert>
+              </Grid>
+            </>
+          )}
           {!!errorMessage && (
             <>
               <Grid size={{ xs: 0, md: 1 }} />
@@ -403,7 +454,7 @@ const ProposalSigning = ({
             )}
             {isGettingCallInfo && (
               <Button disabled>
-                <CircularProgress size="1rem" />
+                <CircularProgress size={20} />
               </Button>
             )}
           </ButtonContainerStyled>

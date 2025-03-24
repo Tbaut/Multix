@@ -410,8 +410,6 @@ const Send = ({ onClose, className, onSuccess, onFinalized, preselected }: Props
 }
 
 const LoaderStyled = styled(CircularProgress)`
-  width: 1.5rem !important;
-  height: 1.5rem !important;
   margin-right: 4px;
 
   & > svg {

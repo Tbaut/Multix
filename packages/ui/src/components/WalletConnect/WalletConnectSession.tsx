@@ -67,7 +67,7 @@ export const WalletConnectSession = () => {
             onClick={onConnect}
             data-cy="button-connect-dapp"
           >
-            {loading ? <CircularProgress size={24} /> : 'Connect Dapp'}
+            {loading ? <CircularProgress size={20} /> : 'Connect Dapp'}
           </ButtonStyled>
         </Grid>
       </Grid>

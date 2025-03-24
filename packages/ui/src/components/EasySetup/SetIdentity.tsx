@@ -1,4 +1,4 @@
-import { Alert, Grid2 as Grid } from '@mui/material'
+import { Grid2 as Grid } from '@mui/material'
 import { styled } from '@mui/material/styles'
 import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react'
 import { TextField } from '../library'
@@ -7,12 +7,11 @@ import { useCheckTransferableBalance } from '../../hooks/useCheckTransferableBal
 import { getErrorMessageReservedFunds } from '../../utils/getErrorMessageReservedFunds'
 import { useSetIdentityReservedFunds } from '../../hooks/useSetIdentityReservedFunds'
 import { FixedSizeBinary, Transaction } from 'polkadot-api'
-import { useIdentityApi } from '../../hooks/useIdentityApi'
 import { formatBigIntBalance } from '../../utils/formatBnBalance'
-import { isPplContextIn } from '../../contexts/PeopleChainApiContext'
-import { pplDescriptorKeys } from '../../types'
+import { usePplApi } from '../../contexts/PeopleChainApiContext'
 import { IdentityData } from '@polkadot-api/descriptors'
 import { useGetED } from '../../hooks/useGetED'
+import { TeleportFundsAlert } from '../TeleportFundsAlert'
 
 interface Props {
   className?: string
@@ -57,7 +56,7 @@ const getExtrinsicsArgs = ({ legal, display, email, matrix, twitter, web }: Iden
   }
 }
 
-const fieldNameAndPlaceholder = (fieldName: keyof IdentityFields) => {
+export const fieldNameAndPlaceholder = (fieldName: keyof IdentityFields) => {
   switch (fieldName) {
     case 'display':
       return {
@@ -113,7 +112,11 @@ const fieldNameAndPlaceholder = (fieldName: keyof IdentityFields) => {
 const MAX_ALLOWED_VAL_LENGTH = 32
 
 const SetIdentity = ({ className, onSetExtrinsic, from, onSetErrorMessage }: Props) => {
-  const { ctx, chainInfo } = useIdentityApi()
+  const {
+    pplApi: api,
+    pplChainInfo: chainInfo,
+    pplCompatibilityToken: compatibilityToken
+  } = usePplApi()
   const [identityFields, setIdentityFields] = useState<IdentityFields | undefined>()
   const getIdentity = useGetIdentity()
   const [chainIdentity, setChainIdentity] = useState<IdentityInfo>()
@@ -134,7 +137,16 @@ const SetIdentity = ({ className, onSetExtrinsic, from, onSetErrorMessage }: Pro
   }, [identityFields])
 
   const { reserved: identityReservedFunds } = useSetIdentityReservedFunds(identityFields)
-  const { hasEnoughFreeBalance: hasOriginEnoughFunds } = useCheckTransferableBalance({
+  const amountToSend = useMemo(() => {
+    if (!api || !compatibilityToken) return 0n
+    // This is what we transfer to the ppl chain in case the sender doesn't have enough
+    // to be safe, we send 10x the existential deposit to pay for fees + reserved funds
+    return (
+      10n * api.constants.Balances.ExistentialDeposit(compatibilityToken) + identityReservedFunds
+    )
+  }, [api, compatibilityToken, identityReservedFunds])
+
+  const { hasEnoughFreeBalance: hasMultisigEnoughPplFunds } = useCheckTransferableBalance({
     min: identityReservedFunds,
     address: from,
     withPplApi: true
@@ -147,7 +159,7 @@ const SetIdentity = ({ className, onSetExtrinsic, from, onSetErrorMessage }: Pro
   const { existentialDeposit } = useGetED({
     withPplApi: true
   })
-  const minBalanceDisplay = useMemo(() => {
+  const minOriginBalanceDisplay = useMemo(() => {
     if (!existentialDeposit || !identityReservedFunds) return
 
     return identityReservedFunds + existentialDeposit
@@ -164,9 +176,9 @@ const SetIdentity = ({ className, onSetExtrinsic, from, onSetErrorMessage }: Pro
       return
     }
 
-    if (!!minBalanceDisplay && !hasOriginEnoughFunds) {
+    if (!!minOriginBalanceDisplay && !hasMultisigEnoughPplFunds) {
       const requiredBalanceString = formatBigIntBalance(
-        minBalanceDisplay,
+        minOriginBalanceDisplay,
         chainInfo?.tokenDecimals,
         {
           tokenSymbol: chainInfo?.tokenSymbol
@@ -176,6 +188,7 @@ const SetIdentity = ({ className, onSetExtrinsic, from, onSetErrorMessage }: Pro
       const reservedString = formatBigIntBalance(identityReservedFunds, chainInfo?.tokenDecimals, {
         tokenSymbol: chainInfo?.tokenSymbol
       })
+
       const errorWithReservedFunds = getErrorMessageReservedFunds({
         identifier: '"From" account',
         requiredBalanceString,
@@ -192,11 +205,11 @@ const SetIdentity = ({ className, onSetExtrinsic, from, onSetErrorMessage }: Pro
     chainInfo,
     fieldtooLongError,
     hasChangedAtLeastAField,
-    hasOriginEnoughFunds,
+    hasMultisigEnoughPplFunds,
     identityFields,
     onSetErrorMessage,
     identityReservedFunds,
-    minBalanceDisplay
+    minOriginBalanceDisplay
   ])
 
   useEffect(() => {
@@ -223,7 +236,7 @@ const SetIdentity = ({ className, onSetExtrinsic, from, onSetErrorMessage }: Pro
   }, [chainIdentity])
 
   useEffect(() => {
-    if (!isPplContextIn(ctx, pplDescriptorKeys) || !ctx.pplApi) {
+    if (!api) {
       onSetExtrinsic(undefined)
       return
     }
@@ -239,12 +252,12 @@ const SetIdentity = ({ className, onSetExtrinsic, from, onSetErrorMessage }: Pro
     }
 
     const extrinsicsArgs = getExtrinsicsArgs(identityFields)
-    const call = ctx.pplApi.tx.Identity.set_identity(extrinsicsArgs)
+    const call = api.tx.Identity.set_identity(extrinsicsArgs)
     onSetExtrinsic(call)
   }, [
     allFieldsUndefined,
+    api,
     chainInfo,
-    ctx,
     fieldtooLongError,
     identityFields,
     onSetErrorMessage,
@@ -263,16 +276,14 @@ const SetIdentity = ({ className, onSetExtrinsic, from, onSetErrorMessage }: Pro
       spacing={1}
       data-cy="section-set-identity"
     >
-      <Grid size={{ xs: 12 }}>
-        <AlertStyled
-          className={className}
-          severity="info"
-          data-cy="alert-info-identity"
-        >
-          Identity is managed on the People Chain. You need both the signatories, and the multisig
-          to have funds on this chain.
-        </AlertStyled>
-      </Grid>
+      {!!minOriginBalanceDisplay && !hasMultisigEnoughPplFunds && (
+        <TeleportFundsAlert
+          receivingName="The Multisig"
+          receivingAddress={from}
+          sendingAmount={amountToSend}
+          batchWithSignerIfNeeded={true}
+        />
+      )}
       {identityFields &&
         Object.entries(identityFields).map(([fieldName, value]) => {
           const { field, placeholder, required } = fieldNameAndPlaceholder(
@@ -309,11 +320,6 @@ const SetIdentity = ({ className, onSetExtrinsic, from, onSetErrorMessage }: Pro
     </Grid>
   )
 }
-
-const AlertStyled = styled(Alert)`
-  border: 0;
-  margin-bottom: 0.5rem;
-`
 
 const TextFieldStyled = styled(TextField)`
   .MuiFormHelperText-root.Mui-error {

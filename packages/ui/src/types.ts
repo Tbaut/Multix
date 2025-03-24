@@ -124,6 +124,13 @@ export const DESCRIPTORS_ASSET_HUBS = {
   wesAssetHub
 }
 
+export const DESCRIPTORS_RELAYS = {
+  paseo,
+  dot,
+  ksm,
+  westend
+}
+
 export const DESCRIPTORS_1_3 = { acala, bifrostDot, dot, dotAssetHub, hydration } as const
 export const DESCRIPTORS_2_3 = { ksm, ksmAssetHub, paseo, phala } as const
 export const DESCRIPTORS_3_3 = { polimec, coretimeDot, westend, wesAssetHub } as const
@@ -163,6 +170,9 @@ export const allDescriptorsKey_3_3 = Object.keys(
 export const assetHubKeys = Object.keys(
   DESCRIPTORS_ASSET_HUBS
 ) as (keyof typeof DESCRIPTORS_ASSET_HUBS)[]
+
+// Relays
+export const relayKeys = Object.keys(DESCRIPTORS_RELAYS) as (keyof typeof DESCRIPTORS_RELAYS)[]
 
 // Ppl chains
 export const DESCRIPTORS_PPL = {

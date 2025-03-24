@@ -1,7 +1,7 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
 import { Core } from '@walletconnect/core'
 import { ICore, PairingTypes } from '@walletconnect/types'
-import { Web3Wallet, IWeb3Wallet } from '@walletconnect/web3wallet'
+import { WalletKit, IWalletKit } from '@reown/walletkit'
 import { DAPP_NAME, WALLETCONNECT_PROJECT_ID } from '../constants'
 
 export type WalletConnect = { [address: string]: string }
@@ -11,7 +11,7 @@ type WalletConnectContextProps = {
 }
 
 export interface IWalletConnectContext {
-  web3wallet: IWeb3Wallet | undefined
+  walletKit: IWalletKit | undefined
   core: ICore
   pair: (params: { uri: string }) => Promise<PairingTypes.Struct>
   refresh: () => Promise<void>
@@ -21,28 +21,28 @@ const WalletConnectContext = createContext<IWalletConnectContext | undefined>(un
 
 const WalletConnectContextProvider = ({ children }: WalletConnectContextProps) => {
   const [isInitialized, setIsInitialized] = useState(false)
-  const [web3wallet, setWeb3wallet] = useState<IWeb3Wallet | undefined>()
+  const [walletKit, setwalletKit] = useState<IWalletKit | undefined>()
   const core = useMemo(
     () =>
       new Core({
-        logger: undefined, // use 'debug' to get more insight
+        logger: undefined, // use 'debug' to get more insight,
         projectId: WALLETCONNECT_PROJECT_ID
         // relayUrl: relayerRegionURL ?? import.meta.env.VITE_WALLETCONNECT_PUBLIC_RELAY_URL
       }),
     []
   )
-  const createWeb3Wallet = useCallback(() => {
-    return Web3Wallet.init({
+  const createWalletKit = useCallback(() => {
+    return WalletKit.init({
       core,
       metadata: {
         name: DAPP_NAME,
         description: 'Multix Client as Wallet/Peer',
-        url: 'multix.chainsafe.io',
+        url: 'multix.cloud',
         icons: ['https://avatars.githubusercontent.com/u/37784886']
       }
     })
       .then((web) => {
-        setWeb3wallet(web)
+        setwalletKit(web)
         setIsInitialized(true)
       })
       .catch(console.error)
@@ -56,17 +56,17 @@ const WalletConnectContextProvider = ({ children }: WalletConnectContextProps) =
   )
 
   const refresh = useCallback(() => {
-    return createWeb3Wallet()
-  }, [createWeb3Wallet])
+    return createWalletKit()
+  }, [createWalletKit])
 
   useEffect(() => {
     if (!isInitialized) {
-      createWeb3Wallet()
+      createWalletKit()
     }
-  }, [createWeb3Wallet, isInitialized])
+  }, [createWalletKit, isInitialized])
 
   return (
-    <WalletConnectContext.Provider value={{ web3wallet, core, pair, refresh }}>
+    <WalletConnectContext.Provider value={{ walletKit: walletKit, core, pair, refresh }}>
       {children}
     </WalletConnectContext.Provider>
   )

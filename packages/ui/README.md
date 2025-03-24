@@ -4,8 +4,8 @@ This UI is meant to be run either alongside an indexer as presented in `../squid
 
 ## Wiki articles
 
-- [Connect Dapps to Multix using WalletConnect v2](https://github.com/ChainSafe/Multix/wiki/Connect-Dapps-to-Multix-using-WalletConnect-v2)
-- [How to integrate with Multix - no api required!](https://github.com/ChainSafe/Multix/wiki/Multix-integration)
+- [Connect Dapps to Multix using WalletConnect v2](https://github.com/Tbaut/Multix/wiki/Connect-Dapps-to-Multix-using-WalletConnect-v2)
+- [How to integrate with Multix - no api required!](https://github.com/Tbaut/Multix/wiki/Multix-integration)
 
 ## Available scripts
 

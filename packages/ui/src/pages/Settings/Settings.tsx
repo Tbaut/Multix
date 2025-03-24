@@ -6,17 +6,20 @@ import { WalletConnectActiveSessions } from '../../components/WalletConnect/Wall
 import {
   HiOutlineChevronDown as ExpandMoreIcon,
   HiOutlineEye,
-  HiOutlineEyeSlash
+  HiOutlineEyeSlash,
+  HiOutlineArrowRightOnRectangle
 } from 'react-icons/hi2'
 import { theme } from '../../styles/theme'
 import { useCallback, useEffect, useState } from 'react'
 import { useLocation } from 'react-router'
 import WalletConnectSVG from '../../logos/walletConnectSVG.svg?react'
 import HiddenAccounts from './HiddenAccounts'
+import { Export } from './Export'
 
 const ACCORDION_WATCHED_ACCOUNTS = 'panel-watched-accounts'
 const ACCORDION_WALLET_CONNECT = 'panel-wallet-connect'
 const ACCORDION_HIDDEN_ACCOUNTS = 'panel-hidden-accounts'
+const ACCORDION_EXPORT_LOCAL_DATA = 'panel-export-local-data'
 export const WATCH_ACCOUNT_ANCHOR = 'watched-accounts'
 export const HIDDEN_ACCOUNTS_ANCHOR = 'hidden-accounts'
 
@@ -24,6 +27,7 @@ type AccordionNames =
   | typeof ACCORDION_WATCHED_ACCOUNTS
   | typeof ACCORDION_WALLET_CONNECT
   | typeof ACCORDION_HIDDEN_ACCOUNTS
+  | typeof ACCORDION_EXPORT_LOCAL_DATA
 
 const Settings = () => {
   const { hash } = useLocation()
@@ -94,6 +98,21 @@ const Settings = () => {
           <WalletConnectActiveSessions />
         </AccordionDetails>
       </AccordionStyled>
+      <AccordionStyled
+        expanded={expanded === ACCORDION_EXPORT_LOCAL_DATA}
+        onChange={() => onToggle(ACCORDION_EXPORT_LOCAL_DATA)}
+      >
+        <AccordionSummaryStyled
+          expandIcon={<ExpandMoreIcon size={20} />}
+          data-cy="accordion-title-export-data"
+        >
+          <HiOutlineArrowRightOnRectangleStyled color={theme.custom.proxyBadge.pure} />
+          <SummaryLabelStyled>Export local data</SummaryLabelStyled>
+        </AccordionSummaryStyled>
+        <AccordionDetails>
+          <Export />
+        </AccordionDetails>
+      </AccordionStyled>
     </>
   )
 }
@@ -152,6 +171,8 @@ const WalletConnectSVGStyled = styled(WalletConnectSVG)(commonCssImgs)
 const HiOutlineEyeStyled = styled(HiOutlineEye)(commonCssImgs)
 
 const HiOutlineEyeSlashStyled = styled(HiOutlineEyeSlash)(commonCssImgs)
+
+const HiOutlineArrowRightOnRectangleStyled = styled(HiOutlineArrowRightOnRectangle)(commonCssImgs)
 
 const SummaryLabelStyled = styled('div')`
   color: ${({ theme }) => theme.custom.gray[900]};

@@ -19,7 +19,7 @@ interface Props {
 
 const WalletConnectSessionProposal = ({ onClose, className, sessionProposal }: Props) => {
   const { selectedMultiProxy } = useMultiProxy()
-  const { web3wallet, refresh } = useWalletConnect()
+  const { walletKit, refresh } = useWalletConnect()
   const { currentNamespace, getAccountsWithNamespace } = useGetWalletConnectNamespace()
   const [errorMessage, setErrorMessage] = useState('')
   const accountsToShare = useMemo(() => {
@@ -49,7 +49,7 @@ const WalletConnectSessionProposal = ({ onClose, className, sessionProposal }: P
   )
 
   useEffect(() => {
-    if (!web3wallet || !sessionProposal) return
+    if (!walletKit || !sessionProposal) return
 
     if (!chains.includes(currentNamespace)) {
       setErrorMessage(
@@ -60,12 +60,12 @@ const WalletConnectSessionProposal = ({ onClose, className, sessionProposal }: P
     } else {
       setErrorMessage('')
     }
-  }, [chains, currentNamespace, sessionProposal, web3wallet])
+  }, [chains, currentNamespace, sessionProposal, walletKit])
 
   const onApprove = useCallback(() => {
-    if (!web3wallet || !sessionProposal) return
+    if (!walletKit || !sessionProposal) return
 
-    web3wallet
+    walletKit
       .approveSession({
         id: sessionProposal.id,
         namespaces: {
@@ -82,12 +82,12 @@ const WalletConnectSessionProposal = ({ onClose, className, sessionProposal }: P
         onClose()
         refresh()
       })
-  }, [accountsToShare, chains, events, methods, onClose, refresh, sessionProposal, web3wallet])
+  }, [accountsToShare, chains, events, methods, onClose, refresh, sessionProposal, walletKit])
 
   const onReject = useCallback(() => {
-    if (!web3wallet || !sessionProposal) return
+    if (!walletKit || !sessionProposal) return
 
-    web3wallet
+    walletKit
       .rejectSession({
         id: sessionProposal.id,
         reason: getSdkError('USER_REJECTED_METHODS')
@@ -96,7 +96,7 @@ const WalletConnectSessionProposal = ({ onClose, className, sessionProposal }: P
       .finally(() => {
         onClose()
       })
-  }, [onClose, sessionProposal, web3wallet])
+  }, [onClose, sessionProposal, walletKit])
 
   return (
     <Dialog

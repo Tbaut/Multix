@@ -20,7 +20,7 @@ const About = ({ className }: Props) => {
           <p>
             Multix is open-source from the get-go. The back-end and front-end code can be{' '}
             <a
-              href="https://github.com/ChainSafe/Multix"
+              href="https://github.com/Tbaut/Multix"
               target="_blank"
               rel="noreferrer"
             >
@@ -51,22 +51,15 @@ const About = ({ className }: Props) => {
         </li>
       </ul>
       <h1 className="title">
-        Built by
-        <Box className="logoWrapper">
-          <Link
-            className="link chainsafe"
-            target="_blank"
-            rel="noreferrer"
-            href="https://chainsafe.io"
-          >
-            <img
-              className="logo-chainsafe"
-              src={chainsafeSVG}
-              alt="chainsafe systems logo"
-            />{' '}
-            ChainSafe Systems
-          </Link>
-        </Box>
+        Built by{' '}
+        <Link
+          className="link"
+          target="_blank"
+          rel="noreferrer"
+          href="https://github.com/tbaut/"
+        >
+          Tbaut
+        </Link>
       </h1>
       <h1 className="title">
         Supported by
@@ -94,6 +87,18 @@ const About = ({ className }: Props) => {
               alt="Polkadot logo"
             />
           </LinkPolkadotLogoStyled>
+          <Link
+            className="link chainsafe"
+            target="_blank"
+            rel="noreferrer"
+            href="https://chainsafe.io"
+          >
+            <img
+              className="logo-chainsafe"
+              src={chainsafeSVG}
+              alt="chainsafe systems logo"
+            />
+          </Link>
         </Box>
       </h1>
     </Center>
@@ -111,7 +116,7 @@ const LinkPolkadotLogoStyled = styled(Link)`
 
 export default styled(About)`
   .title {
-    margin-top: 2rem;
+    margin-top: 3rem;
   }
 
   .values {
@@ -135,6 +140,7 @@ export default styled(About)`
   .link {
     text-decoration: none;
     &.chainsafe {
+      margin-left: 1rem;
       display: flex;
       align-items: center;
     }

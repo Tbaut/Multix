@@ -1,41 +1,42 @@
-import { SignClientTypes } from '@walletconnect/types'
 import { useCallback, useEffect } from 'react'
-import { Web3WalletTypes } from '@walletconnect/web3wallet'
+import { WalletKitTypes } from '@reown/walletkit'
 import { POLKADOT_SIGNING_METHODS } from '../constants'
 import { useWalletConnect } from '../contexts/WalletConnectContext'
 import { useModals } from '../contexts/ModalsContext'
 import { useGetWalletConnectNamespace } from './useWalletConnectNamespace'
 
 export default function useWalletConnectEventsManager() {
-  const { web3wallet } = useWalletConnect()
+  const { walletKit } = useWalletConnect()
   const { openWalletConnectSessionModal, onOpenWalletConnectSigning } = useModals()
   const { currentNamespace } = useGetWalletConnectNamespace()
 
   // Open session proposal modal for confirmation / rejection
   const onSessionProposal = useCallback(
-    (proposal: SignClientTypes.EventArguments['session_proposal']) => {
+    (proposal: WalletKitTypes.EventArguments['session_proposal']) => {
       console.info('WalletConnect session_proposal', proposal)
       openWalletConnectSessionModal({ sessionProposal: proposal })
     },
     [openWalletConnectSessionModal]
   )
 
-  const onAuthRequest = useCallback((request: Web3WalletTypes.AuthRequest) => {
-    console.error('---> WalletConnect AuthRequest not implemented', request)
-  }, [])
+  const onAuthRequest = useCallback(
+    (request: WalletKitTypes.EventArguments['session_authenticate']) => {
+      console.error('---> WalletConnect AuthRequest not implemented', request)
+    },
+    []
+  )
 
   // Open request handling modal based on method that was used
   const onSessionRequest = useCallback(
-    async (requestEvent: SignClientTypes.EventArguments['session_request']) => {
-      if (!web3wallet) {
-        console.error('web3Wallet is undefined')
+    async (requestEvent: WalletKitTypes.EventArguments['session_request']) => {
+      console.info('WalletConnect session_request', requestEvent)
+      if (!walletKit) {
+        console.error('walletKit is undefined')
         return
       }
-      console.info('WalletConnect session_request', requestEvent)
       const { topic, params } = requestEvent
       const { request } = params
-      const requestSession = web3wallet.engine.signClient.session.get(topic)
-
+      const requestSession = walletKit.engine.signClient.session.get(topic)
       switch (request.method) {
         case POLKADOT_SIGNING_METHODS.POLKADOT_SIGN_MESSAGE:
         case POLKADOT_SIGNING_METHODS.POLKADOT_SIGN_TRANSACTION:
@@ -56,18 +57,18 @@ export default function useWalletConnectEventsManager() {
           return null
       }
     },
-    [currentNamespace, onOpenWalletConnectSigning, web3wallet]
+    [currentNamespace, onOpenWalletConnectSigning, walletKit]
   )
 
   useEffect(() => {
-    if (web3wallet) {
+    if (walletKit) {
       // sign
-      web3wallet.on('session_proposal', onSessionProposal)
-      web3wallet.on('session_request', onSessionRequest)
+      walletKit.on('session_proposal', onSessionProposal)
+      walletKit.on('session_request', onSessionRequest)
       // auth
-      web3wallet.on('auth_request', onAuthRequest)
+      walletKit.on('session_authenticate', onAuthRequest)
       // session deleted
-      web3wallet.on('session_delete', (data) => console.log('session deleted', data))
+      walletKit.on('session_delete', (data) => console.log('session deleted', data))
     }
-  }, [onSessionProposal, onSessionRequest, onAuthRequest, web3wallet])
+  }, [onSessionProposal, onSessionRequest, onAuthRequest, walletKit])
 }

@@ -3,6 +3,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { HiOutlineXMark as CloseIcon } from 'react-icons/hi2'
 import { Button } from './library'
 import { useImportExportLocalData } from '../hooks/useImportExportLocalData'
+import { getImportUrl } from '../utils/getImportUrl'
 
 interface Props {
   className?: string
@@ -29,7 +30,9 @@ export const DomainMoveBanner = ({ className = '' }: Props) => {
   }, [])
 
   const onMigrate = useCallback(() => {
-    window.open(`https://multix.cloud/migrate?d=${encodedData}`)
+    if (!encodedData) return
+
+    window.open(getImportUrl(encodedData))
   }, [encodedData])
 
   if (!isVisible || isOnMultixCloud) return null

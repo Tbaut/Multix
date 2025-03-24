@@ -98,8 +98,5 @@ export const useImportExportLocalData = () => {
     ]
   )
 
-  //   console.log('encodedData', encodedData)
-  //   console.log('decoded', decodeData(encodedData || ''))
-
   return { encodedData, mergeWithLocalData, decodeData }
 }

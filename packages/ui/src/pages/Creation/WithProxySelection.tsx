@@ -17,7 +17,7 @@ const WithProxySelection = ({ setWithProxy, withProxy, className }: Props) => {
           <>
             Use a pure proxy (not cross-chain{' '}
             <a
-              href="https://github.com/ChainSafe/Multix/wiki/When-to-use-a-Pure-proxy-with-a-Multisig"
+              href="https://github.com/Tbaut/Multix/wiki/When-to-use-a-Pure-proxy-with-a-Multisig"
               target="_blank"
               rel="noreferrer"
             >
@@ -46,7 +46,7 @@ const InfoBox = ({ className = '' }: { className?: string }) => (
       <span>
         Using a pure proxy has advantages and drawbacks see when it makes sense to use it{' '}
         <a
-          href="https://github.com/ChainSafe/Multix/wiki/When-to-use-a-Pure-proxy-with-a-Multisig"
+          href="https://github.com/Tbaut/Multix/wiki/When-to-use-a-Pure-proxy-with-a-Multisig"
           target="_blank"
           rel="noreferrer"
         >

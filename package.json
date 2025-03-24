@@ -39,8 +39,8 @@
   "devDependencies": {
     "concurrently": "^9.1.2",
     "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.2.3",
-    "prettier": "^3.5.1"
+    "eslint-plugin-prettier": "^5.2.4",
+    "prettier": "^3.5.3"
   },
   "resolutions": {
     "graphql": "^16.0.0",

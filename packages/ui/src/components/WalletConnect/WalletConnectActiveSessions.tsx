@@ -6,29 +6,31 @@ import { Button } from '../library'
 import { getSdkError } from '@walletconnect/utils'
 
 export const WalletConnectActiveSessions = () => {
-  const { web3wallet, refresh } = useWalletConnect()
+  const { walletKit, refresh } = useWalletConnect()
   const [isLoading, setIsLoading] = useState(false)
 
   const activeSessions = useMemo(
-    () => Object.values(web3wallet?.getActiveSessions() || {}),
-    [web3wallet]
+    () => Object.values(walletKit?.getActiveSessions() || {}),
+    [walletKit]
   )
 
   const onDeleteSession = useCallback(
     async (topic: string) => {
-      if (!web3wallet) return
+      if (!walletKit) return
 
       setIsLoading(true)
-      await web3wallet.disconnectSession({ topic, reason: getSdkError('USER_DISCONNECTED') })
+      await walletKit.disconnectSession({ topic, reason: getSdkError('USER_DISCONNECTED') })
       await refresh()
       setIsLoading(false)
     },
-    [web3wallet, refresh]
+    [walletKit, refresh]
   )
 
   if (!activeSessions || activeSessions.length === 0) {
     return null
   }
+
+  console.log('activeSessions', activeSessions)
 
   return (
     <WrapperBox>

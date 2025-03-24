@@ -4404,6 +4404,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/node@npm:22.7.5":
+  version: 22.7.5
+  resolution: "@types/node@npm:22.7.5"
+  dependencies:
+    undici-types: ~6.19.2
+  checksum: cf11f74f1a26053ec58066616e3a8685b6bcd7259bc569738b8f752009f9f0f7f85a1b2d24908e5b0f752482d1e8b6babdf1fbb25758711ec7bb9500bfcd6e60
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:^22.13.13":
   version: 22.13.13
   resolution: "@types/node@npm:22.13.13"
@@ -7265,8 +7274,8 @@ __metadata:
   linkType: hard
 
 "ethers@npm:^6.13.5":
-  version: 6.13.5
-  resolution: "ethers@npm:6.13.5"
+  version: 6.13.6
+  resolution: "ethers@npm:6.13.6"
   dependencies:
     "@adraffy/ens-normalize": 1.10.1
     "@noble/curves": 1.2.0
@@ -7275,7 +7284,7 @@ __metadata:
     aes-js: 4.0.0-beta.5
     tslib: 2.7.0
     ws: 8.17.1
-  checksum: 64bc7b8907de199392b8a88c15c9a085892919cff7efa2e5326abc7fe5c426001726c51d91e10c74e5fc5e2547188297ce4127f6e52ea42a97ade0b2ae474677
+  checksum: e757b2995e1298396d120e9cb92a07c4308e93ea28eedb577d4e7a43b0b1cdf4be2460a6722294e42c1da9a9b1dddd9f2c885c9e6120fa845ccdd1b706e0ec04
   languageName: node
   linkType: hard
 
@@ -9653,6 +9662,7 @@ __metadata:
     "@mui/base": ^5.0.0-beta.70
     "@mui/material": ^6.4.8
     "@mui/styled-engine": ^6.4.8
+    "@paraspell/sdk": ^8.9.0
     "@polkadot-api/descriptors": "portal:.papi/descriptors"
     "@polkadot-api/tx-utils": ^0.0.10
     "@polkadot-labs/hdkd": ^0.0.13
@@ -12801,8 +12811,8 @@ __metadata:
   linkType: hard
 
 "viem@npm:^2.23.5":
-  version: 2.23.13
-  resolution: "viem@npm:2.23.13"
+  version: 2.23.14
+  resolution: "viem@npm:2.23.14"
   dependencies:
     "@noble/curves": 1.8.1
     "@noble/hashes": 1.7.1
@@ -12817,7 +12827,7 @@ __metadata:
   peerDependenciesMeta:
     typescript:
       optional: true
-  checksum: 76bdca78dc91392d3ab7821326717f8af0473f560e5b59eb409a43b5718a0c80f22a643760e42b8b0138ae5d46c3964c5bdf80288741988ee6e6c2574f5ae5df
+  checksum: 65859ec0d6fd0d3b766ddbcda808a4d251b614611685b7f90f7c0f401e589bd21d129bca869f62f77acf743dc0dd2b6a244eba5e3b8f7f7ddd2c0c5e9f8eaf4a
   languageName: node
   linkType: hard
 

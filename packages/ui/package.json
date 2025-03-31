@@ -33,7 +33,7 @@
     "react-router": "^7.4.0",
     "reactflow": "^11.11.4",
     "typescript": "5.8.2",
-    "vite": "^6.2.3"
+    "vite": "^6.2.4"
   },
   "devDependencies": {
     "@chainsafe/cypress-polkadot-wallet": "^2.3.0",

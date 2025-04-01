@@ -1,7 +1,7 @@
 // import { nodesAstarPNG } from './logos/astarPNG'
 // import { nodesInterlaySVG } from './logos/interlaySVG'
-// import { nodesMoonriverSVG } from './logos/moonriverSVG'
-// import { nodesMoonbeamSVG } from './logos/moonbeamSVG'
+import { nodesMoonriverSVG } from './logos/moonriverSVG'
+import { nodesMoonbeamSVG } from './logos/moonbeamSVG'
 // import { nodesKiltPNG } from './logos/kiltPNG'
 // import { chainsPendulumSVG } from './logos/pendulumSVG'
 // import { chainsAmplitudeSVG } from './logos/amplitudeSVG'
@@ -49,7 +49,7 @@ export interface NetworkInfo {
   genesisHash?: string
 }
 
-export const HTTP_GRAPHQL_URL = `https://chainsafe.squids.live/multix-arrow@v7/api/graphql`
+export const HTTP_GRAPHQL_URL = `https://chainsafe.squids.live/multix-arrow@v8/api/graphql`
 
 export const PAYMENT_INFO_ACCOUNT = '5CXQZrh1MSgnGGCdJu3tqvRfCv7t5iQXGGV9UKotrbfhkavs'
 
@@ -275,20 +275,24 @@ export const networkList: Record<string, NetworkInfo> = {
   //   networkLogo: nodesKhalaSVG,
   //   descriptor: 'khala'
   // },
-  // moonbeam: {
-  //   chainId: 'moonbeam',
-  //   explorerNetworkName: 'moonbeam',
-  //   rpcUrls: ['wss://moonbeam-rpc.dwellir.com'],
-  //   httpGraphqlUrl: HTTP_GRAPHQL_URL,
-  //   logo: nodesMoonbeamSVG
-  // },
-  // moonriver: {
-  //   chainId: 'moonriver',
-  //   explorerNetworkName: 'moonriver',
-  //   rpcUrls: ['wss://moonriver-rpc.dwellir.com'],
-  //   httpGraphqlUrl: HTTP_GRAPHQL_URL,
-  //   logo: nodesMoonriverSVG
-  // },
+  moonbeam: {
+    chainId: 'moonbeam',
+    explorerNetworkName: 'moonbeam',
+    rpcUrls: ['wss://moonbeam.public.curie.radiumblock.co/ws'],
+    httpGraphqlUrl: HTTP_GRAPHQL_URL,
+    networkLogo: nodesMoonbeamSVG,
+    descriptor: 'moonbeam',
+    genesisHash: ''
+  },
+  moonriver: {
+    chainId: 'moonriver',
+    explorerNetworkName: 'moonriver',
+    rpcUrls: ['wss://moonriver.public.curie.radiumblock.co/ws'],
+    httpGraphqlUrl: HTTP_GRAPHQL_URL,
+    networkLogo: nodesMoonriverSVG,
+    descriptor: 'moonriver',
+    genesisHash: ''
+  },
   phala: {
     chainId: 'phala',
     explorerNetworkName: 'phala',
@@ -441,7 +445,7 @@ export const polkadotNetworksAndParachains: Partial<keyof typeof networkList>[] 
   'hydration',
   // 'interlay',
   // 'kilt',
-  // 'moonbeam',
+  'moonbeam',
   // 'pendulum',
   'phala',
   'polimec'
@@ -449,11 +453,11 @@ export const polkadotNetworksAndParachains: Partial<keyof typeof networkList>[] 
 ]
 export const kusamaNetworksAndParachains: Partial<keyof typeof networkList>[] = [
   'kusama',
-  'asset-hub-kusama'
+  'asset-hub-kusama',
   // 'coretime-kusama'
   // 'amplitude',
   // 'khala'
-  // 'moonriver'
+  'moonriver'
 ]
 export const soloChains: Partial<keyof typeof networkList>[] = [
   //joystream

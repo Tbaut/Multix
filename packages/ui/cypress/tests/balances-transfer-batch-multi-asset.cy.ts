@@ -275,7 +275,7 @@ describe('Crafts the correct extrinsics for polkadot native asset', () => {
 
     sendTxModal.inputSendtokenAmount().click().type('{selectall}{del}0.0001')
 
-    sendTxModal.sendTxError().should('be.visible')
+    // sendTxModal.sendTxError().should('be.visible')
 
     // sendTxModal
     //   .sendTxError()

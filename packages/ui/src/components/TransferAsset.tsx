@@ -12,6 +12,7 @@ import { Select, TextField } from './library'
 import { HiOutlineTrash } from 'react-icons/hi2'
 import { FieldInfo } from './EasySetup/BalancesTransfer'
 import { debounce } from '../utils/debounce'
+import { AccountId, FixedSizeBinary, HexString } from 'polkadot-api'
 
 export interface Option extends Omit<Asset, 'name'> {
   id?: number
@@ -142,11 +143,16 @@ const TransferAsset = ({
             dest: toAddress,
             value: amount
           })
-        : isContextIn(ctx, noHydrationKeys) &&
-          ctx.api.tx.Balances.transfer_keep_alive({
-            dest: MultiAddress.Id(toAddress),
-            value: amount
-          })
+        : isContextIn(ctx, ['moonbeam', 'moonriver'])
+          ? ctx.api.tx.Balances.transfer_keep_alive({
+              dest: toAddress as HexString,
+              value: amount
+            })
+          : !isContextIn(ctx, noHydrationKeys) &&
+            ctx.api.tx.Balances.transfer_keep_alive({
+              dest: MultiAddress.Id(toAddress),
+              value: amount
+            })
 
       !!extrinsic && onSetExtrinsic({ extrinsic, index, assetId: undefined, amount })
     }

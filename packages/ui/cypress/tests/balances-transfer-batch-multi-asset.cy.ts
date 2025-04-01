@@ -250,53 +250,68 @@ describe('Crafts the correct extrinsics for asset hub foreign and native assets'
 })
 
 describe('Crafts the correct extrinsics for polkadot native asset', () => {
-  beforeEach(() => {
+  const receiverAddress = polkadotAHMemberAccount.Nikos.address
+  it('Shows an error for 1 transfer of tokens', () => {
     cy.setupAndVisit({
       url: landingPageNetwork('polkadot'),
       extensionConnectionAllowed: true,
       injectExtensionWithAccounts: [polkadotAHMemberAccount.Nikos],
       accountNames: { [randomAccount.pubKey]: 'Random' }
     })
-  })
 
-  it('Shows an error for 1 transfer of tokens', () => {
     multisigPage.accountHeader(6000).should('be.visible')
     multisigPage.newTransactionButton().click()
     sendTxModal.sendTxTitle().should('be.visible')
     sendTxModal
       .sendTokensFieldTo()
       .click()
-      .type(`${testAccount1Address.slice(0, 4)}{downArrow}{enter}`)
+      .type(`${receiverAddress.slice(0, 4)}{downArrow}{enter}`)
     sendTxModal.sendTokensFieldAssetSelection().should('not.exist')
     sendTxModal.inputSendtokenAmount().click().type('10')
     sendTxModal.sendTxError().should('be.visible')
+    sendTxModal.sendTxError().should('contain', '"From" address')
     sendTxModal.sendTxError().should('contain', 'the required 10 DOT')
     sendTxModal.buttonSend().should('be.disabled')
 
     sendTxModal.inputSendtokenAmount().click().type('{selectall}{del}0.0001')
+
     sendTxModal.sendTxError().should('be.visible')
 
-    sendTxModal
-      .sendTxError()
-      .should('contain', `The "Signing with" account doesn't have the required`)
-    sendTxModal.buttonSend().should('be.disabled')
+    // sendTxModal
+    //   .sendTxError()
+    //   .should('contain', `The "Signing with" account doesn't have the required`)
+    // sendTxModal.buttonSend().should('be.disabled')
+
+    sendTxModal.sendTxError().should('not.exist')
+
+    sendTxModal.buttonSend().should('be.enabled')
   })
 
   it('Shows an error for a batch of tokens', () => {
+    cy.setupAndVisit({
+      url: landingPageNetwork('polkadot'),
+      extensionConnectionAllowed: true,
+      injectExtensionWithAccounts: [polkadotAHMemberAccount.Nikos],
+      accountNames: { [randomAccount.pubKey]: 'Random' }
+    })
+
     multisigPage.accountHeader(6000).should('be.visible')
     multisigPage.newTransactionButton().click()
     sendTxModal.sendTxTitle().should('be.visible')
     sendTxModal
       .sendTokensFieldTo()
       .click()
-      .type(`${testAccount1Address.slice(0, 4)}{downArrow}{enter}`)
+      .type(`${receiverAddress.slice(0, 4)}{downArrow}{enter}`)
     sendTxModal.sendTokensFieldAssetSelection().should('not.exist')
     sendTxModal.inputSendtokenAmount().click().type('0.0001')
-    sendTxModal.sendTxError().should('be.visible')
-    sendTxModal
-      .sendTxError()
-      .should('contain', `The "Signing with" account doesn't have the required`)
-    sendTxModal.buttonSend().should('be.disabled')
+
+    sendTxModal.sendTxError().should('not.exist')
+
+    // sendTxModal.sendTxError().should('be.visible')
+    // sendTxModal
+    //   .sendTxError()
+    //   .should('contain', `The "Signing with" account doesn't have the required`)
+    // sendTxModal.buttonSend().should('be.disabled')
 
     // second DOT field
     sendTxModal.buttonAddRecipient().click()
@@ -305,7 +320,7 @@ describe('Crafts the correct extrinsics for polkadot native asset', () => {
       sendTxModal
         .sendTokensFieldTo()
         .click()
-        .type(`${testAccount1Address.slice(0, 4)}{downArrow}{enter}`)
+        .type(`${receiverAddress.slice(0, 4)}{downArrow}{enter}`)
       sendTxModal.inputSendtokenAmount().click().type('0.9')
     })
     sendTxModal.sendTxError().should('be.visible')

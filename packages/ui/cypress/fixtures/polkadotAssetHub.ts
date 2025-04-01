@@ -10,5 +10,12 @@ export const polkadotAHMemberAccount = {
     name: 'Nikos',
     type: 'sr25519',
     mnemonic: ''
+  } as InjectedAccountWitMnemonic,
+  Gato: {
+    address: '14b9HXT8zq3uTqUPPhVFLCYfJjLgKFAdbLTStTPWTUEqrXHc',
+    publicKey: '0x9ebeef0150a33357023e678bfff549602e6943b5b85d8bfdb58473992fcfaf63',
+    name: 'Gato',
+    type: 'sr25519',
+    mnemonic: ''
   } as InjectedAccountWitMnemonic
 }

@@ -278,7 +278,7 @@ const SetIdentity = ({ className, onSetExtrinsic, from, onSetErrorMessage }: Pro
     >
       {!!minOriginBalanceDisplay && !hasMultisigEnoughPplFunds && (
         <TeleportFundsAlert
-          receivingName="The Multisig"
+          receivingName="the multisig"
           receivingAddress={from}
           sendingAmount={amountToSend}
           batchWithSignerIfNeeded={true}

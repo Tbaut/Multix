@@ -78,10 +78,14 @@ const ProposalSigning = ({
 
   const amountToTeleport = useMemo(() => {
     if (!isPplChainTx || !pplApi || !pplCompatibilityToken) return 0n
+
     // This is what we transfer to the ppl chain in case the sender doesn't have enough
-    // to be safe, we send 10x the existential deposit to pay for fees
-    return 10n * pplApi.constants.Balances.ExistentialDeposit(pplCompatibilityToken)
-  }, [isPplChainTx, pplApi, pplCompatibilityToken])
+    // to be safe, we send 10x the existential deposit + 10x the tx fee
+    return (
+      10n * pplApi.constants.Balances.ExistentialDeposit(pplCompatibilityToken) +
+      (callInfo?.partialFee || 0n) * 10n
+    )
+  }, [callInfo?.partialFee, isPplChainTx, pplApi, pplCompatibilityToken])
 
   const { hasEnoughFreeBalance: hasSignerEnoughOriginFunds } = useCheckTransferableBalance({
     min: amountToTeleport,
@@ -339,18 +343,6 @@ const ProposalSigning = ({
             />
           </Grid>
           <Grid size={{ xs: 0, md: 5 }} />
-          {!!isPplChainTx && hasSignerEnoughOriginFunds && !hasSignerEnoughFunds && (
-            <>
-              <Grid size={{ xs: 0, md: 1 }} />
-              <Grid size={{ xs: 12, md: 6 }}>
-                <TeleportFundsAlert
-                  receivingAddress={selectedAccount?.address || ''}
-                  sendingAmount={amountToTeleport}
-                />
-              </Grid>
-              <Grid size={{ xs: 0, md: 5 }} />
-            </>
-          )}
           <>
             <Grid size={{ xs: 0, md: 1 }} />
             <HashGridStyled size={{ xs: 12, md: 11 }}>
@@ -412,9 +404,20 @@ const ProposalSigning = ({
               >
                 <Alert severity="error">
                   The &quot;Signing with&quot; account doesn&apos;t have enough funds on the People
-                  Chain to pay for the transaction, and not enough on the origin chain either to
+                  Chain to pay for the transaction, and not enough on the current chain either to
                   teleport.
                 </Alert>
+              </Grid>
+            </>
+          )}
+          {!!isPplChainTx && hasSignerEnoughOriginFunds && !hasSignerEnoughFunds && (
+            <>
+              <Grid size={{ xs: 0, md: 1 }} />
+              <Grid size={{ xs: 12, md: 11 }}>
+                <TeleportFundsAlert
+                  receivingAddress={selectedAccount?.address || ''}
+                  sendingAmount={amountToTeleport}
+                />
               </Grid>
             </>
           )}

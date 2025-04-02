@@ -22,7 +22,7 @@ export const TeleportFundsAlert = ({
   className = '',
   receivingAddress,
   sendingAmount,
-  receivingName = 'Your account',
+  receivingName = 'your account',
   batchWithSignerIfNeeded = false
 }: Props) => {
   const ctx = useApi()
@@ -63,18 +63,21 @@ export const TeleportFundsAlert = ({
 
   const BatchTransferInfo = useMemo(
     () => (
-      <ul>
-        <li>
-          Send {amountString} {receivingName}
-        </li>
-        <li>
-          Send{' '}
-          {formatBigIntBalance(amountToSendToSigner, pplCtx.pplChainInfo?.tokenDecimals, {
-            tokenSymbol: pplCtx.pplChainInfo?.tokenSymbol
-          })}{' '}
-          to the signer
-        </li>
-      </ul>
+      <>
+        <p>Click on the batch button to:</p>
+        <ul>
+          <li>
+            send {amountString} to {receivingName}
+          </li>
+          <li>
+            send{' '}
+            {formatBigIntBalance(amountToSendToSigner, pplCtx.pplChainInfo?.tokenDecimals, {
+              tokenSymbol: pplCtx.pplChainInfo?.tokenSymbol
+            })}{' '}
+            to the signer
+          </li>
+        </ul>
+      </>
     ),
     [
       amountString,
@@ -140,8 +143,7 @@ export const TeleportFundsAlert = ({
         data-cy="alert-error-pepople-chain-identity"
         variant="outlined"
       >
-        Identity is managed on the People Chain. {receivingName} needs funds there to sign the
-        transaction.
+        Identity is managed on the People Chain. You need funds there to perform the transaction.
         {batchWithSignerIfNeeded && !hasSignerEnoughPplFunds && BatchTransferInfo}
         <ButtonWrapper>
           <ButtonWithIcon
@@ -154,7 +156,7 @@ export const TeleportFundsAlert = ({
                 <LoaderStyled size={20} /> Signing...
               </>
             ) : (
-              `${batchWithSignerIfNeeded && !hasSignerEnoughPplFunds ? 'Batch' : `Transfer ${amountString}`} to People Chain`
+              `${batchWithSignerIfNeeded && !hasSignerEnoughPplFunds ? 'Batch' : `Transfer ${amountString}`} to the People Chain`
             )}
           </ButtonWithIcon>
         </ButtonWrapper>
@@ -166,6 +168,10 @@ export const TeleportFundsAlert = ({
 const AlertStyled = styled(Alert)`
   margin-top: 1rem;
   margin-bottom: 0.5rem;
+
+  .MuiAlert-message {
+    flex: 1;
+  }
 `
 
 const ButtonWrapper = styled('div')`

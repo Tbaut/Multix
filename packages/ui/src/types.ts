@@ -26,6 +26,7 @@ export interface SubmittingCall {
   method?: string
   section?: string
   weight?: Weight
+  partialFee?: bigint
 }
 
 export type Weight = { ref_time: bigint; proof_size: bigint }

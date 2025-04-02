@@ -35,14 +35,15 @@ export const useCallInfoFromCallData = ({
       const tx = api.txFromCallData(Binary.fromHex(callData), compatibilityToken)
 
       tx.getPaymentInfo(PAYMENT_INFO_ACCOUNT, { at: 'best' })
-        .then(({ weight }) => {
+        .then(({ weight, partial_fee }) => {
           setCallInfo({
             decodedCall: tx?.decodedCall,
             call: tx,
             hash: hashFromTx(callData),
             weight,
             section: tx?.decodedCall.type,
-            method: tx?.decodedCall.value.type
+            method: tx?.decodedCall.value.type,
+            partialFee: partial_fee
           })
           setIsGettingCallInfo(false)
         })

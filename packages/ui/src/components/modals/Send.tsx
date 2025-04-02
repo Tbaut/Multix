@@ -389,7 +389,7 @@ const Send = ({ onClose, className, onSuccess, onFinalized, preselected }: Props
                 aria-label="sending"
                 disabled
               >
-                <LoaderStyled />
+                <LoaderStyled size={20} />
                 Sending...
               </ButtonWithIcon>
             ) : (

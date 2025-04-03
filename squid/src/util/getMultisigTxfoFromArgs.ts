@@ -19,7 +19,7 @@ export const getMultisigTxfoFromArgs = async ({
   isCancelled,
   blockNumber
 }: Params) => {
-  const isSuccess = event.args.result.__kind === 'Ok'
+  const isSuccess = event.args?.result?.__kind === 'Ok'
   const status = isSuccess ? TxStatus.Success : isCancelled ? TxStatus.Cancelled : TxStatus.Error
   const multisig = await getOrCreateAccounts(ctx, [event.args.multisig], chainId)
 

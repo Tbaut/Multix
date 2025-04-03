@@ -40,6 +40,17 @@ type ProxyAccount @entity {
   creationBlockNumber: Int # only useful for pure proxies
 }
 
+# entity for done multisig txs
+type MultisigTx @entity {
+  id: ID!
+  multisig: Account!
+  blockNumber: Int!
+  originBlockNumber: Int!
+  originExtrinsicIndex: Int!
+  callData: String
+  status: TxStatus!
+}
+
 # from https://github.com/paritytech/polkadot/blob/476d3ddddf7a8f7361edac92228d0200abac0895/runtime/polkadot/src/lib.rs#L918
 # and https://github.com/paritytech/polkadot/blob/476d3ddddf7a8f7361edac92228d0200abac0895/runtime/kusama/src/lib.rs#L934
 enum ProxyType {
@@ -54,4 +65,10 @@ enum ProxyType {
   NominationPools
   Society
   Unknown # this is added in case a new proxy type comes up and isn't supported yet
+}
+
+enum TxStatus {
+  Success
+  Cancelled
+  Error
 }

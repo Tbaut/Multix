@@ -46,6 +46,8 @@ import * as v1002004 from '../v1002004'
 import * as v1002005 from '../v1002005'
 import * as v1002006 from '../v1002006'
 import * as v1003000 from '../v1003000'
+import * as v1004000 from '../v1004000'
+import * as v1004001 from '../v1004001'
 
 export const proxy =  {
     name: 'Proxy.proxy',
@@ -1102,6 +1104,44 @@ export const proxy =  {
             call: v1003000.Call,
         })
     ),
+    /**
+     * Dispatch the given `call` from an account that the sender is authorised for through
+     * `add_proxy`.
+     * 
+     * The dispatch origin for this call must be _Signed_.
+     * 
+     * Parameters:
+     * - `real`: The account that the proxy will make a call on behalf of.
+     * - `force_proxy_type`: Specify the exact proxy type to be used and checked for this call.
+     * - `call`: The call to be made by the `real` account.
+     */
+    v1004000: new CallType(
+        'Proxy.proxy',
+        sts.struct({
+            real: v1004000.MultiAddress,
+            forceProxyType: sts.option(() => v1004000.ProxyType),
+            call: v1004000.Call,
+        })
+    ),
+    /**
+     * Dispatch the given `call` from an account that the sender is authorised for through
+     * `add_proxy`.
+     * 
+     * The dispatch origin for this call must be _Signed_.
+     * 
+     * Parameters:
+     * - `real`: The account that the proxy will make a call on behalf of.
+     * - `force_proxy_type`: Specify the exact proxy type to be used and checked for this call.
+     * - `call`: The call to be made by the `real` account.
+     */
+    v1004001: new CallType(
+        'Proxy.proxy',
+        sts.struct({
+            real: v1004001.MultiAddress,
+            forceProxyType: sts.option(() => v1004001.ProxyType),
+            call: v1004001.Call,
+        })
+    ),
 }
 
 export const removeProxies =  {
@@ -1220,6 +1260,34 @@ export const killPure =  {
         sts.struct({
             spawner: v1003000.MultiAddress,
             proxyType: v1003000.ProxyType,
+            index: sts.number(),
+            height: sts.number(),
+            extIndex: sts.number(),
+        })
+    ),
+    /**
+     * Removes a previously spawned pure proxy.
+     * 
+     * WARNING: **All access to this account will be lost.** Any funds held in it will be
+     * inaccessible.
+     * 
+     * Requires a `Signed` origin, and the sender account must have been created by a call to
+     * `pure` with corresponding parameters.
+     * 
+     * - `spawner`: The account that originally called `pure` to create this account.
+     * - `index`: The disambiguation index originally passed to `pure`. Probably `0`.
+     * - `proxy_type`: The proxy type originally passed to `pure`.
+     * - `height`: The height of the chain when the call to `pure` was processed.
+     * - `ext_index`: The extrinsic index in which the call to `pure` was processed.
+     * 
+     * Fails with `NoPermission` in case the caller is not a previously created pure
+     * account whose `pure` call has corresponding parameters.
+     */
+    v1004000: new CallType(
+        'Proxy.kill_pure',
+        sts.struct({
+            spawner: v1004000.MultiAddress,
+            proxyType: v1004000.ProxyType,
             index: sts.number(),
             height: sts.number(),
             extIndex: sts.number(),

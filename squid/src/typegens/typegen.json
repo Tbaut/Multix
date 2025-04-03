@@ -5,7 +5,9 @@
     "Proxy.AnonymousCreated",
     "Proxy.PureCreated",
     "Proxy.ProxyAdded",
-    "Proxy.ProxyRemoved"
+    "Proxy.ProxyRemoved",
+    "Multisig.MultisigCancelled",
+    "Multisig.MultisigExecuted"
   ],
   "calls": [
     "Proxy.proxy",

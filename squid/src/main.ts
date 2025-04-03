@@ -25,7 +25,7 @@ import { getProxyAccountIByDelegatorIds } from './util/getProxyAccountIByDelegat
 import { KillPureCallInfo, getProxyKillPureArgs } from './util/getProxyKillPureArgs'
 import { handleProxyKillPure } from './processorHandlers/handleProxyKillPure'
 import { getProxyAccountId } from './util/getProxyAccountId'
-import { MultisigTx, ProxyType } from './model'
+import { ProxyType } from './model'
 import { decodeAddress } from '@polkadot/util-crypto'
 import { u8aToHex } from '@polkadot/util'
 import {
@@ -33,7 +33,8 @@ import {
   PURE_PROXIEs_MIGRATION_CHAIN,
   PURE_PROXIES_MIGRATION_ARRAY
 } from './constants'
-import { getMultisigTxfoFromArgs } from './util/getMultisigTxfoFromArgs'
+import { getMultisigTxfoFromArgs, MultisigTxInfo } from './util/getMultisigTxInfoFromArgs'
+import { handleNewMultisigTxs } from './processorHandlers/handleNewMultisigTxs'
 
 const supportedMultisigCalls = [
   'Multisig.as_multi',
@@ -96,7 +97,7 @@ processor.run(
     const proxyRemovalIds: Set<string> = new Set()
     const delegatorToRemoveIds: Set<string> = new Set()
     const pureToKill: KillPureCallInfo[] = []
-    const multisigTxs: MultisigTx[] = []
+    const multisigTxsInfo: MultisigTxInfo[] = []
 
     for (const block of ctx.blocks) {
       const { calls, events, header } = block
@@ -236,19 +237,14 @@ processor.run(
           event.name === 'Multisig.MultisigExecuted' ||
           event.name === 'Multisig.MultisigCancelled'
         ) {
-          const isCancelled = event.name === 'Multisig.MultisigCancelled'
-
           const newTx = await getMultisigTxfoFromArgs({
             event,
             chainId,
             ctx,
-            isCancelled,
             blockNumber
           })
 
-          const tx = !!newTx && new MultisigTx(newTx)
-
-          !!tx && multisigTxs.push(tx)
+          !!newTx && multisigTxsInfo.push(newTx)
         }
 
         if (event.name === 'Proxy.PureCreated' || event.name === 'Proxy.AnonymousCreated') {
@@ -353,6 +349,6 @@ processor.run(
     newPureProxies.size &&
       (await handleNewPureProxies(ctx, Array.from(newPureProxies.values()), chainId))
     newProxies.size && (await handleNewProxies(ctx, Array.from(newProxies.values()), chainId))
-    multisigTxs.length && (await ctx.store.save(multisigTxs))
+    multisigTxsInfo.length && (await handleNewMultisigTxs(ctx, multisigTxsInfo, chainId))
   }
 )

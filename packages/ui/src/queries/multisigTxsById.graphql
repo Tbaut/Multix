@@ -1,0 +1,11 @@
+query MultisigTxsById($multisigIds: [String!]) {
+  multisigTxes(where: { multisig: { id_in: $multisigIds } }) {
+    id
+    blockNumber
+    extrinsicIndex
+    status
+    callData
+    originBlockNumber
+    originExtrinsicIndex
+  }
+}

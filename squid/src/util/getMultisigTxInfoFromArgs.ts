@@ -53,6 +53,7 @@ export const getMultisigTxfoFromArgs = async ({ event, chainId, ctx, blockNumber
     status,
     multisigPubKey,
     originBlockNumber,
-    callData: undefined
+    callData: undefined,
+    extrinsicIndex: event.extrinsicIndex ?? 0
   } as MultisigTxInfo
 }

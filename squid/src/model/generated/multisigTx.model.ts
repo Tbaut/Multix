@@ -19,6 +19,9 @@ export class MultisigTx {
     blockNumber!: number
 
     @IntColumn_({nullable: false})
+    extrinsicIndex!: number
+
+    @IntColumn_({nullable: false})
     originBlockNumber!: number
 
     @IntColumn_({nullable: false})

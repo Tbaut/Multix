@@ -439,6 +439,188 @@ export type MultisigCallsConnection = {
   totalCount: Scalars['Int']['output'];
 };
 
+export type MultisigTx = {
+  __typename?: 'MultisigTx';
+  blockNumber: Scalars['Int']['output'];
+  callData?: Maybe<Scalars['String']['output']>;
+  extrinsicIndex: Scalars['Int']['output'];
+  id: Scalars['String']['output'];
+  multisig: Account;
+  originBlockNumber: Scalars['Int']['output'];
+  originExtrinsicIndex: Scalars['Int']['output'];
+  status: TxStatus;
+};
+
+export type MultisigTxEdge = {
+  __typename?: 'MultisigTxEdge';
+  cursor: Scalars['String']['output'];
+  node: MultisigTx;
+};
+
+export enum MultisigTxOrderByInput {
+  BlockNumberAsc = 'blockNumber_ASC',
+  BlockNumberAscNullsFirst = 'blockNumber_ASC_NULLS_FIRST',
+  BlockNumberAscNullsLast = 'blockNumber_ASC_NULLS_LAST',
+  BlockNumberDesc = 'blockNumber_DESC',
+  BlockNumberDescNullsFirst = 'blockNumber_DESC_NULLS_FIRST',
+  BlockNumberDescNullsLast = 'blockNumber_DESC_NULLS_LAST',
+  CallDataAsc = 'callData_ASC',
+  CallDataAscNullsFirst = 'callData_ASC_NULLS_FIRST',
+  CallDataAscNullsLast = 'callData_ASC_NULLS_LAST',
+  CallDataDesc = 'callData_DESC',
+  CallDataDescNullsFirst = 'callData_DESC_NULLS_FIRST',
+  CallDataDescNullsLast = 'callData_DESC_NULLS_LAST',
+  ExtrinsicIndexAsc = 'extrinsicIndex_ASC',
+  ExtrinsicIndexAscNullsFirst = 'extrinsicIndex_ASC_NULLS_FIRST',
+  ExtrinsicIndexAscNullsLast = 'extrinsicIndex_ASC_NULLS_LAST',
+  ExtrinsicIndexDesc = 'extrinsicIndex_DESC',
+  ExtrinsicIndexDescNullsFirst = 'extrinsicIndex_DESC_NULLS_FIRST',
+  ExtrinsicIndexDescNullsLast = 'extrinsicIndex_DESC_NULLS_LAST',
+  IdAsc = 'id_ASC',
+  IdAscNullsFirst = 'id_ASC_NULLS_FIRST',
+  IdAscNullsLast = 'id_ASC_NULLS_LAST',
+  IdDesc = 'id_DESC',
+  IdDescNullsFirst = 'id_DESC_NULLS_FIRST',
+  IdDescNullsLast = 'id_DESC_NULLS_LAST',
+  MultisigIdAsc = 'multisig_id_ASC',
+  MultisigIdAscNullsFirst = 'multisig_id_ASC_NULLS_FIRST',
+  MultisigIdAscNullsLast = 'multisig_id_ASC_NULLS_LAST',
+  MultisigIdDesc = 'multisig_id_DESC',
+  MultisigIdDescNullsFirst = 'multisig_id_DESC_NULLS_FIRST',
+  MultisigIdDescNullsLast = 'multisig_id_DESC_NULLS_LAST',
+  MultisigIsMultisigAsc = 'multisig_isMultisig_ASC',
+  MultisigIsMultisigAscNullsFirst = 'multisig_isMultisig_ASC_NULLS_FIRST',
+  MultisigIsMultisigAscNullsLast = 'multisig_isMultisig_ASC_NULLS_LAST',
+  MultisigIsMultisigDesc = 'multisig_isMultisig_DESC',
+  MultisigIsMultisigDescNullsFirst = 'multisig_isMultisig_DESC_NULLS_FIRST',
+  MultisigIsMultisigDescNullsLast = 'multisig_isMultisig_DESC_NULLS_LAST',
+  MultisigIsPureProxyAsc = 'multisig_isPureProxy_ASC',
+  MultisigIsPureProxyAscNullsFirst = 'multisig_isPureProxy_ASC_NULLS_FIRST',
+  MultisigIsPureProxyAscNullsLast = 'multisig_isPureProxy_ASC_NULLS_LAST',
+  MultisigIsPureProxyDesc = 'multisig_isPureProxy_DESC',
+  MultisigIsPureProxyDescNullsFirst = 'multisig_isPureProxy_DESC_NULLS_FIRST',
+  MultisigIsPureProxyDescNullsLast = 'multisig_isPureProxy_DESC_NULLS_LAST',
+  MultisigPubKeyAsc = 'multisig_pubKey_ASC',
+  MultisigPubKeyAscNullsFirst = 'multisig_pubKey_ASC_NULLS_FIRST',
+  MultisigPubKeyAscNullsLast = 'multisig_pubKey_ASC_NULLS_LAST',
+  MultisigPubKeyDesc = 'multisig_pubKey_DESC',
+  MultisigPubKeyDescNullsFirst = 'multisig_pubKey_DESC_NULLS_FIRST',
+  MultisigPubKeyDescNullsLast = 'multisig_pubKey_DESC_NULLS_LAST',
+  MultisigThresholdAsc = 'multisig_threshold_ASC',
+  MultisigThresholdAscNullsFirst = 'multisig_threshold_ASC_NULLS_FIRST',
+  MultisigThresholdAscNullsLast = 'multisig_threshold_ASC_NULLS_LAST',
+  MultisigThresholdDesc = 'multisig_threshold_DESC',
+  MultisigThresholdDescNullsFirst = 'multisig_threshold_DESC_NULLS_FIRST',
+  MultisigThresholdDescNullsLast = 'multisig_threshold_DESC_NULLS_LAST',
+  OriginBlockNumberAsc = 'originBlockNumber_ASC',
+  OriginBlockNumberAscNullsFirst = 'originBlockNumber_ASC_NULLS_FIRST',
+  OriginBlockNumberAscNullsLast = 'originBlockNumber_ASC_NULLS_LAST',
+  OriginBlockNumberDesc = 'originBlockNumber_DESC',
+  OriginBlockNumberDescNullsFirst = 'originBlockNumber_DESC_NULLS_FIRST',
+  OriginBlockNumberDescNullsLast = 'originBlockNumber_DESC_NULLS_LAST',
+  OriginExtrinsicIndexAsc = 'originExtrinsicIndex_ASC',
+  OriginExtrinsicIndexAscNullsFirst = 'originExtrinsicIndex_ASC_NULLS_FIRST',
+  OriginExtrinsicIndexAscNullsLast = 'originExtrinsicIndex_ASC_NULLS_LAST',
+  OriginExtrinsicIndexDesc = 'originExtrinsicIndex_DESC',
+  OriginExtrinsicIndexDescNullsFirst = 'originExtrinsicIndex_DESC_NULLS_FIRST',
+  OriginExtrinsicIndexDescNullsLast = 'originExtrinsicIndex_DESC_NULLS_LAST',
+  StatusAsc = 'status_ASC',
+  StatusAscNullsFirst = 'status_ASC_NULLS_FIRST',
+  StatusAscNullsLast = 'status_ASC_NULLS_LAST',
+  StatusDesc = 'status_DESC',
+  StatusDescNullsFirst = 'status_DESC_NULLS_FIRST',
+  StatusDescNullsLast = 'status_DESC_NULLS_LAST'
+}
+
+export type MultisigTxWhereInput = {
+  AND?: InputMaybe<Array<MultisigTxWhereInput>>;
+  OR?: InputMaybe<Array<MultisigTxWhereInput>>;
+  blockNumber_eq?: InputMaybe<Scalars['Int']['input']>;
+  blockNumber_gt?: InputMaybe<Scalars['Int']['input']>;
+  blockNumber_gte?: InputMaybe<Scalars['Int']['input']>;
+  blockNumber_in?: InputMaybe<Array<Scalars['Int']['input']>>;
+  blockNumber_isNull?: InputMaybe<Scalars['Boolean']['input']>;
+  blockNumber_lt?: InputMaybe<Scalars['Int']['input']>;
+  blockNumber_lte?: InputMaybe<Scalars['Int']['input']>;
+  blockNumber_not_eq?: InputMaybe<Scalars['Int']['input']>;
+  blockNumber_not_in?: InputMaybe<Array<Scalars['Int']['input']>>;
+  callData_contains?: InputMaybe<Scalars['String']['input']>;
+  callData_containsInsensitive?: InputMaybe<Scalars['String']['input']>;
+  callData_endsWith?: InputMaybe<Scalars['String']['input']>;
+  callData_eq?: InputMaybe<Scalars['String']['input']>;
+  callData_gt?: InputMaybe<Scalars['String']['input']>;
+  callData_gte?: InputMaybe<Scalars['String']['input']>;
+  callData_in?: InputMaybe<Array<Scalars['String']['input']>>;
+  callData_isNull?: InputMaybe<Scalars['Boolean']['input']>;
+  callData_lt?: InputMaybe<Scalars['String']['input']>;
+  callData_lte?: InputMaybe<Scalars['String']['input']>;
+  callData_not_contains?: InputMaybe<Scalars['String']['input']>;
+  callData_not_containsInsensitive?: InputMaybe<Scalars['String']['input']>;
+  callData_not_endsWith?: InputMaybe<Scalars['String']['input']>;
+  callData_not_eq?: InputMaybe<Scalars['String']['input']>;
+  callData_not_in?: InputMaybe<Array<Scalars['String']['input']>>;
+  callData_not_startsWith?: InputMaybe<Scalars['String']['input']>;
+  callData_startsWith?: InputMaybe<Scalars['String']['input']>;
+  extrinsicIndex_eq?: InputMaybe<Scalars['Int']['input']>;
+  extrinsicIndex_gt?: InputMaybe<Scalars['Int']['input']>;
+  extrinsicIndex_gte?: InputMaybe<Scalars['Int']['input']>;
+  extrinsicIndex_in?: InputMaybe<Array<Scalars['Int']['input']>>;
+  extrinsicIndex_isNull?: InputMaybe<Scalars['Boolean']['input']>;
+  extrinsicIndex_lt?: InputMaybe<Scalars['Int']['input']>;
+  extrinsicIndex_lte?: InputMaybe<Scalars['Int']['input']>;
+  extrinsicIndex_not_eq?: InputMaybe<Scalars['Int']['input']>;
+  extrinsicIndex_not_in?: InputMaybe<Array<Scalars['Int']['input']>>;
+  id_contains?: InputMaybe<Scalars['String']['input']>;
+  id_containsInsensitive?: InputMaybe<Scalars['String']['input']>;
+  id_endsWith?: InputMaybe<Scalars['String']['input']>;
+  id_eq?: InputMaybe<Scalars['String']['input']>;
+  id_gt?: InputMaybe<Scalars['String']['input']>;
+  id_gte?: InputMaybe<Scalars['String']['input']>;
+  id_in?: InputMaybe<Array<Scalars['String']['input']>>;
+  id_isNull?: InputMaybe<Scalars['Boolean']['input']>;
+  id_lt?: InputMaybe<Scalars['String']['input']>;
+  id_lte?: InputMaybe<Scalars['String']['input']>;
+  id_not_contains?: InputMaybe<Scalars['String']['input']>;
+  id_not_containsInsensitive?: InputMaybe<Scalars['String']['input']>;
+  id_not_endsWith?: InputMaybe<Scalars['String']['input']>;
+  id_not_eq?: InputMaybe<Scalars['String']['input']>;
+  id_not_in?: InputMaybe<Array<Scalars['String']['input']>>;
+  id_not_startsWith?: InputMaybe<Scalars['String']['input']>;
+  id_startsWith?: InputMaybe<Scalars['String']['input']>;
+  multisig?: InputMaybe<AccountWhereInput>;
+  multisig_isNull?: InputMaybe<Scalars['Boolean']['input']>;
+  originBlockNumber_eq?: InputMaybe<Scalars['Int']['input']>;
+  originBlockNumber_gt?: InputMaybe<Scalars['Int']['input']>;
+  originBlockNumber_gte?: InputMaybe<Scalars['Int']['input']>;
+  originBlockNumber_in?: InputMaybe<Array<Scalars['Int']['input']>>;
+  originBlockNumber_isNull?: InputMaybe<Scalars['Boolean']['input']>;
+  originBlockNumber_lt?: InputMaybe<Scalars['Int']['input']>;
+  originBlockNumber_lte?: InputMaybe<Scalars['Int']['input']>;
+  originBlockNumber_not_eq?: InputMaybe<Scalars['Int']['input']>;
+  originBlockNumber_not_in?: InputMaybe<Array<Scalars['Int']['input']>>;
+  originExtrinsicIndex_eq?: InputMaybe<Scalars['Int']['input']>;
+  originExtrinsicIndex_gt?: InputMaybe<Scalars['Int']['input']>;
+  originExtrinsicIndex_gte?: InputMaybe<Scalars['Int']['input']>;
+  originExtrinsicIndex_in?: InputMaybe<Array<Scalars['Int']['input']>>;
+  originExtrinsicIndex_isNull?: InputMaybe<Scalars['Boolean']['input']>;
+  originExtrinsicIndex_lt?: InputMaybe<Scalars['Int']['input']>;
+  originExtrinsicIndex_lte?: InputMaybe<Scalars['Int']['input']>;
+  originExtrinsicIndex_not_eq?: InputMaybe<Scalars['Int']['input']>;
+  originExtrinsicIndex_not_in?: InputMaybe<Array<Scalars['Int']['input']>>;
+  status_eq?: InputMaybe<TxStatus>;
+  status_in?: InputMaybe<Array<TxStatus>>;
+  status_isNull?: InputMaybe<Scalars['Boolean']['input']>;
+  status_not_eq?: InputMaybe<TxStatus>;
+  status_not_in?: InputMaybe<Array<TxStatus>>;
+};
+
+export type MultisigTxesConnection = {
+  __typename?: 'MultisigTxesConnection';
+  edges: Array<MultisigTxEdge>;
+  pageInfo: PageInfo;
+  totalCount: Scalars['Int']['output'];
+};
+
 export type PageInfo = {
   __typename?: 'PageInfo';
   endCursor: Scalars['String']['output'];
@@ -663,6 +845,9 @@ export type Query = {
   multisigCallById?: Maybe<MultisigCall>;
   multisigCalls: Array<MultisigCall>;
   multisigCallsConnection: MultisigCallsConnection;
+  multisigTxById?: Maybe<MultisigTx>;
+  multisigTxes: Array<MultisigTx>;
+  multisigTxesConnection: MultisigTxesConnection;
   proxyAccountById?: Maybe<ProxyAccount>;
   proxyAccounts: Array<ProxyAccount>;
   proxyAccountsConnection: ProxyAccountsConnection;
@@ -733,6 +918,27 @@ export type QueryMultisigCallsConnectionArgs = {
 };
 
 
+export type QueryMultisigTxByIdArgs = {
+  id: Scalars['String']['input'];
+};
+
+
+export type QueryMultisigTxesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  orderBy?: InputMaybe<Array<MultisigTxOrderByInput>>;
+  where?: InputMaybe<MultisigTxWhereInput>;
+};
+
+
+export type QueryMultisigTxesConnectionArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  orderBy: Array<MultisigTxOrderByInput>;
+  where?: InputMaybe<MultisigTxWhereInput>;
+};
+
+
 export type QueryProxyAccountByIdArgs = {
   id: Scalars['String']['input'];
 };
@@ -765,12 +971,25 @@ export type SquidStatus = {
   height?: Maybe<Scalars['Int']['output']>;
 };
 
+export enum TxStatus {
+  Cancelled = 'Cancelled',
+  Error = 'Error',
+  Success = 'Success'
+}
+
 export type MultisigByIdQueryVariables = Exact<{
   id: Scalars['String']['input'];
 }>;
 
 
 export type MultisigByIdQuery = { __typename?: 'Query', accounts: Array<{ __typename?: 'Account', id: string, threshold?: number | null, signatories: Array<{ __typename?: 'AccountMultisig', id: string, signatory: { __typename?: 'Account', id: string, pubKey: string } }> }> };
+
+export type MultisigTxsByIdQueryVariables = Exact<{
+  multisigIds?: InputMaybe<Array<Scalars['String']['input']> | Scalars['String']['input']>;
+}>;
+
+
+export type MultisigTxsByIdQuery = { __typename?: 'Query', multisigTxes: Array<{ __typename?: 'MultisigTx', id: string, blockNumber: number, extrinsicIndex: number, status: TxStatus, callData?: string | null, originBlockNumber: number, originExtrinsicIndex: number }> };
 
 export type MultisigsAndPureByAccountQueryVariables = Exact<{
   accountIds?: InputMaybe<Array<Scalars['String']['input']> | Scalars['String']['input']>;
@@ -810,6 +1029,36 @@ export const useMultisigByIdQuery = <
       {
     queryKey: ['MultisigById', variables],
     queryFn: useFetchData<MultisigByIdQuery, MultisigByIdQueryVariables>(MultisigByIdDocument).bind(null, variables),
+    ...options
+  }
+    )};
+
+export const MultisigTxsByIdDocument = `
+    query MultisigTxsById($multisigIds: [String!]) {
+  multisigTxes(where: {multisig: {id_in: $multisigIds}}) {
+    id
+    blockNumber
+    extrinsicIndex
+    status
+    callData
+    originBlockNumber
+    originExtrinsicIndex
+  }
+}
+    `;
+
+export const useMultisigTxsByIdQuery = <
+      TData = MultisigTxsByIdQuery,
+      TError = unknown
+    >(
+      variables?: MultisigTxsByIdQueryVariables,
+      options?: Omit<UseQueryOptions<MultisigTxsByIdQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<MultisigTxsByIdQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<MultisigTxsByIdQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['MultisigTxsById'] : ['MultisigTxsById', variables],
+    queryFn: useFetchData<MultisigTxsByIdQuery, MultisigTxsByIdQueryVariables>(MultisigTxsByIdDocument).bind(null, variables),
     ...options
   }
     )};

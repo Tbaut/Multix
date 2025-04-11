@@ -1,5 +1,5 @@
-module.exports = class Data1743682984788 {
-    name = 'Data1743682984788'
+module.exports = class Data1743780266308 {
+    name = 'Data1743780266308'
 
     async up(db) {
         await db.query(`CREATE TABLE "account_multisig" ("id" character varying NOT NULL, "multisig_id" character varying, "signatory_id" character varying, CONSTRAINT "PK_9c47c4be06a450da56b95bf3e06" PRIMARY KEY ("id"))`)
@@ -11,7 +11,7 @@ module.exports = class Data1743682984788 {
         await db.query(`CREATE TABLE "multisig_call" ("id" character varying NOT NULL, "block_hash" text NOT NULL, "timestamp" TIMESTAMP WITH TIME ZONE NOT NULL, "call_index" integer NOT NULL, "multisig_id" character varying, CONSTRAINT "PK_fa22322b62825a7b48838d98e17" PRIMARY KEY ("id"))`)
         await db.query(`CREATE INDEX "IDX_2f1479a9dfc96f8d277b11cb10" ON "multisig_call" ("multisig_id") `)
         await db.query(`CREATE TABLE "account" ("id" character varying NOT NULL, "pub_key" text NOT NULL, "is_pure_proxy" boolean, "is_multisig" boolean, "threshold" integer, CONSTRAINT "PK_54115ee388cdb6d86bb4bf5b2ea" PRIMARY KEY ("id"))`)
-        await db.query(`CREATE TABLE "multisig_tx" ("id" character varying NOT NULL, "block_number" integer NOT NULL, "origin_block_number" integer NOT NULL, "origin_extrinsic_index" integer NOT NULL, "call_data" text, "status" character varying(9) NOT NULL, "multisig_id" character varying, CONSTRAINT "PK_e871543d680e3a2677d267979da" PRIMARY KEY ("id"))`)
+        await db.query(`CREATE TABLE "multisig_tx" ("id" character varying NOT NULL, "block_number" integer NOT NULL, "extrinsic_index" integer NOT NULL, "origin_block_number" integer NOT NULL, "origin_extrinsic_index" integer NOT NULL, "call_data" text, "status" character varying(9) NOT NULL, "multisig_id" character varying, CONSTRAINT "PK_e871543d680e3a2677d267979da" PRIMARY KEY ("id"))`)
         await db.query(`CREATE INDEX "IDX_2ef45bcd96b19fa34af9a80893" ON "multisig_tx" ("multisig_id") `)
         await db.query(`ALTER TABLE "account_multisig" ADD CONSTRAINT "FK_373149008deefb43018021ac009" FOREIGN KEY ("multisig_id") REFERENCES "account"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`)
         await db.query(`ALTER TABLE "account_multisig" ADD CONSTRAINT "FK_b9094826e16b3725b5bcb814b19" FOREIGN KEY ("signatory_id") REFERENCES "account"("id") ON DELETE NO ACTION ON UPDATE NO ACTION`)

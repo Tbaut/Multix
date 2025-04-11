@@ -23,7 +23,8 @@ export const handleNewMultisigTxs = async (
     callData,
     originBlockNumber,
     originExtrinsicIndex,
-    status
+    status,
+    extrinsicIndex
   } of newMultisigTxsInfo) {
     multisigTxs.set(
       id,
@@ -31,6 +32,7 @@ export const handleNewMultisigTxs = async (
         id,
         multisig: multisigAccountsMap.get(multisigPubKey),
         blockNumber,
+        extrinsicIndex,
         originBlockNumber,
         originExtrinsicIndex,
         callData,

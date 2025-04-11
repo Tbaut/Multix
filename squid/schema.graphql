@@ -45,6 +45,7 @@ type MultisigTx @entity {
   id: ID!
   multisig: Account!
   blockNumber: Int!
+  extrinsicIndex: Int!
   originBlockNumber: Int!
   originExtrinsicIndex: Int!
   callData: String

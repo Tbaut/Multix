@@ -81,11 +81,10 @@ export const networkList: Record<string, NetworkInfo> = {
     explorerNetworkName: 'polkadot',
     pplChainRpcUrls: polkadotPplChains,
     rpcUrls: [
-      'wss://rpc.ibp.network/polkadot',
       'wss://rpc-polkadot.luckyfriday.io',
+      'wss://rpc.ibp.network/polkadot',
       'wss://polkadot.dotters.network',
-      'wss://polkadot-rpc.dwellir.com',
-      'wss://polkadot-rpc-tn.dwellir.com'
+      'wss://polkadot-rpc.dwellir.com'
       // 'wss://polkadot.api.onfinality.io/public-ws'
       // 'wss://polkadot-rpc.publicnode.com',
       // 'wss://polkadot-public-rpc.blockops.network/ws',

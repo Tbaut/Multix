@@ -33,6 +33,8 @@ import {
   PURE_PROXIEs_MIGRATION_CHAIN,
   PURE_PROXIES_MIGRATION_ARRAY
 } from './constants'
+import { getMultisigTxfoFromArgs, MultisigTxInfo } from './util/getMultisigTxInfoFromArgs'
+import { handleNewMultisigTxs } from './processorHandlers/handleNewMultisigTxs'
 
 const supportedMultisigCalls = [
   'Multisig.as_multi',
@@ -48,7 +50,9 @@ const supportedEvents = [
   'Proxy.PureCreated',
   'Proxy.AnonymousCreated',
   'Proxy.ProxyAdded',
-  'Proxy.ProxyRemoved'
+  'Proxy.ProxyRemoved',
+  'Multisig.MultisigCancelled',
+  'Multisig.MultisigExecuted'
 ]
 
 export const env = new Env().getEnv()
@@ -93,6 +97,7 @@ processor.run(
     const proxyRemovalIds: Set<string> = new Set()
     const delegatorToRemoveIds: Set<string> = new Set()
     const pureToKill: KillPureCallInfo[] = []
+    const multisigTxsInfo: MultisigTxInfo[] = []
 
     for (const block of ctx.blocks) {
       const { calls, events, header } = block
@@ -184,6 +189,64 @@ processor.run(
       }
 
       for (const event of events) {
+        //   ------ Executed {
+        //     "id": "0012432588-35dca-000024",
+        //     "index": 24,
+        //     "name": "Multisig.MultisigExecuted",
+        //     "args": {
+        //         "approving": "0xbf0e4f23da489d14165b2ba815d016785d7f19e54edd68ba947520e4e9842ccf",
+        //         "timepoint": {
+        //             "height": 12432570,
+        //             "index": 3
+        //         },
+        //         "multisig": "0x3a8a2a6cf79946867c5cd684b31a74a95fd8fe27007ed070a9e2c40836c10838",
+        //         "callHash": "0xdefd5e3a12d910a4430b5a18609da562c2842bd3ecb37b624a17d53f0fee4841",
+        //         "result": {
+        //             "__kind": "Err",
+        //             "value": {
+        //                 "__kind": "Module",
+        //                 "value": {
+        //                     "index": 5,
+        //                     "error": "0x04000000"
+        //                 }
+        //             }
+        //         }
+        //     },
+        //     "extrinsicIndex": 2,
+        //     "callAddress": []
+        // }
+
+        //   --------- Cancelled {
+        //     "id": "0012466539-4f582-000025",
+        //     "index": 25,
+        //     "name": "Multisig.MultisigCancelled",
+        //     "args": {
+        //         "cancelling": "0x44b950f440709a5ea45db212b3ccd97ded1b133fd3dbdde34d9268ccef1e1667",
+        //         "timepoint": {
+        //             "height": 11075280,
+        //             "index": 2
+        //         },
+        //         "multisig": "0x443de9a1d912ed8c45f339444efe5e8715efeb41297580820c8fda842a2d9c6e",
+        //         "callHash": "0x17ab0c8e392500b94a89ba59355deb1230fc8045b92b8265cc4be0541c08ca15"
+        //     },
+        //     "extrinsicIndex": 2,
+        //     "callAddress": []
+        // }
+
+        if (
+          event.name === 'Multisig.MultisigExecuted' ||
+          event.name === 'Multisig.MultisigCancelled'
+        ) {
+          const newTx = await getMultisigTxfoFromArgs({
+            event,
+            chainId,
+            ctx,
+            blockNumber
+          })
+
+          !!newTx && multisigTxsInfo.push(newTx)
+        }
+
         if (event.name === 'Proxy.PureCreated' || event.name === 'Proxy.AnonymousCreated') {
           const newPureProxy = getPureProxyInfoFromArgs({
             event,
@@ -286,5 +349,6 @@ processor.run(
     newPureProxies.size &&
       (await handleNewPureProxies(ctx, Array.from(newPureProxies.values()), chainId))
     newProxies.size && (await handleNewProxies(ctx, Array.from(newProxies.values()), chainId))
+    multisigTxsInfo.length && (await handleNewMultisigTxs(ctx, multisigTxsInfo, chainId))
   }
 )

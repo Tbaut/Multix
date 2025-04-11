@@ -5,7 +5,7 @@ import { MultisigAggregated, useMultiProxy } from '../../contexts/MultiProxyCont
 import { getDifference, getIntersection } from '../../utils/arrayUtils'
 import { useAccounts } from '../../contexts/AccountsContext'
 import { MdOutlineFlare as FlareIcon } from 'react-icons/md'
-import Transaction from './Transaction'
+import Transaction from './Transactions'
 
 interface Props {
   className?: string
@@ -84,7 +84,6 @@ const TransactionList = ({ className }: Props) => {
   }
   return (
     <Box className={className}>
-      <h3>Transactions</h3>
       {isLoadingPendingTxs && (
         <LoaderStyled data-cy="loader-transaction-list">
           <CircularProgress />

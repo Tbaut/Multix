@@ -15,10 +15,12 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  */
 type Documents = {
     "query MultisigById($id: String!) {\n  accounts(where: {id_eq: $id, isMultisig_eq: true}) {\n    id\n    threshold\n    signatories(limit: 50) {\n      id\n      signatory {\n        id\n        pubKey\n      }\n    }\n  }\n}": typeof types.MultisigByIdDocument,
+    "query MultisigTxsById($multisigIds: [String!]) {\n  multisigTxes(where: {multisig: {id_in: $multisigIds}}) {\n    id\n    blockNumber\n    extrinsicIndex\n    status\n    callData\n    originBlockNumber\n    originExtrinsicIndex\n  }\n}": typeof types.MultisigTxsByIdDocument,
     "query MultisigsAndPureByAccount($accountIds: [String!], $watchedAccountIds: [String!]) {\n  accounts(\n    where: {AND: [{OR: [{id_in: $watchedAccountIds}, {signatories_some: {signatory: {id_in: $accountIds}}}, {signatories_some: {signatory: {id_in: $watchedAccountIds}}}]}, {OR: [{isMultisig_eq: true}, {isPureProxy_eq: true}]}]}\n  ) {\n    id\n    pubKey\n    isMultisig\n    isPureProxy\n    threshold\n    signatories {\n      id\n      signatory {\n        id\n        pubKey\n      }\n    }\n    delegateeFor {\n      id\n      type\n      delegator {\n        id\n        pubKey\n        isPureProxy\n      }\n      delegatee {\n        id\n        pubKey\n        isPureProxy\n      }\n    }\n    delegatorFor {\n      id\n      type\n      delegatee {\n        id\n        pubKey\n        isMultisig\n        threshold\n        signatories {\n          id\n          signatory {\n            id\n            pubKey\n          }\n        }\n      }\n    }\n  }\n}": typeof types.MultisigsAndPureByAccountDocument,
 };
 const documents: Documents = {
     "query MultisigById($id: String!) {\n  accounts(where: {id_eq: $id, isMultisig_eq: true}) {\n    id\n    threshold\n    signatories(limit: 50) {\n      id\n      signatory {\n        id\n        pubKey\n      }\n    }\n  }\n}": types.MultisigByIdDocument,
+    "query MultisigTxsById($multisigIds: [String!]) {\n  multisigTxes(where: {multisig: {id_in: $multisigIds}}) {\n    id\n    blockNumber\n    extrinsicIndex\n    status\n    callData\n    originBlockNumber\n    originExtrinsicIndex\n  }\n}": types.MultisigTxsByIdDocument,
     "query MultisigsAndPureByAccount($accountIds: [String!], $watchedAccountIds: [String!]) {\n  accounts(\n    where: {AND: [{OR: [{id_in: $watchedAccountIds}, {signatories_some: {signatory: {id_in: $accountIds}}}, {signatories_some: {signatory: {id_in: $watchedAccountIds}}}]}, {OR: [{isMultisig_eq: true}, {isPureProxy_eq: true}]}]}\n  ) {\n    id\n    pubKey\n    isMultisig\n    isPureProxy\n    threshold\n    signatories {\n      id\n      signatory {\n        id\n        pubKey\n      }\n    }\n    delegateeFor {\n      id\n      type\n      delegator {\n        id\n        pubKey\n        isPureProxy\n      }\n      delegatee {\n        id\n        pubKey\n        isPureProxy\n      }\n    }\n    delegatorFor {\n      id\n      type\n      delegatee {\n        id\n        pubKey\n        isMultisig\n        threshold\n        signatories {\n          id\n          signatory {\n            id\n            pubKey\n          }\n        }\n      }\n    }\n  }\n}": types.MultisigsAndPureByAccountDocument,
 };
 
@@ -40,6 +42,10 @@ export function graphql(source: string): unknown;
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "query MultisigById($id: String!) {\n  accounts(where: {id_eq: $id, isMultisig_eq: true}) {\n    id\n    threshold\n    signatories(limit: 50) {\n      id\n      signatory {\n        id\n        pubKey\n      }\n    }\n  }\n}"): (typeof documents)["query MultisigById($id: String!) {\n  accounts(where: {id_eq: $id, isMultisig_eq: true}) {\n    id\n    threshold\n    signatories(limit: 50) {\n      id\n      signatory {\n        id\n        pubKey\n      }\n    }\n  }\n}"];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(source: "query MultisigTxsById($multisigIds: [String!]) {\n  multisigTxes(where: {multisig: {id_in: $multisigIds}}) {\n    id\n    blockNumber\n    extrinsicIndex\n    status\n    callData\n    originBlockNumber\n    originExtrinsicIndex\n  }\n}"): (typeof documents)["query MultisigTxsById($multisigIds: [String!]) {\n  multisigTxes(where: {multisig: {id_in: $multisigIds}}) {\n    id\n    blockNumber\n    extrinsicIndex\n    status\n    callData\n    originBlockNumber\n    originExtrinsicIndex\n  }\n}"];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -40,6 +40,12 @@ export type IdentityJudgement =
   | 'LowQuality'
   | 'Erroneous'
 
+export enum TxStatus {
+  Success = 'Success',
+  Cancelled = 'Cancelled',
+  Error = 'Error'
+}
+
 export interface AccountRegistration {
   discord?: string | undefined
   display?: string | undefined

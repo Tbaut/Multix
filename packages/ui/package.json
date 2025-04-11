@@ -6,7 +6,6 @@
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
     "@fontsource/jost": "^5.2.5",
-    "@mui/base": "^5.0.0-beta.70",
     "@mui/material": "^6.4.10",
     "@mui/styled-engine": "^6.4.9",
     "@paraspell/sdk": "^8.9.0",

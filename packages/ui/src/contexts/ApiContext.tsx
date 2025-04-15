@@ -18,6 +18,7 @@ export type IApiContext<Id extends ApiDescriptors> = {
   client?: PolkadotClient
   compatibilityToken?: CompatibilityToken
   resetApi: () => void
+  selectedRpc?: string
 }
 
 export const isContextOf = <Id extends ApiDescriptors>(
@@ -43,6 +44,10 @@ export interface ChainInfoHuman {
 
 const ApiContext = createContext<IApiContext<ApiDescriptors> | undefined>(undefined)
 
+const selectRandomRpc = (rpcUrls: string[]) => {
+  return rpcUrls[Math.floor(Math.random() * rpcUrls.length)]
+}
+
 const ApiContextProvider = <Id extends ApiDescriptors>({ children }: ApiContextProps) => {
   const { selectedNetworkInfo } = useNetwork()
   const [chainInfo, setChainInfo] = useState<ChainInfoHuman>()
@@ -50,25 +55,32 @@ const ApiContextProvider = <Id extends ApiDescriptors>({ children }: ApiContextP
   const [api, setApi] = useState<TypedApi<Descriptors<Id>> | undefined>()
   const [compatibilityToken, setCompatibilityToken] = useState<CompatibilityToken | undefined>()
   const [apiDescriptor, setApiDescriptor] = useState<IApiContext<ApiDescriptors>['apiDescriptor']>()
+  const [selectedRpc, setSelectedRpc] = useState<string | undefined>(undefined)
 
   const resetApi = useCallback(() => {
     setChainInfo(undefined)
     setCompatibilityToken(undefined)
     setApi(undefined)
     setApiDescriptor(undefined)
+    setSelectedRpc(undefined)
   }, [])
 
   useEffect(() => {
-    if (!selectedNetworkInfo?.chainId || !selectedNetworkInfo?.descriptor) return
+    const sel = selectRandomRpc(selectedNetworkInfo?.rpcUrls || [])
+    setSelectedRpc(sel)
+  }, [selectedNetworkInfo?.rpcUrls])
 
-    const cl = createClient(withPolkadotSdkCompat(getWsProvider(selectedNetworkInfo.rpcUrls)))
+  useEffect(() => {
+    if (!selectedNetworkInfo?.chainId || !selectedNetworkInfo?.descriptor || !selectedRpc) return
+
+    const cl = createClient(withPolkadotSdkCompat(getWsProvider(selectedRpc)))
     setClient(cl)
     const id = selectedNetworkInfo.descriptor as Id
     const typedApi = cl.getTypedApi(DESCRIPTORS[id])
     setApi(typedApi)
 
     setApiDescriptor(selectedNetworkInfo.descriptor)
-  }, [selectedNetworkInfo])
+  }, [selectedNetworkInfo, selectedRpc])
 
   useEffect(() => {
     if (!client || !api) return
@@ -110,7 +122,8 @@ const ApiContextProvider = <Id extends ApiDescriptors>({ children }: ApiContextP
         chainInfo,
         client,
         compatibilityToken,
-        resetApi
+        resetApi,
+        selectedRpc
       }}
     >
       {children}

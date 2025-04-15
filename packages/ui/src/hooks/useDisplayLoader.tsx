@@ -6,7 +6,7 @@ import LoadingBox from '../components/LoadingBox'
 
 export const useDisplayLoader = () => {
   const { isLoading: isLoadingMultisigs } = useMultiProxy()
-  const { api } = useApi()
+  const { api, selectedRpc } = useApi()
   const { selectedNetworkInfo } = useNetwork()
   const { isInitialized: isWatchAddressInitialized } = useWatchedAccounts()
 
@@ -31,7 +31,7 @@ export const useDisplayLoader = () => {
   if (isLoadingMultisigs) {
     return (
       <LoadingBox
-        message="Loading your multisigs..."
+        message={`Using rpc: ${selectedRpc}. Loading your multisigs...`}
         testId="multisigs"
       />
     )

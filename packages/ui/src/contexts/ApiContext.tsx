@@ -68,6 +68,7 @@ const ApiContextProvider = <Id extends ApiDescriptors>({ children }: ApiContextP
   useEffect(() => {
     const sel = selectRandomRpc(selectedNetworkInfo?.rpcUrls || [])
     setSelectedRpc(sel)
+    console.log('--> Selected RPC:', sel)
   }, [selectedNetworkInfo?.rpcUrls])
 
   useEffect(() => {

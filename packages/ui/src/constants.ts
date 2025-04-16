@@ -125,8 +125,8 @@ export const networkList: Record<string, NetworkInfo> = {
     chainId: 'asset-hub-polkadot',
     explorerNetworkName: 'assethub-polkadot',
     rpcUrls: [
-      'wss://asset-hub-polkadot-rpc.dwellir.com',
       'wss://sys.ibp.network/asset-hub-polkadot',
+      'wss://asset-hub-polkadot-rpc.dwellir.com',
       'wss://asset-hub-polkadot.dotters.network',
       'wss://rpc-asset-hub-polkadot.luckyfriday.io',
       'wss://statemint.api.onfinality.io/public-ws',

@@ -38,10 +38,7 @@ export interface IPendingTxContext {
 
 const PendingTxContext = createContext<IPendingTxContext | undefined>(undefined)
 
-const getBodyAndHashFromHeight = async (
-  request: PolkadotClient['_request'],
-  height: number
-): Promise<{ blockHash: HexString | undefined; body: HexString[] }> => {
+const getArchiveVersion = async (request: PolkadotClient['_request']) => {
   const [archiveMethod] = (
     await request<{ methods: string[] }>('rpc_methods', [])
       .then((res) => {
@@ -53,14 +50,24 @@ const getBodyAndHashFromHeight = async (
   if (!archiveMethod) throw new Error('RPC does not support archive methods')
 
   const [, version] = archiveMethod.split('_')
+  return version
+}
 
-  const blockHashes = await request(`archive_${version}_hashByHeight`, [height])
+const getBodyAndHashFromHeight = async (
+  request: PolkadotClient['_request'],
+  height: number
+): Promise<{ blockHash: HexString | undefined; body: HexString[] }> => {
+  const archiveVersion = await getArchiveVersion(request)
+  const blockHashes = await request(`archive_${archiveVersion}_hashByHeight`, [height])
   const blockHash = (Array.isArray(blockHashes) ? blockHashes?.[0] : blockHashes) as
     | HexString
     | undefined
   if (!blockHash) throw new Error(`no hash found for height: ${height}`)
 
-  return { blockHash, body: await request<HexString[]>(`archive_${version}_body`, [blockHash]) }
+  return {
+    blockHash,
+    body: await request<HexString[]>(`archive_${archiveVersion}_body`, [blockHash])
+  }
 }
 
 export interface PendingTx {
@@ -91,11 +98,13 @@ const getExtDecoderAt = async (
 ) => {
   if (!api) return
 
+  const archiveVersion = await getArchiveVersion(client._request)
+
   const rawMetadata = await (blockHash && !import.meta.env.DEV
     ? client
         ._request<{
           result: HexString
-        }>('archive_unstable_call', [blockHash, 'Metadata_metadata', ''])
+        }>(`archive_${archiveVersion}_call`, [blockHash, 'Metadata_metadata', ''])
         .then((x) => opaqueMetadata(x.result)[1])
     : api.apis.Metadata.metadata())
 
@@ -163,18 +172,6 @@ const getCallDataFromChainPromise = (
 ) =>
   pendingTxData.map(async (pendingTx) => {
     const blockNumber = pendingTx.info.when.height
-    // const blockHashes = await client._request('archive_unstable_hashByHeight', [blockNumber])
-
-    // const blockHash = (Array.isArray(blockHashes) ? blockHashes?.[0] : blockHashes) as
-    //   | HexString
-    //   | undefined
-
-    // if (!blockHash) {
-    //   console.log('no hash found for height', blockNumber)
-    //   return
-    // }
-
-    // const body: HexString[] = await client._request('archive_unstable_body', [blockHash])
     const { blockHash, body } = await getBodyAndHashFromHeight(client._request, blockNumber)
 
     let date: Date | undefined

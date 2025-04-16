@@ -38,6 +38,31 @@ export interface IPendingTxContext {
 
 const PendingTxContext = createContext<IPendingTxContext | undefined>(undefined)
 
+const getBodyAndHashFromHeight = async (
+  request: PolkadotClient['_request'],
+  height: number
+): Promise<{ blockHash: HexString | undefined; body: HexString[] }> => {
+  const [archiveMethod] = (
+    await request<{ methods: string[] }>('rpc_methods', [])
+      .then((res) => {
+        return res.methods
+      })
+      .catch(() => [])
+  ).filter((method) => method.startsWith('archive_'))
+
+  if (!archiveMethod) throw new Error('RPC does not support archive methods')
+
+  const [, version] = archiveMethod.split('_')
+
+  const blockHashes = await request(`archive_${version}_hashByHeight`, [height])
+  const blockHash = (Array.isArray(blockHashes) ? blockHashes?.[0] : blockHashes) as
+    | HexString
+    | undefined
+  if (!blockHash) throw new Error(`no hash found for height: ${height}`)
+
+  return { blockHash, body: await request<HexString[]>(`archive_${version}_body`, [blockHash]) }
+}
+
 export interface PendingTx {
   from: string
   hash: string
@@ -138,17 +163,19 @@ const getCallDataFromChainPromise = (
 ) =>
   pendingTxData.map(async (pendingTx) => {
     const blockNumber = pendingTx.info.when.height
-    const blockHashes = await client._request('archive_unstable_hashByHeight', [blockNumber])
-    const blockHash = (Array.isArray(blockHashes) ? blockHashes?.[0] : blockHashes) as
-      | HexString
-      | undefined
+    // const blockHashes = await client._request('archive_unstable_hashByHeight', [blockNumber])
 
-    if (!blockHash) {
-      console.log('no hash found for height', blockNumber)
-      return
-    }
+    // const blockHash = (Array.isArray(blockHashes) ? blockHashes?.[0] : blockHashes) as
+    //   | HexString
+    //   | undefined
 
-    const body: HexString[] = await client._request('archive_unstable_body', [blockHash])
+    // if (!blockHash) {
+    //   console.log('no hash found for height', blockNumber)
+    //   return
+    // }
+
+    // const body: HexString[] = await client._request('archive_unstable_body', [blockHash])
+    const { blockHash, body } = await getBodyAndHashFromHeight(client._request, blockNumber)
 
     let date: Date | undefined
 

@@ -125,15 +125,13 @@ export const networkList: Record<string, NetworkInfo> = {
     chainId: 'asset-hub-polkadot',
     explorerNetworkName: 'assethub-polkadot',
     rpcUrls: [
-      // 'wss://asset-hub-polkadot-rpc.dwellir.com'
-      // 'wss://statemint-rpc-tn.dwellir.com',
-      'wss://sys.ibp.network/asset-hub-polkadot'
-      // 'wss://asset-hub-polkadot.dotters.network',
-      // 'wss://rpc-asset-hub-polkadot.luckyfriday.io'
-      // 'wss://statemint.api.onfinality.io/public-ws',
-      // 'wss://polkadot-asset-hub-rpc.polkadot.io',
-      // 'wss://statemint.public.curie.radiumblock.co/ws',
-      // 'wss://dot-rpc.stakeworld.io/assethub'
+      'wss://asset-hub-polkadot-rpc.dwellir.com',
+      'wss://sys.ibp.network/asset-hub-polkadot',
+      'wss://asset-hub-polkadot.dotters.network',
+      'wss://rpc-asset-hub-polkadot.luckyfriday.io',
+      'wss://statemint.api.onfinality.io/public-ws',
+      'wss://polkadot-asset-hub-rpc.polkadot.io',
+      'wss://dot-rpc.stakeworld.io/assethub'
     ],
     pplChainRpcUrls: polkadotPplChains,
     httpGraphqlUrl: HTTP_GRAPHQL_URL,

@@ -100,12 +100,17 @@ const getExtDecoderAt = async (
 
   const archiveVersion = await getArchiveVersion(client._request)
 
-  const rawMetadata = await (blockHash && !import.meta.env.DEV
+  const rawMetadata = await (blockHash
     ? client
-        ._request<{
-          result: HexString
-        }>(`archive_${archiveVersion}_call`, [blockHash, 'Metadata_metadata', ''])
-        .then((x) => opaqueMetadata(x.result)[1])
+        ._request<
+          | {
+              value: HexString
+            }
+          | { result: HexString }
+        >(`archive_${archiveVersion}_call`, [blockHash, 'Metadata_metadata', ''])
+        .then((x) => {
+          return opaqueMetadata('value' in x ? x.value : x.result)[1]
+        })
     : api.apis.Metadata.metadata())
 
   const decoder = await getExtrinsicDecoder(rawMetadata.asOpaqueBytes())

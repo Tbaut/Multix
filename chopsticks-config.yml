@@ -1,6 +1,6 @@
 endpoint: wss://rpc-kusama.luckyfriday.io
 mock-signature-host: true
-block: 26000000
+block: 28000000
 db: ./db.sqlite
 # wasm-override: staging_kusama_runtime.wasm
 runtime-log-level: 5

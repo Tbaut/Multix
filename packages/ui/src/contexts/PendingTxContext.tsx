@@ -177,11 +177,11 @@ const getCallDataFromChainPromise = (
 ) =>
   pendingTxData.map(async (pendingTx) => {
     const blockNumber = pendingTx.info.when.height
-    const { body } = await getBodyAndHashFromHeight(client._request, blockNumber)
+    const { body, blockHash } = await getBodyAndHashFromHeight(client._request, blockNumber)
 
     let date: Date | undefined
 
-    const decoder = await getExtDecoderAt(api)
+    const decoder = await getExtDecoderAt(api, client, blockHash)
 
     if (!decoder || !api) {
       !decoder && console.error('usePendingTx: no decoder found')

@@ -15,7 +15,7 @@ import { ChainInfoHuman, IApiContext, useApi } from './ApiContext'
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 import { PolkadotClient, Transaction } from 'polkadot-api'
-import { Bin, Binary, compact, HexString, Tuple } from '@polkadot-api/substrate-bindings'
+import { Binary, HexString } from '@polkadot-api/substrate-bindings'
 import { hashFromTx } from '../utils/txHash'
 import { getEncodedCallFromDecodedTx } from '../utils/getEncodedCallFromDecodedTx'
 import { getExtrinsicDecoder } from '@polkadot-api/tx-utils'
@@ -89,24 +89,18 @@ export interface CallDataInfoFromChain {
 
 export type AggGroupedByDate = { [index: string]: CallDataInfoFromChain[] }
 
-const opaqueMetadata = Tuple(compact, Bin(Infinity)).dec
+// const opaqueMetadata = Tuple(compact, Bin(Infinity)).dec
 
 const getExtDecoderAt = async (
-  api: IApiContext<ApiDescriptors>['api'],
-  client: PolkadotClient,
-  blockHash?: string
+  api: IApiContext<ApiDescriptors>['api']
+  // client: PolkadotClient
+  // blockHash?: string
 ) => {
   if (!api) return
 
-  const archiveVersion = await getArchiveVersion(client._request)
+  // const archiveVersion = await getArchiveVersion(client._request)
 
-  const rawMetadata = await (blockHash && !import.meta.env.DEV
-    ? client
-        ._request<{
-          result: HexString
-        }>(`archive_${archiveVersion}_call`, [blockHash, 'Metadata_metadata', ''])
-        .then((x) => opaqueMetadata(x.result)[1])
-    : api.apis.Metadata.metadata())
+  const rawMetadata = await api.apis.Metadata.metadata()
 
   const decoder = await getExtrinsicDecoder(rawMetadata.asOpaqueBytes())
 
@@ -172,11 +166,11 @@ const getCallDataFromChainPromise = (
 ) =>
   pendingTxData.map(async (pendingTx) => {
     const blockNumber = pendingTx.info.when.height
-    const { blockHash, body } = await getBodyAndHashFromHeight(client._request, blockNumber)
+    const { body } = await getBodyAndHashFromHeight(client._request, blockNumber)
 
     let date: Date | undefined
 
-    const decoder = await getExtDecoderAt(api, client, blockHash)
+    const decoder = await getExtDecoderAt(api)
 
     if (!decoder || !api) {
       !decoder && console.error('usePendingTx: no decoder found')

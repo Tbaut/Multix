@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useState, useEffect, createContext, useContext } from 'react'
 import { useNetwork } from './NetworkContext'
 import { CompatibilityToken, createClient, PolkadotClient, TypedApi } from 'polkadot-api'
@@ -6,6 +6,7 @@ import { getWsProvider } from 'polkadot-api/ws-provider/web'
 import { withPolkadotSdkCompat } from 'polkadot-api/polkadot-sdk-compat'
 import { PplApiOf, PplDescriptorKeys, PplDescriptors, DESCRIPTORS_PPL } from '../types'
 import { ChainInfoHuman } from './ApiContext'
+import { wsStatusChangeCallback } from '../utils/wsStatusChangeCallback'
 
 type ApiContextProps = {
   children: React.ReactNode | React.ReactNode[]
@@ -47,6 +48,12 @@ const PplApiContextProvider = <Id extends PplDescriptorKeys>({ children }: ApiCo
   const [pplApiDescriptor, setPplApiDescriptor] =
     useState<IPplApiContext<PplDescriptorKeys>['pplApiDescriptor']>()
 
+  const wsProvider = useMemo(() => {
+    if (!selectedNetworkInfo?.pplChainRpcUrls) return
+
+    return getWsProvider(selectedNetworkInfo.pplChainRpcUrls, wsStatusChangeCallback)
+  }, [selectedNetworkInfo?.pplChainRpcUrls])
+
   useEffect(() => {
     if (!pplApi) return
 
@@ -54,17 +61,15 @@ const PplApiContextProvider = <Id extends PplDescriptorKeys>({ children }: ApiCo
   }, [pplApi])
 
   useEffect(() => {
-    if (!selectedNetworkInfo?.pplChainRpcUrls) return
+    if (!wsProvider || !selectedNetworkInfo) return
 
-    const cl = createClient(
-      withPolkadotSdkCompat(getWsProvider(selectedNetworkInfo.pplChainRpcUrls))
-    )
+    const cl = createClient(withPolkadotSdkCompat(wsProvider))
     setPplClient(cl)
     const id = selectedNetworkInfo.pplChainDescriptor as Id
     const typedApi = cl.getTypedApi(DESCRIPTORS_PPL[id])
     setPplApi(typedApi)
     setPplApiDescriptor(selectedNetworkInfo.pplChainDescriptor)
-  }, [selectedNetworkInfo])
+  }, [selectedNetworkInfo, wsProvider])
 
   useEffect(() => {
     if (!pplClient || !pplApi) return

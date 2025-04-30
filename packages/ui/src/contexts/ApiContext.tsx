@@ -1,4 +1,4 @@
-import { useCallback, ReactNode } from 'react'
+import { useCallback, ReactNode, useMemo } from 'react'
 import { useState, useEffect, createContext, useContext } from 'react'
 import { useNetwork } from './NetworkContext'
 import { ethereumChains } from '../utils/ethereumChains'
@@ -6,6 +6,7 @@ import { CompatibilityToken, createClient, PolkadotClient, TypedApi } from 'polk
 import { getWsProvider } from 'polkadot-api/ws-provider/web'
 import { withPolkadotSdkCompat } from 'polkadot-api/polkadot-sdk-compat'
 import { ApiDescriptors, ApiOf, Descriptors, DESCRIPTORS } from '../types'
+import { wsStatusChangeCallback } from '../utils/wsStatusChangeCallback'
 
 type ApiContextProps = {
   children: ReactNode | ReactNode[]
@@ -58,17 +59,23 @@ const ApiContextProvider = <Id extends ApiDescriptors>({ children }: ApiContextP
     setApiDescriptor(undefined)
   }, [])
 
-  useEffect(() => {
-    if (!selectedNetworkInfo?.chainId || !selectedNetworkInfo?.descriptor) return
+  const wsProvider = useMemo(() => {
+    if (!selectedNetworkInfo?.rpcUrls) return
 
-    const cl = createClient(withPolkadotSdkCompat(getWsProvider(selectedNetworkInfo.rpcUrls)))
+    return getWsProvider(selectedNetworkInfo?.rpcUrls, wsStatusChangeCallback)
+  }, [selectedNetworkInfo?.rpcUrls])
+
+  useEffect(() => {
+    if (!selectedNetworkInfo?.chainId || !selectedNetworkInfo?.descriptor || !wsProvider) return
+
+    const cl = createClient(withPolkadotSdkCompat(wsProvider))
     setClient(cl)
     const id = selectedNetworkInfo.descriptor as Id
     const typedApi = cl.getTypedApi(DESCRIPTORS[id])
     setApi(typedApi)
 
     setApiDescriptor(selectedNetworkInfo.descriptor)
-  }, [selectedNetworkInfo])
+  }, [selectedNetworkInfo, wsProvider])
 
   useEffect(() => {
     if (!client || !api) return

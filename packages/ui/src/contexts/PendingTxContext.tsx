@@ -265,6 +265,7 @@ interface getTxsByDateArgs {
   chainInfo: ChainInfoHuman
   currentProxy?: string
 }
+
 const getTxsByDate = async ({
   api,
   client,
@@ -390,19 +391,20 @@ const PendingTxsContextProvider = ({ children }: PendingTxContextProps) => {
       const chainInfoToUse = forPplChain ? pplChainInfo : chainInfo
 
       if (!apiToUse || !clientToUse || !chainInfoToUse) {
-        // !apiToUse && console.error('usePendingTx: no api found')
-        // !clientToUse && console.error('usePendingTx: no client found')
-        // !chainInfoToUse && console.error('usePendingTx: no chainInfo found')
+        !apiToUse && console.error('usePendingTx: no api found')
+        !clientToUse && console.error('usePendingTx: no client found')
+        !chainInfoToUse && console.error('usePendingTx: no chainInfo found')
         return
       }
 
       if (isEmptyArray(multisigAddresses)) {
-        // console.error('usePendingTx: empty multisigAddresses found')
+        console.error('usePendingTx: empty multisigAddresses found')
         return
       }
 
       !forPplChain && setIsLoading(true)
       forPplChain && setIsLoadingPpl(true)
+
       const newTxs = await getTxsByDate({
         api: apiToUse,
         client: clientToUse,
@@ -410,6 +412,7 @@ const PendingTxsContextProvider = ({ children }: PendingTxContextProps) => {
         chainInfo: chainInfoToUse,
         currentProxy: selectedMultiProxy?.proxy
       })
+
       !forPplChain && setIsLoading(false)
       forPplChain && setIsLoadingPpl(false)
       forPplChain ? setPplTxByDate(newTxs) : setTxByDate(newTxs)

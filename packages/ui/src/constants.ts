@@ -64,8 +64,8 @@ const kusamaPplChains = [
   'wss://people-kusama-rpc.dwellir.com',
   'wss://sys.ibp.network/people-kusama',
   'wss://people-kusama.dotters.network',
-  'wss://rpc-people-kusama.luckyfriday.io',
-  'wss://kusama-people-rpc.polkadot.io'
+  'wss://rpc-people-kusama.luckyfriday.io'
+  // 'wss://kusama-people-rpc.polkadot.io'
   // 'wss://ksm-rpc.stakeworld.io/people'
 ]
 const westendPplChains = [
@@ -81,10 +81,10 @@ export const networkList: Record<string, NetworkInfo> = {
     explorerNetworkName: 'polkadot',
     pplChainRpcUrls: polkadotPplChains,
     rpcUrls: [
-      'wss://rpc-polkadot.luckyfriday.io'
-      // 'wss://rpc.ibp.network/polkadot'
-      // 'wss://polkadot.dotters.network'
-      // 'wss://polkadot-rpc.dwellir.com'
+      'wss://rpc-polkadot.luckyfriday.io',
+      'wss://rpc.ibp.network/polkadot',
+      'wss://polkadot.dotters.network',
+      'wss://polkadot-rpc.dwellir.com'
       // 'wss://polkadot.api.onfinality.io/public-ws'
       // 'wss://polkadot-rpc.publicnode.com',
       // 'wss://polkadot-public-rpc.blockops.network/ws',
@@ -104,12 +104,12 @@ export const networkList: Record<string, NetworkInfo> = {
     explorerNetworkName: 'kusama',
     pplChainRpcUrls: kusamaPplChains,
     rpcUrls: [
-      // 'wss://kusama-rpc.publicnode.com',
       'wss://kusama-rpc.dwellir.com',
-      'wss://kusama-rpc-tn.dwellir.com',
       'wss://rpc.ibp.network/kusama',
       'wss://kusama.dotters.network',
       'wss://rpc-kusama.luckyfriday.io'
+      // 'wss://kusama-rpc.publicnode.com' //nope
+      // 'wss://kusama-rpc-tn.dwellir.com', //nope
       // 'wss://kusama.api.onfinality.io/public-ws',
       // 'wss://rockx-ksm.w3node.com/polka-public-ksm/ws',
       // 'wss://ksm-rpc.stakeworld.io',

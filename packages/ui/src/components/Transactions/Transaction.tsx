@@ -74,6 +74,7 @@ const Transaction = ({
           withLink
           aggregatedData={{ ...aggregatedData }}
           isPplChainTx={isPplChainTx}
+          hideTooLargeCallData={true}
         >
           {(isProposer || possibleSigners.length > 0) && (
             <TransactionFooterStyled>

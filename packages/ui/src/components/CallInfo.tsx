@@ -24,6 +24,7 @@ interface Props {
   withLink?: boolean
   withProxyFiltered?: boolean
   isPplChainTx: boolean
+  hideTooLargeCallData?: boolean
 }
 
 interface CreateTreeParams {
@@ -345,7 +346,8 @@ const CallInfo = ({
   className,
   withLink = false,
   withProxyFiltered = true,
-  isPplChainTx
+  isPplChainTx,
+  hideTooLargeCallData = false
 }: Props) => {
   const { decodedCall, name } = withProxyFiltered
     ? filterProxyProxy(aggregatedData)
@@ -365,6 +367,13 @@ const CallInfo = ({
     [aggregatedData, getDecodeUrl]
   )
   const hasArgs = useMemo(() => decodedCall && decodedCall?.value?.value, [decodedCall])
+
+  const callDataTooLong = useMemo(() => {
+    if (!aggregatedData.callData) return false
+
+    // the UI get super slow with large call data
+    return hideTooLargeCallData && aggregatedData.callData.length > 1000000
+  }, [aggregatedData.callData, hideTooLargeCallData])
 
   return (
     <div
@@ -396,7 +405,7 @@ const CallInfo = ({
           annoyance.
         </AlertStyled>
       )}
-      {hasArgs && (
+      {!callDataTooLong && hasArgs && (
         <Expander
           expanded={expanded}
           title="Params"
@@ -409,6 +418,16 @@ const CallInfo = ({
             ahAssets: assets
           })}
         />
+      )}
+      {callDataTooLong && (
+        <AlertStyled
+          className={className}
+          severity="info"
+          variant="outlined"
+          data-cy="alert-no-call-data"
+        >
+          CallData too long. Click on &quot;Review&quot; to be able to read it.
+        </AlertStyled>
       )}
       {children}
     </div>

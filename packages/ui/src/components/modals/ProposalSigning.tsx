@@ -322,6 +322,11 @@ const ProposalSigning = ({
     [debouncedCallDatahange]
   )
 
+  console.log('!!errorMessage', errorMessage)
+  console.log('isSubmitting', isSubmitting)
+  console.log('(mustProvideCallData && !callInfo?.call)', mustProvideCallData && !callInfo?.call)
+  console.log('mustProvideCallData', mustProvideCallData)
+  console.log('!callInfo?.call', !callInfo?.call)
   return (
     <Dialog
       fullWidth

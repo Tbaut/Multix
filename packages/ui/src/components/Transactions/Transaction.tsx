@@ -76,16 +76,16 @@ const Transaction = ({
           isPplChainTx={isPplChainTx}
           hideTooLargeCallData={true}
         >
-          {(isProposer || possibleSigners.length > 0) && (
-            <TransactionFooterStyled>
-              <ButtonStyled
-                onClick={onOpenModal}
-                data-cy="button-review-tx"
-              >
-                Review
-              </ButtonStyled>
-            </TransactionFooterStyled>
-          )}
+          {/* {(isProposer || possibleSigners.length > 0) && ( */}
+          <TransactionFooterStyled>
+            <ButtonStyled
+              onClick={onOpenModal}
+              data-cy="button-review-tx"
+            >
+              Review
+            </ButtonStyled>
+          </TransactionFooterStyled>
+          {/* )} */}
         </CallInfo>
         <TransactionProgress
           multisigSignatories={multisigSignatories}

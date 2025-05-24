@@ -347,10 +347,7 @@ const MultisigCreation = ({ className }: Props) => {
     multiAddress && addName(name, multiAddress)
     setIsSubmitted(true)
 
-    const nonce = await ctx.api.apis.AccountNonceApi.account_nonce(selectedAccount.address, {
-      at: 'best'
-    })
-    remarkCall.signSubmitAndWatch(selectedAccount.polkadotSigner, { nonce }).subscribe(signCallBack)
+    remarkCall.signSubmitAndWatch(selectedAccount.polkadotSigner).subscribe(signCallBack)
   }, [addName, ctx, multiAddress, name, remarkCall, selectedAccount, signCallBack])
 
   const handleCreateWithPure = useCallback(async () => {
@@ -367,11 +364,7 @@ const MultisigCreation = ({ className }: Props) => {
     multiAddress && addName(name, multiAddress)
     setIsSubmitted(true)
 
-    const nonce = await ctx.api.apis.AccountNonceApi.account_nonce(selectedAccount.address, {
-      at: 'best'
-    })
-
-    batchCall.signSubmitAndWatch(selectedAccount.polkadotSigner, { nonce }).subscribe(signCallBack)
+    batchCall.signSubmitAndWatch(selectedAccount.polkadotSigner).subscribe(signCallBack)
   }, [addName, batchCall, ctx.api, multiAddress, name, selectedAccount, signCallBack])
 
   const goNext = useCallback(() => {

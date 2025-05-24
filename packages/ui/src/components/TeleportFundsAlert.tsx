@@ -117,11 +117,7 @@ export const TeleportFundsAlert = ({
       ? ctx.api.tx.Utility.batch_all({ calls: [xcmCall1.decodedCall, xcmCall2.decodedCall] })
       : xcmCall1
 
-    const nonce = await ctx.api.apis.AccountNonceApi.account_nonce(selectedAccount.address, {
-      at: 'best'
-    })
-
-    tx.signSubmitAndWatch(selectedAccount.polkadotSigner, { nonce }).subscribe(signCallback)
+    tx.signSubmitAndWatch(selectedAccount.polkadotSigner).subscribe(signCallback)
   }, [
     amountToSendToSigner,
     batchWithSignerIfNeeded,

@@ -392,12 +392,8 @@ const ChangeMultisig = ({ onClose, className }: Props) => {
 
     setCurrentStep('call')
 
-    const nonce = await api.apis.AccountNonceApi.account_nonce(selectedAccount.address, {
-      at: 'best'
-    })
-
     api.tx.Utility.batch_all({ calls: [firstCall.decodedCall, secondCall.decodedCall] })
-      .signSubmitAndWatch(selectedAccount.polkadotSigner, { nonce })
+      .signSubmitAndWatch(selectedAccount.polkadotSigner)
       .subscribe(signCallBack)
   }, [api, selectedAccount, firstCall, secondCall, signCallBack])
 

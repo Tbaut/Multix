@@ -258,11 +258,7 @@ const Send = ({ onClose, className, onSuccess, onFinalized, preselected }: Props
 
     setIsSubmitting(true)
 
-    const nonce = await api.apis.AccountNonceApi.account_nonce(selectedAccount.address, {
-      at: 'best'
-    })
-
-    multisigTx.signSubmitAndWatch(selectedAccount.polkadotSigner, { nonce }).subscribe(signCallback)
+    multisigTx.signSubmitAndWatch(selectedAccount.polkadotSigner).subscribe(signCallback)
   }, [api, threshold, selectedAccount, selectedOrigin, extrinsicToCall, multisigTx, signCallback])
 
   const onChangeEasySetupOption: (event: SelectChangeEvent<unknown>) => void = useCallback(

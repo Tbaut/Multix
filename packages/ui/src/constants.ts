@@ -56,14 +56,14 @@ export const PAYMENT_INFO_ACCOUNT = '5CXQZrh1MSgnGGCdJu3tqvRfCv7t5iQXGGV9UKotrbf
 
 const polkadotPplChains = [
   'wss://people-polkadot.dotters.network',
-  'wss://sys.ibp.network/people-polkadot',
+  'wss://people-polkadot.ibp.network',
   'wss://rpc-people-polkadot.luckyfriday.io'
   // 'wss://polkadot-people-rpc.polkadot.io'
   // 'wss://people-polkadot.public.curie.radiumblock.co/ws'
 ]
 const kusamaPplChains = [
   'wss://people-kusama-rpc.dwellir.com',
-  'wss://sys.ibp.network/people-kusama',
+  'wss://people-kusama.ibp.network',
   'wss://people-kusama.dotters.network',
   'wss://rpc-people-kusama.luckyfriday.io',
   'wss://kusama-people-rpc.polkadot.io'

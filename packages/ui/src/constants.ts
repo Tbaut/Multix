@@ -62,11 +62,11 @@ const polkadotPplChains = [
   // 'wss://people-polkadot.public.curie.radiumblock.co/ws'
 ]
 const kusamaPplChains = [
-  'wss://people-kusama-rpc.dwellir.com'
-  // 'wss://sys.ibp.network/people-kusama'
-  // 'wss://people-kusama.dotters.network'
-  // 'wss://rpc-people-kusama.luckyfriday.io'
-  // 'wss://kusama-people-rpc.polkadot.io'
+  'wss://people-kusama-rpc.dwellir.com',
+  'wss://sys.ibp.network/people-kusama',
+  'wss://people-kusama.dotters.network',
+  'wss://rpc-people-kusama.luckyfriday.io',
+  'wss://kusama-people-rpc.polkadot.io'
   // 'wss://ksm-rpc.stakeworld.io/people'
 ]
 const westendPplChains = [

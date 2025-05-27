@@ -111,7 +111,10 @@ const getExtDecoderAt = async (
         .then((x) => {
           return opaqueMetadata('value' in x ? x.value : x.result)[1]
         })
+        .catch(console.error)
     : api.apis.Metadata.metadata())
+
+  if (!rawMetadata) return
 
   const decoder = await getExtrinsicDecoder(rawMetadata.asOpaqueBytes())
 

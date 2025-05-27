@@ -6,7 +6,7 @@
       "chain": "polkadot",
       "metadata": ".papi/metadata/dot.scale",
       "genesis": "0x91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3",
-      "codeHash": "0x15826d883aef4291af111e97d6b5623367bfe123f64c5d520d5b6b9a89563aa4"
+      "codeHash": "0x716bb701ec19452fa522cdaa83ef101d368ba2bcfd89fde9acb6f793a420a616"
     },
     "ksm": {
       "chain": "ksmcc3",
@@ -30,7 +30,7 @@
       "chain": "polkadot_people",
       "metadata": ".papi/metadata/dotPpl.scale",
       "genesis": "0x67fa177a097bfa18f77ea95ab56e9bcdfeb0e5b8a40e46298bb93e16b6fc5008",
-      "codeHash": "0x2e567d68c1913de7292d66827b057c10a2ef8a6aa1e47e316b6cd5e7b4295e85"
+      "codeHash": "0x5ad90a21b395a16a6d720983bb9fdd096577710beea33c7882bb61a7518dbb79"
     },
     "bifrostDot": {
       "wsUrl": "wss://eu.bifrost-polkadot-rpc.liebi.com/ws",
@@ -42,7 +42,7 @@
       "wsUrl": "wss://rpc.helikon.io/hydradx",
       "metadata": ".papi/metadata/hydration.scale",
       "genesis": "0xafdc188f45c71dacbaa0b62e16a91f726c7b8699a9748cdf715459de6b7f366d",
-      "codeHash": "0xed7677704a380daa4627c680f20cfedccf9b183205051afd71d72c9eeb841a9a"
+      "codeHash": "0xf229884fe5c637f59db752a7c67df6c536681f88f1631c8bf7da4d5bf29ac6f1"
     },
     "phala": {
       "wsUrl": "wss://phala-rpc.dwellir.com",
@@ -60,7 +60,7 @@
       "wsUrl": "wss://acala-rpc.dwellir.com",
       "metadata": ".papi/metadata/acala.scale",
       "genesis": "0xfc41b9bd8ef8fe53d58c7ea67c794c7ec9a73daf05e6d54b14ff6342c99ba64c",
-      "codeHash": "0xfc757025e83434de88e6ed72e289d4b7eabf573d5a14d02705a8a71dd973e702"
+      "codeHash": "0x55f7b185fec5e7ba4ed5816324151344e0c20e87582502bf50d74bdc3e40ebbe"
     },
     "pasPpl": {
       "wsUrl": "wss://people-paseo.rpc.amforc.com",
@@ -72,7 +72,7 @@
       "chain": "polkadot_asset_hub",
       "metadata": ".papi/metadata/dotAssetHub.scale",
       "genesis": "0x68d56f15f85d3136970ec16946040bc1752654e906147f7e43e9d539d7c3de2f",
-      "codeHash": "0xb141cfba5f13b3b06362bf62222f585d4bb61fcb1345c716294a097df44d5eb5"
+      "codeHash": "0x6e20bc52aaaafd1de82ba7d2a3c0fa39193787e240b93608489cf72a4c46a584"
     },
     "polimec": {
       "wsUrl": "wss://polimec.ibp.network",
@@ -84,7 +84,7 @@
       "wsUrl": "wss://polkadot-coretime-rpc.polkadot.io",
       "metadata": ".papi/metadata/coretimeDot.scale",
       "genesis": "0xefb56e30d9b4a24099f88820987d0f45fb645992416535d87650d98e00f46fc4",
-      "codeHash": "0x8f84199c39c4ce451af0400bef1b8fd980ec2ab1192093441c55b29ecca2fe32"
+      "codeHash": "0x8730d62fc24f15525986b33d5f754b4262d33cd5fa9bf49277843232b793cae4"
     },
     "westend": {
       "chain": "westend2",
@@ -108,7 +108,7 @@
       "wsUrl": "wss://dancelight.tanssi-api.network",
       "metadata": ".papi/metadata/dancelight.scale",
       "genesis": "0x983a1a72503d6cc3636776747ec627172b51272bf45e50a355348facb67a820a",
-      "codeHash": "0xd3dfb7ddb4dbbc1d6eb2f5eeb218f077c08a7e558d0d5c473e6ae6cf483a5c21"
+      "codeHash": "0x4f6587dff70c837529171c73492c1434a534c7f707348f2217c7a8241cd84d3e"
     }
   }
 }

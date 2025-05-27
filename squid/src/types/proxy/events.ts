@@ -8,6 +8,7 @@ import * as v9300 from '../v9300'
 import * as v9420 from '../v9420'
 import * as v1002006 from '../v1002006'
 import * as v1003000 from '../v1003000'
+import * as v1004000 from '../v1004000'
 
 export const anonymousCreated =  {
     name: 'Proxy.AnonymousCreated',
@@ -116,6 +117,18 @@ export const proxyAdded =  {
             delay: sts.number(),
         })
     ),
+    /**
+     * A proxy was added.
+     */
+    v1004000: new EventType(
+        'Proxy.ProxyAdded',
+        sts.struct({
+            delegator: v1004000.AccountId32,
+            delegatee: v1004000.AccountId32,
+            proxyType: v1004000.ProxyType,
+            delay: sts.number(),
+        })
+    ),
 }
 
 export const proxyRemoved =  {
@@ -165,6 +178,18 @@ export const proxyRemoved =  {
             delegator: v1003000.AccountId32,
             delegatee: v1003000.AccountId32,
             proxyType: v1003000.ProxyType,
+            delay: sts.number(),
+        })
+    ),
+    /**
+     * A proxy was removed.
+     */
+    v1004000: new EventType(
+        'Proxy.ProxyRemoved',
+        sts.struct({
+            delegator: v1004000.AccountId32,
+            delegatee: v1004000.AccountId32,
+            proxyType: v1004000.ProxyType,
             delay: sts.number(),
         })
     ),
@@ -221,6 +246,19 @@ export const pureCreated =  {
             pure: v1003000.AccountId32,
             who: v1003000.AccountId32,
             proxyType: v1003000.ProxyType,
+            disambiguationIndex: sts.number(),
+        })
+    ),
+    /**
+     * A pure account has been created by new proxy with given
+     * disambiguation index and proxy type.
+     */
+    v1004000: new EventType(
+        'Proxy.PureCreated',
+        sts.struct({
+            pure: v1004000.AccountId32,
+            who: v1004000.AccountId32,
+            proxyType: v1004000.ProxyType,
             disambiguationIndex: sts.number(),
         })
     ),

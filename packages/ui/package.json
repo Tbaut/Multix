@@ -27,7 +27,7 @@
     "graphql-request": "^7.1.2",
     "graphql-ws": "^6.0.5",
     "json5": "^2.2.3",
-    "polkadot-api": "^1.12.0",
+    "polkadot-api": "^1.12.2",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-icons": "^5.5.0",

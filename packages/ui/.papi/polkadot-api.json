@@ -12,19 +12,19 @@
       "chain": "ksmcc3",
       "metadata": ".papi/metadata/ksm.scale",
       "genesis": "0xb0a8d493285c2df73290dfb7e61f870f17b41801197a149ca93654499ea3dafe",
-      "codeHash": "0x299d4f77bd222a64966dfb3eaa16985be10cc047ad4b9d8bc56735be60a065c2"
+      "codeHash": "0xf45689276dfdcf05b6defd26da68e3283a96190d789f7a311ff31f64b455b421"
     },
     "ksmAssetHub": {
       "chain": "ksmcc3_asset_hub",
       "metadata": ".papi/metadata/ksmAssetHub.scale",
       "genesis": "0x48239ef607d7928874027a43a67689209727dfb3d3dc5e5b03a39bdc2eda771a",
-      "codeHash": "0xa15103f7b71bb23c9602a210c7f1ec34a01208cd4a029d78ac2a7620ddbbd4ce"
+      "codeHash": "0xe47150af4545236c2ec6915ad0dbc56a9aadf59e7a031e4d133d962d38ab0ab4"
     },
     "ksmPpl": {
       "chain": "ksmcc3_people",
       "metadata": ".papi/metadata/ksmPpl.scale",
       "genesis": "0xc1af4cb4eb3918e5db15086c0cc5ec17fb334f728b7c65dd44bfe1e174ff8b3f",
-      "codeHash": "0x3ca7ebbfc8fafec59a1f0559227b96d31a5f00964c46d388ee17f6fadd5b39cf"
+      "codeHash": "0xc897696af11fac9547bdd053b5ef06ee2c5fb4d9465e5be1f6955770b1f2d082"
     },
     "dotPpl": {
       "chain": "polkadot_people",
@@ -108,7 +108,7 @@
       "wsUrl": "wss://dancelight.tanssi-api.network",
       "metadata": ".papi/metadata/dancelight.scale",
       "genesis": "0x983a1a72503d6cc3636776747ec627172b51272bf45e50a355348facb67a820a",
-      "codeHash": "0x4f6587dff70c837529171c73492c1434a534c7f707348f2217c7a8241cd84d3e"
+      "codeHash": "0x3b53e3d568a1add74374e87b5ad6351fc96f016390e832441722912237b83d53"
     }
   }
 }

@@ -64,6 +64,8 @@ deploy:
       cmd: ['sqd', 'start-polimec']
     - name: dancelight-processor
       cmd: ['sqd', 'start-dancelight']
+    - name: tanssi-processor
+      cmd: ['sqd', 'start-tanssi']
   # api:
   #   env:
   # SQD_DEBUG: sqd:graphql-server

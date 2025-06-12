@@ -259,6 +259,16 @@
         "lib/main",
         "dotenv_config_path=assets/envs/.env.dancelight"
       ]
+    },
+    "start-tanssi": {
+      "description": "starts the indexer with tanssi",
+      "cmd": [
+        "node",
+        "-r",
+        "dotenv/config",
+        "lib/main",
+        "dotenv_config_path=assets/envs/.env.tanssi"
+      ]
     }
   }
 }

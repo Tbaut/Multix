@@ -19,6 +19,7 @@ import { chainsAcalaSVG } from './logos/acalaSVG'
 import { nodesBifrostSVG } from './logos/bifrostSVG'
 import paseoSVG from './logos/paseoSVG.svg'
 import dancelightSVG from './logos/dancelightSVG.svg'
+import tanssiSVG from './logos/tanssiSVG.svg'
 import { nodesCoretimeSVG } from './logos/coretimeSVG'
 import { polimecSVG } from './logos/polimecSVG'
 import usdc from './logos/usdc.svg'
@@ -417,17 +418,17 @@ export const networkList: Record<string, NetworkInfo> = {
     descriptor: 'polimec',
     genesisHash: '0x7eb9354488318e7549c722669dcbdcdc526f1fef1420e7944667212f3601fdbd'
   },
-  /*tanssi: {
+tanssi: {
     chainId: 'tanssi',
     explorerNetworkName: 'tanssi',
     rpcUrls: [
-      tbd,
+      'wss://tanssi.tanssi-mainnet.network',
     ],
     httpGraphqlUrl: HTTP_GRAPHQL_URL,
     networkLogo: tanssiSVG,
     descriptor: 'tanssi',
-    genesisHash: 'tbd'
-  },*/
+    genesisHash: '0xdd6d086f75ec041b66e20c4186d327b23c8af244c534a2418de6574e8c041a60'
+  },
   dancelight: {
     chainId: 'dancelight',
     explorerNetworkName: 'dancelight',
@@ -474,7 +475,7 @@ export const kusamaNetworksAndParachains: Partial<keyof typeof networkList>[] = 
   // 'moonriver'
 ]
 export const soloChains: Partial<keyof typeof networkList>[] = [
-  //joystream
+    'tanssi'
 ]
 export const testChains: Partial<keyof typeof networkList>[] = [
   // 'rococo',

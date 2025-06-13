@@ -109,6 +109,12 @@
       "metadata": ".papi/metadata/dancelight.scale",
       "genesis": "0x983a1a72503d6cc3636776747ec627172b51272bf45e50a355348facb67a820a",
       "codeHash": "0x3b53e3d568a1add74374e87b5ad6351fc96f016390e832441722912237b83d53"
+    },
+    "tanssi": {
+      "wsUrl": "wss://tanssi.tanssi-api.network",
+      "metadata": ".papi/metadata/tanssi.scale",
+      "genesis": "0xdd6d086f75ec041b66e20c4186d327b23c8af244c534a2418de6574e8c041a60",
+      "codeHash": "0x2090dd77374b27824954352ad47d892c7359ec1d2d3b7d6f85127518817cecb3"
     }
   }
 }

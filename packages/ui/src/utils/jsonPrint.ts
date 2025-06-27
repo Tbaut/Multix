@@ -8,8 +8,16 @@ export const JSONprint = (e: unknown) => {
   return (
     json5
       .stringify(e, {
-        replacer: (_, v) =>
-          typeof v === 'bigint' ? v.toString() : v instanceof Binary ? v.asText() : v,
+        replacer: (_, v) => {
+          if (typeof v === 'bigint') return v.toString()
+          if (v instanceof Binary) {
+            const text = v.asText()
+            // Check if all characters are printable ASCII (32-126)
+            const isAscii = /^[\x20-\x7E]*$/.test(text)
+            return isAscii ? text : v.asHex()
+          }
+          return v
+        },
         space: 4
       })
       // remove { and }

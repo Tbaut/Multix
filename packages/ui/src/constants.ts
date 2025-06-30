@@ -8,6 +8,7 @@
 // import { nodesJoystreamSVG } from './logos/joystreamSVG'
 // import { chainsWatrPNG } from './logos/watrPNG'
 // import { nodesKhalaSVG } from './logos/khalaSVG'
+// import { nodesCoretimeSVG } from './logos/coretimeSVG'
 import { chainsKusamaSVG } from './logos/kusamaSVG '
 import { localSVG } from './logos/localSVG'
 import { chainsPolkadotCircleSVG } from './logos/polkadot-circleSVG'
@@ -20,7 +21,6 @@ import { nodesBifrostSVG } from './logos/bifrostSVG'
 import paseoSVG from './logos/paseoSVG.svg'
 import dancelightSVG from './logos/dancelightSVG.svg'
 import tanssiSVG from './logos/tanssiSVG.svg'
-import { nodesCoretimeSVG } from './logos/coretimeSVG'
 import { polimecSVG } from './logos/polimecSVG'
 import usdc from './logos/usdc.svg'
 import usdt from './logos/usdt.svg'
@@ -51,7 +51,7 @@ export interface NetworkInfo {
   genesisHash?: string
 }
 
-export const HTTP_GRAPHQL_URL = `https://chainsafe.squids.live/multix-arrow@v7/api/graphql`
+export const HTTP_GRAPHQL_URL = `https://multix.squids.live/multix-arrow@v7/api/graphql`
 
 export const PAYMENT_INFO_ACCOUNT = '5CXQZrh1MSgnGGCdJu3tqvRfCv7t5iQXGGV9UKotrbfhkavs'
 
@@ -164,21 +164,21 @@ export const networkList: Record<string, NetworkInfo> = {
     pplChainDescriptor: 'ksmPpl',
     genesisHash: '0x48239ef607d7928874027a43a67689209727dfb3d3dc5e5b03a39bdc2eda771a'
   },
-  'coretime-polkadot': {
-    chainId: 'coretime-polkadot',
-    explorerNetworkName: 'coretime-polkadot',
-    rpcUrls: [
-      'wss://sys.ibp.network/coretime-polkadot',
-      'wss://coretime-polkadot.dotters.network',
-      'wss://polkadot-coretime-rpc.polkadot.io'
-    ],
-    pplChainRpcUrls: polkadotPplChains,
-    httpGraphqlUrl: HTTP_GRAPHQL_URL,
-    networkLogo: nodesCoretimeSVG,
-    descriptor: 'coretimeDot',
-    pplChainDescriptor: 'dotPpl',
-    genesisHash: '0xefb56e30d9b4a24099f88820987d0f45fb645992416535d87650d98e00f46fc4'
-  },
+  // 'coretime-polkadot': {
+  //   chainId: 'coretime-polkadot',
+  //   explorerNetworkName: 'coretime-polkadot',
+  //   rpcUrls: [
+  //     'wss://sys.ibp.network/coretime-polkadot',
+  //     'wss://coretime-polkadot.dotters.network',
+  //     'wss://polkadot-coretime-rpc.polkadot.io'
+  //   ],
+  //   pplChainRpcUrls: polkadotPplChains,
+  //   httpGraphqlUrl: HTTP_GRAPHQL_URL,
+  //   networkLogo: nodesCoretimeSVG,
+  //   descriptor: 'coretimeDot',
+  //   pplChainDescriptor: 'dotPpl',
+  //   genesisHash: '0xefb56e30d9b4a24099f88820987d0f45fb645992416535d87650d98e00f46fc4'
+  // },
   // 'coretime-kusama': {
   //   chainId: 'coretime-kusama',
   //   explorerNetworkName: 'coretime-kusama',

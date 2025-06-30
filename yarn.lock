@@ -687,17 +687,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@chainsafe/multix@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "@chainsafe/multix@workspace:."
-  dependencies:
-    concurrently: ^9.1.2
-    eslint-config-prettier: ^10.1.5
-    eslint-plugin-prettier: ^5.4.1
-    prettier: ^3.5.3
-  languageName: unknown
-  linkType: soft
-
 "@commander-js/extra-typings@npm:^14.0.0":
   version: 14.0.0
   resolution: "@commander-js/extra-typings@npm:14.0.0"
@@ -10043,6 +10032,17 @@ __metadata:
     typescript: 5.8.3
     vite: ^6.3.5
     vite-plugin-svgr: ^4.3.0
+  languageName: unknown
+  linkType: soft
+
+"multix@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "multix@workspace:."
+  dependencies:
+    concurrently: ^9.1.2
+    eslint-config-prettier: ^10.1.5
+    eslint-plugin-prettier: ^5.4.1
+    prettier: ^3.5.3
   languageName: unknown
   linkType: soft
 

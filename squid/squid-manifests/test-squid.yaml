@@ -14,8 +14,8 @@ deploy:
     #   cmd: ['sqd', 'start-asset-hub-kusama']
     # - name: asset-hub-polkadot-processor
     #   cmd: ['sqd', 'start-asset-hub-polkadot']
-    - name: rococo-processor
-      cmd: ['sqd', 'start-rococo']
+    - name: westend-processor
+      cmd: ['sqd', 'start-westend']
     # - name: kusama-processor
     #   cmd: ['sqd', 'start-kusama']
     # - name: polkadot-processor

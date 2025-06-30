@@ -1,5 +1,5 @@
 export const wikiLinkReservedFunds =
-  'https://github.com/ChainSafe/Multix/wiki/Why-are-funds-reserved%3F'
+  'https://github.com/Tbaut/Multix/wiki/Why-are-funds-reserved%3F'
 
 export const getErrorMessageReservedFunds = ({
   identifier,

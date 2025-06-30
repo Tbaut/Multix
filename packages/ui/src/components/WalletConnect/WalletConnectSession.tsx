@@ -81,7 +81,7 @@ const InfoBox = () => (
       <span>
         Connect a Dapp to Multix using WalletConnect v2. More info{' '}
         <a
-          href="https://github.com/ChainSafe/Multix/wiki/Connect-Dapps-to-Multix-using-WalletConnect-v2"
+          href="https://github.com/Tbaut/Multix/wiki/Connect-Dapps-to-Multix-using-WalletConnect-v2"
           target="_blank"
           rel="noreferrer"
         >

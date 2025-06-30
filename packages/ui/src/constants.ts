@@ -310,13 +310,6 @@ export const networkList: Record<string, NetworkInfo> = {
   //   httpGraphqlUrl: HTTP_GRAPHQL_URL,
   //   logo: nodesKhalaSVG
   // },
-  // rococo: {
-  //   chainId: 'rococo',
-  //   explorerNetworkName: 'rococo',
-  //   rpcUrl: ['wss://rococo-rpc.polkadot.io'],
-  //   httpGraphqlUrl: HTTP_GRAPHQL_URL,
-  //   logo: chainsRococoSVG
-  // },
   westend: {
     chainId: 'westend',
     explorerNetworkName: 'westend',
@@ -474,7 +467,6 @@ export const kusamaNetworksAndParachains: Partial<keyof typeof networkList>[] = 
 ]
 export const soloChains: Partial<keyof typeof networkList>[] = ['tanssi']
 export const testChains: Partial<keyof typeof networkList>[] = [
-  // 'rococo',
   'paseo',
   // 'rhala testnet',
   'westend',

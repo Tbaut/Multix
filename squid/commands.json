@@ -5,17 +5,6 @@
       "description": "Apply the DB migrations",
       "cmd": ["squid-typeorm-migration", "apply"]
     },
-    "start-rococo": {
-      "deps": ["migration:apply"],
-      "description": "starts the indexer with rococo",
-      "cmd": [
-        "node",
-        "-r",
-        "dotenv/config",
-        "lib/main",
-        "dotenv_config_path=assets/envs/.env.rococo"
-      ]
-    },
     "start-kusama": {
       "description": "starts the indexer with kusama",
       "cmd": [

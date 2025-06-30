@@ -4,7 +4,7 @@
 
 ### an interface to easily manage complex multisigs.
 
-### https://multix.chainsafe.io
+### https://multix.cloud
 
 This repo contains the code to run an indexer see `./squid` and a front-end, see `./packages/ui`.
 
@@ -21,12 +21,12 @@ DB_PORT=5432
 GQL_PORT=4350
 SQD_DEBUG=sqd:processor:mapping
 
-# rococo
+# westend
 BLOCK_START=3510000 # this is the starting block of the indexer
 PREFIX=42 # the ss58 prefix for the chain
-RPC_WS="wss://rococo-rpc.polkadot.io" # a WS endpoint to connect to the blockchain
-ARCHIVE_NAME="rococo" # the archive name from subsquid archives
-CHAIN_ID='rococo' # the name that will prefix most ids in the indexer's DB
+RPC_WS="wss://westend-rpc.polkadot.io" # a WS endpoint to connect to the blockchain
+ARCHIVE_NAME="westend" # the archive name from subsquid archives
+CHAIN_ID='westend' # the name that will prefix most ids in the indexer's DB
 ```
 
 ### Running the project locally

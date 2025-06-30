@@ -1,5 +1,5 @@
 {
-  "name": "@chainsafe/multix",
+  "name": "multix",
   "private": true,
   "workspaces": [
     "packages/*"
@@ -11,7 +11,7 @@
   "packageManager": "yarn@3.6.3",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ChainSafe/Multix"
+    "url": "https://github.com/Tbaut/Multix"
   },
   "keywords": [
     "polkadot",

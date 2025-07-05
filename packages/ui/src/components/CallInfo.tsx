@@ -91,7 +91,7 @@ const getBalanceKey = (value: Record<string, any>) => {
 }
 
 const getMultiAddressKey = (value: Record<string, any>) => {
-  return ['dest', 'beneficiary', 'curator', 'delegate', 'spawner', 'to', 'target'].find(
+  return ['dest', 'beneficiary', 'curator', 'delegate', 'spawner', 'to', 'target', 'real'].find(
     (key) => typeof value[key] === 'object' && value[key].type === 'Id'
   )
 }
@@ -211,7 +211,7 @@ const eachFieldRendered = ({ value, chainInfo, id, extrinsicName }: EachFieldRen
 interface PreparedCallParams {
   decodedCall: CreateTreeParams['decodedCall']
   chainInfo: ChainInfoHuman
-  isBatch?: boolean
+  showExtrinsicName?: boolean
   isFirstCall?: boolean
   ahAssets: IAssetsContext['assets']
 }
@@ -219,13 +219,37 @@ interface PreparedCallParams {
 const preparedCall = ({
   decodedCall,
   chainInfo,
-  isBatch = false,
+  showExtrinsicName = false,
   isFirstCall = false,
   ahAssets
 }: PreparedCallParams) => {
   if (!decodedCall) return
 
   const extrinsicName = getExtrinsicName(decodedCall.type, decodedCall.value.type)
+
+  if (isProxyCall(extrinsicName)) {
+    const lowerLevelCall = decodedCall.value.value.call
+    console.log(decodedCall)
+
+    return (
+      <>
+        <StyleProxyDisplay>
+          <DisplayAccount
+            address={decodedCall.value.value.real.value}
+            label={'Proxy'}
+          />
+        </StyleProxyDisplay>
+        <BatchCallStyled data-cy={`batch-call-item`}>
+          {preparedCall({
+            decodedCall: lowerLevelCall as CreateTreeParams['decodedCall'],
+            chainInfo,
+            showExtrinsicName: true,
+            ahAssets
+          })}
+        </BatchCallStyled>
+      </>
+    )
+  }
 
   if (isBatchedCall(extrinsicName)) {
     const lowerLevelCalls = decodedCall.value.value.calls as Array<Record<string, any>>
@@ -239,7 +263,7 @@ const preparedCall = ({
           {preparedCall({
             decodedCall: call as CreateTreeParams['decodedCall'],
             chainInfo,
-            isBatch: true,
+            showExtrinsicName: true,
             ahAssets
           })}
         </BatchCallStyled>
@@ -256,7 +280,7 @@ const preparedCall = ({
   ) {
     return (
       <>
-        {isBatch && <ExtrinsicNameStyled>{extrinsicName}</ExtrinsicNameStyled>}
+        {showExtrinsicName && <ExtrinsicNameStyled>{extrinsicName}</ExtrinsicNameStyled>}
         <ul>
           <li>
             id: {ahTransfer.id} ({ahAssets[ahTransfer.id].name})
@@ -287,7 +311,7 @@ const preparedCall = ({
     if (typeof lowerLevelCall === 'object') {
       return (
         <>
-          {isBatch && <ExtrinsicNameStyled>{extrinsicName}</ExtrinsicNameStyled>}
+          {showExtrinsicName && <ExtrinsicNameStyled>{extrinsicName}</ExtrinsicNameStyled>}
           <ul>
             {Object.entries(lowerLevelCall).map(([key, value], index) =>
               eachFieldRendered({
@@ -492,4 +516,8 @@ const ImgStyled = styled('img')`
 const StyledAmount = styled('div')`
   display: inline-flex;
   align-items: center;
+`
+
+const StyleProxyDisplay = styled('div')`
+  margin-left: 2rem;
 `

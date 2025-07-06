@@ -41,6 +41,13 @@ export const testAccounts = {
     type: 'sr25519',
     mnemonic: 'hunt pause dawn identify month ahead ship ribbon brother fit fabric fabric'
   } as InjectedAccountWitMnemonic,
+  'Multisig Member Account 6': {
+    address: '133zs4z4iNBvWhHEQ1PJDraBgXtwFdiX3W8y43bghXQ67Ywn',
+    publicKey: '0x5ac1be27611275d1dc40cf345d7bf3355c7ece3f5914f04051dc23c6f3f8e570',
+    name: 'Multisig Member Account 6',
+    type: 'sr25519',
+    mnemonic: 'hunt pause dawn identify month ahead ship ribbon brother fit fabric fabric/1'
+  } as InjectedAccountWitMnemonic,
 
   'Non Multisig Member 1': {
     address: '13ixUNRoNQ2NL57Us7tfQ2VtUDxVhdPn4y3md4gUAbsjW8PS',

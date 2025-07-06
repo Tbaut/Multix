@@ -57,6 +57,7 @@ const Transaction = ({
         color="primary"
         badgeContent={isProxy ? AccountBadge.PURE : AccountBadge.MULTI}
         anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
+        data-cy={`badge-${isProxy ? AccountBadge.PURE : AccountBadge.MULTI}`}
       >
         {!aggregatedData.callData ? (
           <QuestionMarkIcon

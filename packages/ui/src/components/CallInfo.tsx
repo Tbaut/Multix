@@ -229,7 +229,6 @@ const preparedCall = ({
 
   if (isProxyCall(extrinsicName)) {
     const lowerLevelCall = decodedCall.value.value.call
-    console.log(decodedCall)
 
     return (
       <>

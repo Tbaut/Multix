@@ -414,7 +414,7 @@ export const networkList: Record<string, NetworkInfo> = {
   tanssi: {
     chainId: 'tanssi',
     explorerNetworkName: 'tanssi',
-    rpcUrls: ['wss://tanssi.tanssi-mainnet.network'],
+    rpcUrls: ['wss://services.tanssi-mainnet.network/tanssi'],
     httpGraphqlUrl: HTTP_GRAPHQL_URL,
     networkLogo: tanssiSVG,
     descriptor: 'tanssi',
@@ -423,7 +423,7 @@ export const networkList: Record<string, NetworkInfo> = {
   dancelight: {
     chainId: 'dancelight',
     explorerNetworkName: 'dancelight',
-    rpcUrls: ['wss://dancelight.tanssi-api.network'],
+    rpcUrls: ['wss://services.tanssi-testnet.network/dancelight'],
     httpGraphqlUrl: HTTP_GRAPHQL_URL,
     networkLogo: dancelightSVG,
     descriptor: 'dancelight',

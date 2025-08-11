@@ -105,13 +105,13 @@
       "codeHash": "0xea48eb5d470eeed502367c7801f11bb8d262bf31c7fa3dca1eebae1c72d41a46"
     },
     "dancelight": {
-      "wsUrl": "wss://dancelight.tanssi-api.network",
+      "wsUrl": "wss://services.tanssi-testnet.network/dancelight",
       "metadata": ".papi/metadata/dancelight.scale",
       "genesis": "0x983a1a72503d6cc3636776747ec627172b51272bf45e50a355348facb67a820a",
       "codeHash": "0xdade0d3b3bbe17dc8647ffdaeb1b2f92b9b3f5a6be21b765b15e57fe26d0f30d"
     },
     "tanssi": {
-      "wsUrl": "wss://tanssi.tanssi-mainnet.network",
+      "wsUrl": "wss://services.tanssi-mainnet.network/tanssi",
       "metadata": ".papi/metadata/tanssi.scale",
       "genesis": "0xdd6d086f75ec041b66e20c4186d327b23c8af244c534a2418de6574e8c041a60",
       "codeHash": "0x344ee4c20917f15a2f385157a446d72c6db015b52389cc324e6a6996d627ae23"

@@ -20,8 +20,8 @@ deploy:
       cmd: ['sqd', 'start-kusama']
     - name: polkadot-processor
       cmd: ['sqd', 'start-polkadot']
-    - name: phala-processor
-      cmd: ['sqd', 'start-phala']
+    # - name: phala-processor
+    #   cmd: ['sqd', 'start-phala']
     # - name: rhala-processor
     #   cmd: ['sqd', 'start-rhala']
     - name: acala-processor

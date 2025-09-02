@@ -68,11 +68,11 @@ import {
   ksm,
   ksmAssetHub,
   paseo,
-  phala,
+  // phala,
   polimec,
-  coretimeDot,
+  // coretimeDot,
   westend,
-  wesAssetHub,
+  // wesAssetHub,
   dotPpl,
   ksmPpl,
   pasPpl,
@@ -90,11 +90,11 @@ export const DESCRIPTORS = {
   ksm,
   ksmAssetHub,
   paseo,
-  phala,
+  // phala,
   polimec,
-  coretimeDot,
+  // coretimeDot,
   westend,
-  wesAssetHub,
+  // wesAssetHub,
   dotPpl,
   ksmPpl,
   pasPpl,
@@ -118,17 +118,17 @@ export const DESCRIPTORS_NOT_HYDRATION_2_3 = {
 } as const
 
 export const DESCRIPTORS_NOT_HYDRATION_3_3 = {
-  phala,
+  // phala,
   polimec,
-  coretimeDot,
+  // coretimeDot,
   westend,
-  wesAssetHub
+  // wesAssetHub
 } as const
 
 export const DESCRIPTORS_ASSET_HUBS = {
   dotAssetHub,
   ksmAssetHub,
-  wesAssetHub
+  // wesAssetHub
 }
 
 export const DESCRIPTORS_RELAYS = {
@@ -139,8 +139,8 @@ export const DESCRIPTORS_RELAYS = {
 }
 
 export const DESCRIPTORS_1_3 = { acala, bifrostDot, dot, dotAssetHub, hydration } as const
-export const DESCRIPTORS_2_3 = { ksm, ksmAssetHub, paseo, phala, dancelight, tanssi } as const
-export const DESCRIPTORS_3_3 = { polimec, coretimeDot, westend, wesAssetHub } as const
+export const DESCRIPTORS_2_3 = { ksm, ksmAssetHub, paseo, dancelight, tanssi } as const
+export const DESCRIPTORS_3_3 = { polimec, westend } as const
 
 export type ApiDescriptors = keyof typeof DESCRIPTORS
 

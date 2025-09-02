@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { ProxyAccount } from '../model'
 import { Ctx } from '../main'
 import { KillPureCallInfo } from '../util/getProxyKillPureArgs'

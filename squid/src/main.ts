@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-expressions */
 import { DataHandlerContext, SubstrateBatchProcessor } from '@subsquid/substrate-processor'
 import { Store, TypeormDatabase } from '@subsquid/typeorm-store'
 import { handleMultisigCall } from './multisigCalls'
@@ -85,7 +86,7 @@ export type Ctx = DataHandlerContext<Store, typeof fields>
 
 processor.run(
   new TypeormDatabase({ stateSchema: chainId, isolationLevel: 'READ COMMITTED' }),
-  async (ctx) => {
+  async (ctx: Ctx) => {
     const newMultisigsInfo: Map<string, NewMultisigsInfo> = new Map()
     const newPureProxies: Map<string, NewPureProxy> = new Map()
     const newMultisigCalls: MultisigCallInfo[] = []

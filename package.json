@@ -37,10 +37,10 @@
     "ui:start-with-chopsticks": "yarn workspace multix-ui start-with-chopsticks"
   },
   "devDependencies": {
-    "concurrently": "^9.1.2",
-    "eslint-config-prettier": "^10.1.5",
-    "eslint-plugin-prettier": "^5.4.1",
-    "prettier": "^3.5.3"
+    "concurrently": "^9.2.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "prettier": "^3.6.2"
   },
   "resolutions": {
     "graphql": "^16.0.0",

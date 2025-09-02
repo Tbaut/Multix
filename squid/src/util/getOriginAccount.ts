@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function getOriginAccount(origin: any): string {
   if (origin && origin.__kind === 'system' && origin.value.__kind === 'Signed') {
     const id = origin.value.value

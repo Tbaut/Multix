@@ -12,7 +12,7 @@
 import { chainsKusamaSVG } from './logos/kusamaSVG '
 import { localSVG } from './logos/localSVG'
 import { chainsPolkadotCircleSVG } from './logos/polkadot-circleSVG'
-import { phalaSVG } from './logos/phalaSVG'
+// import { phalaSVG } from './logos/phalaSVG'
 import { nodesAssetHubSVG } from './logos/assetHubSVG'
 import { hydrationSVG } from './logos/hydrationSVG'
 import { nodesWestendColourSVG } from './logos/westend_colourSVG'
@@ -288,21 +288,21 @@ export const networkList: Record<string, NetworkInfo> = {
   //   httpGraphqlUrl: HTTP_GRAPHQL_URL,
   //   logo: nodesMoonriverSVG
   // },
-  phala: {
-    chainId: 'phala',
-    explorerNetworkName: 'phala',
-    rpcUrls: [
-      'wss://phala-rpc.dwellir.com',
-      'wss://rpc.helikon.io/phala',
-      'wss://phala.api.onfinality.io/public-ws',
-      'wss://api.phala.network/ws',
-      'wss://phala.public.curie.radiumblock.co/ws'
-    ],
-    httpGraphqlUrl: HTTP_GRAPHQL_URL,
-    networkLogo: phalaSVG,
-    descriptor: 'phala',
-    genesisHash: '0x1bb969d85965e4bb5a651abbedf21a54b6b31a21f66b5401cc3f1e286268d736'
-  },
+  // phala: {
+  //   chainId: 'phala',
+  //   explorerNetworkName: 'phala',
+  //   rpcUrls: [
+  //     'wss://phala-rpc.dwellir.com',
+  //     'wss://rpc.helikon.io/phala',
+  //     'wss://phala.api.onfinality.io/public-ws',
+  //     'wss://api.phala.network/ws',
+  //     'wss://phala.public.curie.radiumblock.co/ws'
+  //   ],
+  //   httpGraphqlUrl: HTTP_GRAPHQL_URL,
+  //   networkLogo: phalaSVG,
+  //   descriptor: 'phala',
+  //   genesisHash: '0x1bb969d85965e4bb5a651abbedf21a54b6b31a21f66b5401cc3f1e286268d736'
+  // },
   // 'rhala testnet': {
   //   chainId: 'rhala',
   //   explorerNetworkName: '',
@@ -329,23 +329,23 @@ export const networkList: Record<string, NetworkInfo> = {
     pplChainDescriptor: 'wesPpl',
     genesisHash: '0xe143f23803ac50e8f6f8e62695d1ce9e4e1d68aa36c1cd2cfd15340213f3423e'
   },
-  'asset-hub-westend': {
-    chainId: 'asset-hub-westend',
-    explorerNetworkName: 'assethub-westend',
-    rpcUrls: [
-      'wss://asset-hub-westend-rpc.dwellir.com',
-      'wss://sys.ibp.network/asset-hub-westend',
-      'wss://asset-hub-westend.dotters.network',
-      'wss://westend-asset-hub-rpc.polkadot.io'
-    ],
-    pplChainRpcUrls: westendPplChains,
-    httpGraphqlUrl: HTTP_GRAPHQL_URL,
-    nativeAssetLogo: nodesWestendColourSVG,
-    networkLogo: nodesAssetHubSVG,
-    descriptor: 'wesAssetHub',
-    pplChainDescriptor: 'wesPpl',
-    genesisHash: '0x67f9723393ef76214df0118c34bbbd3dbebc8ed46a10973a8c969d48fe7598c9'
-  },
+  // 'asset-hub-westend': {
+  //   chainId: 'asset-hub-westend',
+  //   explorerNetworkName: 'assethub-westend',
+  //   rpcUrls: [
+  //     'wss://asset-hub-westend-rpc.dwellir.com',
+  //     'wss://sys.ibp.network/asset-hub-westend',
+  //     'wss://asset-hub-westend.dotters.network',
+  //     'wss://westend-asset-hub-rpc.polkadot.io'
+  //   ],
+  //   pplChainRpcUrls: westendPplChains,
+  //   httpGraphqlUrl: HTTP_GRAPHQL_URL,
+  //   nativeAssetLogo: nodesWestendColourSVG,
+  //   networkLogo: nodesAssetHubSVG,
+  //   descriptor: 'wesAssetHub',
+  //   pplChainDescriptor: 'wesPpl',
+  //   genesisHash: '0x67f9723393ef76214df0118c34bbbd3dbebc8ed46a10973a8c969d48fe7598c9'
+  // },
   paseo: {
     chainId: 'paseo',
     explorerNetworkName: 'paseo',
@@ -444,7 +444,7 @@ export const networkList: Record<string, NetworkInfo> = {
 export const polkadotNetworksAndParachains: Partial<keyof typeof networkList>[] = [
   'polkadot',
   'asset-hub-polkadot',
-  'coretime-polkadot',
+  // 'coretime-polkadot',
   'acala',
   // 'astar',
   'bifrost-dot',
@@ -453,7 +453,7 @@ export const polkadotNetworksAndParachains: Partial<keyof typeof networkList>[] 
   // 'kilt',
   // 'moonbeam',
   // 'pendulum',
-  'phala',
+  // 'phala',
   'polimec'
   // 'watr'
 ]
@@ -470,7 +470,7 @@ export const testChains: Partial<keyof typeof networkList>[] = [
   'paseo',
   // 'rhala testnet',
   'westend',
-  'asset-hub-westend',
+  // 'asset-hub-westend',
   'local',
   'dancelight'
 ]

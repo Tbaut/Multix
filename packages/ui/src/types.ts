@@ -121,13 +121,13 @@ export const DESCRIPTORS_NOT_HYDRATION_3_3 = {
   // phala,
   polimec,
   // coretimeDot,
-  westend,
+  westend
   // wesAssetHub
 } as const
 
 export const DESCRIPTORS_ASSET_HUBS = {
   dotAssetHub,
-  ksmAssetHub,
+  ksmAssetHub
   // wesAssetHub
 }
 

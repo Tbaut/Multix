@@ -10,6 +10,7 @@ import { AccountBadge } from '../../types'
 import TransactionProgress from './TransactionProgress'
 import { useModals } from '../../contexts/ModalsContext'
 import { CallDataInfoFromChain } from '../../contexts/PendingTxContext'
+import { useMultiProxy } from '../../contexts/MultiProxyContext'
 
 interface Props {
   className?: string
@@ -32,6 +33,7 @@ const Transaction = ({
   threshold,
   isPplChainTx = false
 }: Props) => {
+  const { selectedHasProxy } = useMultiProxy()
   const { onOpenSigningModal } = useModals()
   const isProxy = useMemo(() => isProxyCall(aggregatedData.name), [aggregatedData])
   const appliedClass = useMemo(() => (isProxy ? 'blue' : 'red'), [isProxy])
@@ -55,6 +57,7 @@ const Transaction = ({
         color="primary"
         badgeContent={isProxy ? AccountBadge.PURE : AccountBadge.MULTI}
         anchorOrigin={{ horizontal: 'left', vertical: 'top' }}
+        data-cy={`badge-${isProxy ? AccountBadge.PURE : AccountBadge.MULTI}`}
       >
         {!aggregatedData.callData ? (
           <QuestionMarkIcon
@@ -75,6 +78,7 @@ const Transaction = ({
           aggregatedData={{ ...aggregatedData }}
           isPplChainTx={isPplChainTx}
           hideTooLargeCallData={true}
+          withProxyFiltered={selectedHasProxy}
         >
           {(isProposer || possibleSigners.length > 0) && (
             <TransactionFooterStyled>

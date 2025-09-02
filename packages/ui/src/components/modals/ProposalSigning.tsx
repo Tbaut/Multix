@@ -48,7 +48,8 @@ const ProposalSigning = ({
   const { pplApi, pplCompatibilityToken } = usePplApi()
   const { api: originApi, compatibilityToken: originCompatibilityToken } = useApi()
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const { getMultisigByAddress, setRefetchMultisigTimeoutMinutes } = useMultiProxy()
+  const { getMultisigByAddress, setRefetchMultisigTimeoutMinutes, selectedHasProxy } =
+    useMultiProxy()
   const { selectedAccount } = useAccounts()
   const [addedCallData, setAddedCallData] = useState<HexString | undefined>()
   const [debouncedAddedCallData, setDebouncedAddedCallData] = useState<HexString | undefined>()
@@ -387,6 +388,7 @@ const ProposalSigning = ({
                   }
                   expanded
                   isPplChainTx={isPplChainTx}
+                  withProxyFiltered={selectedHasProxy}
                 />
               </Grid>
             </>

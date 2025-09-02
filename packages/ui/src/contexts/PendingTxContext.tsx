@@ -333,9 +333,11 @@ const getTxsByDate = async ({
     .then((res) => {
       const definedTxs = res.filter(Boolean) as CallDataInfoFromChain[]
 
+      // if this multiproxy has a proxy
       // remove the proxy transaction that aren't for the selected proxy
       const relevantTxs = definedTxs.filter((agg) => {
         if (
+          !currentProxy ||
           !isProxyCall(agg.name) ||
           !agg?.decodedCall ||
           !agg.decodedCall.value.value.real.value

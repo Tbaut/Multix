@@ -120,6 +120,87 @@ describe('Unknown Transaction', () => {
   })
 })
 
+describe('Proxy proxy Transaction', () => {
+  it('displays a proxy.proxy transaction with correct params and review modal', () => {
+    const multisigAddress = '5DLSjFMn2zT1pDVnTiHjzbFGZYnE3TvaUX6m9NB13CQuqZcn'
+    const expectedProxyShort = '5H679c'
+    cy.setupAndVisit({
+      url: landingPageNetworkAddress({ network: 'westend', address: multisigAddress }),
+      extensionConnectionAllowed: true,
+      injectExtensionWithAccounts: [testAccounts['Multisig Member Account 6']]
+    })
+
+    multisigPage
+      .transactionList()
+      .should('be.visible')
+      .within(() => {
+        multisigPage.pendingTransactionItem().should('have.length', 1)
+        multisigPage.pendingTransactionCallName().should('contain.text', 'Proxy.proxy')
+        expander.paramExpander().click()
+        expander.contentExpander().should('contain', expectedProxyShort)
+      })
+
+    // Check the review modal
+    multisigPage
+      .pendingTransactionItem()
+      .eq(0)
+      .within(() => {
+        multisigPage.reviewButton().click()
+      })
+    txSigningModal
+      .body()
+      .should('be.visible')
+      .within(() => {
+        multisigPage.pendingTransactionCallName().should('contain.text', 'Proxy.proxy')
+        txSigningModal.callInfoContainer().should('contain.text', expectedProxyShort)
+      })
+  })
+
+  it('does not display a proxy.proxy tx although one is pending', () => {
+    // this proxy proxy has 1 call filtered bc for another pure
+    // pending calldata
+    // 0x160000de3ed24acdfe71c13b4d42539c5390ddee147ba6b29b0593ce842e77ff03444500040300145d6c503d0cf97f4c7725ca773741bd02e1760bfb52e021af5a9f2de283012c0700e8764817
+    // expected pure
+    const unexpectedProxyShort = '5H679c'
+    const proxyAddress = '5EJVjG2biCYUEt8SnVNz8AT5kWEiECgjZqbYva9JvhFQ6Rec'
+    cy.setupAndVisit({
+      url: landingPageNetworkAddress({ network: 'westend', address: proxyAddress }),
+      extensionConnectionAllowed: true,
+      injectExtensionWithAccounts: [testAccounts['Multisig Member Account 6']]
+    })
+
+    multisigPage
+      .transactionList()
+      .should('be.visible')
+      .within(() => {
+        multisigPage.pendingTransactionItem().should('have.length', 1)
+        accountDisplay.pureBadge().should('be.visible')
+        expander.paramExpander().click()
+        multisigPage
+          .pendingTransactionCallName()
+          .should('contain.text', 'Balances.transfer_keep_alive')
+        expander.contentExpander().should('not.contain', unexpectedProxyShort)
+      })
+
+    // Check the review modal
+    multisigPage
+      .pendingTransactionItem()
+      .eq(0)
+      .within(() => {
+        multisigPage.reviewButton().click()
+      })
+    txSigningModal
+      .body()
+      .should('be.visible')
+      .within(() => {
+        multisigPage
+          .pendingTransactionCallName()
+          .should('contain.text', 'Balances.transfer_keep_alive')
+        expander.contentExpander().should('not.contain', unexpectedProxyShort)
+      })
+  })
+})
+
 describe('People chain', () => {
   it('can display People chain transactions', () => {
     cy.setupAndVisit({

@@ -3922,19 +3922,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@reactive-dot/core@npm:^0.42.0":
-  version: 0.42.0
-  resolution: "@reactive-dot/core@npm:0.42.0"
-  dependencies:
-    "@noble/hashes": ^1.8.0
-    "@reactive-dot/utils": ^0.10.0
-    "@substrate/smoldot-discovery": ^2.0.2
-  peerDependencies:
-    polkadot-api: ">=1.11.x"
-  checksum: 2b9e9058bdcf118a98eb0f45ebf517a01473b36862abee83733dff2f37ad127e6f6725f21cfaf05b30ea1f99ab3db1924aeaa1fbf2cb706869f04fb07839eb00
-  languageName: node
-  linkType: hard
-
 "@reactive-dot/core@npm:^0.46.1":
   version: 0.46.1
   resolution: "@reactive-dot/core@npm:0.46.1"
@@ -3948,17 +3935,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@reactive-dot/react@npm:^0.42.4":
-  version: 0.42.4
-  resolution: "@reactive-dot/react@npm:0.42.4"
+"@reactive-dot/react@npm:^0.46.1":
+  version: 0.46.2
+  resolution: "@reactive-dot/react@npm:0.46.2"
   dependencies:
-    "@reactive-dot/core": ^0.42.0
-    jotai: ^2.12.5
+    "@reactive-dot/core": ^0.46.1
+    jotai: ^2.13.1
     jotai-derive: ^0.1.3
-    jotai-effect: ^2.0.4
+    jotai-effect: ^2.0.5
   peerDependencies:
     react: 19.x
-  checksum: a0c77e0c9c909c00a87484b226efc04a02e0df9a6363b75d1f2702ef78145a3f9bb9e23ad5ca4bf99ccbff5fdcd2f2e9324f699296302844f4aee9b5549f58c6
+  checksum: cb2e9599c59a4abdf10ca27bd454b95ad1fca4677f31e60b09522e5d74b7e0dbc140ab9095367da82d3fcd1a506e6717872fc0ebfc62de4f18a93d97d0d58d76
   languageName: node
   linkType: hard
 
@@ -9670,7 +9657,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jotai-effect@npm:^2.0.4":
+"jotai-effect@npm:^2.0.5":
   version: 2.0.5
   resolution: "jotai-effect@npm:2.0.5"
   peerDependencies:
@@ -9679,18 +9666,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jotai@npm:^2.12.5":
-  version: 2.12.5
-  resolution: "jotai@npm:2.12.5"
+"jotai@npm:^2.13.1":
+  version: 2.13.1
+  resolution: "jotai@npm:2.13.1"
   peerDependencies:
+    "@babel/core": ">=7.0.0"
+    "@babel/template": ">=7.0.0"
     "@types/react": ">=17.0.0"
     react: ">=17.0.0"
   peerDependenciesMeta:
+    "@babel/core":
+      optional: true
+    "@babel/template":
+      optional: true
     "@types/react":
       optional: true
     react:
       optional: true
-  checksum: 5075b2c78f3e170d84a14b9f69a5903a5aa5b61242ee9acebc5665ce5a5fb13724748107dfd1069d00fe45b3a4ed15e07c40c0861dc817effc10532b733afabe
+  checksum: 777915c4f83c372bac066ce3acb037c8c5c01e2789b8b435bf3f302ef32a5564d471217c89b9cdee219d735d445b166bf3ff15a9f43f4cb92a8a9115c72446ad
   languageName: node
   linkType: hard
 
@@ -10425,7 +10418,7 @@ __metadata:
     "@polkadot/react-identicon": ^3.16.1
     "@polkadot/util-crypto": ^13.5.6
     "@reactive-dot/core": ^0.46.1
-    "@reactive-dot/react": ^0.42.4
+    "@reactive-dot/react": ^0.46.1
     "@reactive-dot/wallet-walletconnect": ^0.17.28
     "@reown/walletkit": ^1.2.10
     "@tanstack/react-query": ^5.85.9

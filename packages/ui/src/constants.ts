@@ -15,7 +15,7 @@ import { hydrationSVG } from './logos/hydrationSVG';
 // import { nodesWestendColourSVG } from './logos/westend_colourSVG'
 // import { chainsAcalaSVG } from './logos/acalaSVG'
 import { nodesBifrostSVG } from './logos/bifrostSVG';
-import paseoSVG from './logos/paseoSVG.svg';
+// import paseoSVG from './logos/paseoSVG.svg';
 // import dancelightSVG from './logos/dancelightSVG.svg'
 // import tanssiSVG from './logos/tanssiSVG.svg'
 import { zkVerifyMainnetSVG } from './logos/zkVerifyMainnetSVG';
@@ -304,26 +304,24 @@ export const networkList: Record<string, NetworkInfo> = {
     //   pplChainDescriptor: 'wesPpl',
     //   genesisHash: '0x67f9723393ef76214df0118c34bbbd3dbebc8ed46a10973a8c969d48fe7598c9'
     // },
-    paseo: {
-        chainId: 'paseo',
-        explorerNetworkName: 'paseo',
-        rpcUrls: [
-            'wss://rpc.ibp.network/paseo',
-            'wss://paseo.dotters.network',
-            'wss://paseo-rpc.n.dwellir.com',
-            //'wss://pas-rpc.stakeworld.io',
-            //'wss://paseo.rpc.amforc.com',
-        ],
-        httpGraphqlUrl: 'https://paseo.graphql.multix.cloud/graphql',
-        pplChainRpcUrls: [
-            'wss://people-paseo.rpc.amforc.com',
-            'wss://people-paseo.dotters.network',
-        ],
-        networkLogo: paseoSVG,
-        descriptor: 'paseo',
-        pplChainDescriptor: 'pasPpl',
-        genesisHash: '0x77afd6190f1554ad45fd0d31aee62aacc33c6db0ea801129acb813f913e0764f',
-    },
+    // paseo: {
+    //     chainId: 'paseo',
+    //     explorerNetworkName: 'paseo',
+    //     rpcUrls: [
+    //         'wss://rpc.ibp.network/paseo',
+    //         'wss://paseo.dotters.network',
+    //         'wss://paseo-rpc.n.dwellir.com',
+    //     ],
+    //     httpGraphqlUrl: 'https://paseo.graphql.multix.cloud/graphql',
+    //     pplChainRpcUrls: [
+    //         'wss://people-paseo.rpc.amforc.com',
+    //         'wss://people-paseo.dotters.network',
+    //     ],
+    //     networkLogo: paseoSVG,
+    //     descriptor: 'paseo',
+    //     pplChainDescriptor: 'pasPpl',
+    //     genesisHash: '0x77afd6190f1554ad45fd0d31aee62aacc33c6db0ea801129acb813f913e0764f',
+    // },
     // amplitude: {
     //   chainId: 'amplitude',
     //   explorerNetworkName: 'amplitude',
@@ -416,7 +414,7 @@ export const soloChains: Partial<keyof typeof networkList>[] = [
     'zkVerify-mainnet',
 ];
 export const testChains: Partial<keyof typeof networkList>[] = [
-    'paseo',
+    // 'paseo',
     // 'westend',
     // 'asset-hub-westend',
     // 'local',

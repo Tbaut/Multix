@@ -14,7 +14,7 @@ import { nodesAssetHubSVG } from './logos/assetHubSVG';
 import { hydrationSVG } from './logos/hydrationSVG';
 // import { nodesWestendColourSVG } from './logos/westend_colourSVG'
 // import { chainsAcalaSVG } from './logos/acalaSVG'
-import { nodesBifrostSVG } from './logos/bifrostSVG';
+// import { nodesBifrostSVG } from './logos/bifrostSVG';
 // import paseoSVG from './logos/paseoSVG.svg';
 // import dancelightSVG from './logos/dancelightSVG.svg'
 // import tanssiSVG from './logos/tanssiSVG.svg'
@@ -217,21 +217,21 @@ export const networkList: Record<string, NetworkInfo> = {
         descriptor: 'astar',
         genesisHash: '0x9eb76c5184c4ab8679d2d5d819fdf90b9c001403e9e17da2e14b6d8aec4029c6',
     },
-    'bifrost-dot': {
-        chainId: 'bifrost-polkadot',
-        explorerNetworkName: 'bifrost',
-        rpcUrls: [
-            'wss://rpc.ibp.network/bifrost-polkadot',
-            'wss://bifrost-polkadot.dotters.network',
-            'wss://hk.p.bifrost-rpc.liebi.com/ws',
-            'wss://eu.bifrost-polkadot-rpc.liebi.com/ws',
-            // 'wss://bifrost.public.curie.radiumblock.co/ws'
-        ],
-        httpGraphqlUrl: 'https://bifrost-polkadot.graphql.multix.cloud/graphql',
-        networkLogo: nodesBifrostSVG,
-        descriptor: 'bifrostDot',
-        genesisHash: '0x262e1b2ad728475fd6fe88e62d34c200abe6fd693931ddad144059b1eb884e5b',
-    },
+    // 'bifrost-dot': {
+    //     chainId: 'bifrost-polkadot',
+    //     explorerNetworkName: 'bifrost',
+    //     rpcUrls: [
+    //         'wss://rpc.ibp.network/bifrost-polkadot',
+    //         'wss://bifrost-polkadot.dotters.network',
+    //         'wss://hk.p.bifrost-rpc.liebi.com/ws',
+    //         'wss://eu.bifrost-polkadot-rpc.liebi.com/ws',
+    //         // 'wss://bifrost.public.curie.radiumblock.co/ws'
+    //     ],
+    //     httpGraphqlUrl: 'https://bifrost-polkadot.graphql.multix.cloud/graphql',
+    //     networkLogo: nodesBifrostSVG,
+    //     descriptor: 'bifrostDot',
+    //     genesisHash: '0x262e1b2ad728475fd6fe88e62d34c200abe6fd693931ddad144059b1eb884e5b',
+    // },
     hydration: {
         chainId: 'hydradx',
         explorerNetworkName: 'hydration',
@@ -395,7 +395,7 @@ export const polkadotNetworksAndParachains: Partial<keyof typeof networkList>[] 
     // 'coretime-polkadot',
     // 'acala',
     'astar',
-    'bifrost-dot',
+    // 'bifrost-dot',
     'hydration',
     // 'interlay',
     // 'moonbeam',

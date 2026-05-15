@@ -18,7 +18,7 @@ import { hydrationSVG } from './logos/hydrationSVG';
 // import paseoSVG from './logos/paseoSVG.svg';
 // import dancelightSVG from './logos/dancelightSVG.svg'
 // import tanssiSVG from './logos/tanssiSVG.svg'
-import { zkVerifyMainnetSVG } from './logos/zkVerifyMainnetSVG';
+// import { zkVerifyMainnetSVG } from './logos/zkVerifyMainnetSVG';
 import usdc from './logos/usdc.svg';
 import usdt from './logos/usdt.svg';
 import { DESCRIPTORS, PplDescriptorKeys } from './types';
@@ -368,15 +368,15 @@ export const networkList: Record<string, NetworkInfo> = {
     //   descriptor: 'dancelight',
     //   genesisHash: '0x983a1a72503d6cc3636776747ec627172b51272bf45e50a355348facb67a820a'
     // },
-    'zkVerify-mainnet': {
-        chainId: 'zkverify-mainnet',
-        explorerNetworkName: 'zkverify',
-        rpcUrls: ['wss://zkverify-rpc.zkverify.io'],
-        httpGraphqlUrl: 'https://zkverify-mainnet.graphql.multix.cloud/graphql',
-        networkLogo: zkVerifyMainnetSVG,
-        descriptor: 'zkVerifyMainnet',
-        genesisHash: '0x060e3dd3fa2904d031206bb913c954687a2bcc350e5a83d33d9e273ad21460f1',
-    },
+    // 'zkVerify-mainnet': {
+    //     chainId: 'zkverify-mainnet',
+    //     explorerNetworkName: 'zkverify',
+    //     rpcUrls: ['wss://zkverify-rpc.zkverify.io'],
+    //     httpGraphqlUrl: 'https://zkverify-mainnet.graphql.multix.cloud/graphql',
+    //     networkLogo: zkVerifyMainnetSVG,
+    //     descriptor: 'zkVerifyMainnet',
+    //     genesisHash: '0x060e3dd3fa2904d031206bb913c954687a2bcc350e5a83d33d9e273ad21460f1',
+    // },
     local: {
         chainId: import.meta.env.VITE_CHAIN_ID,
         explorerNetworkName: import.meta.env.VITE_NETWORK_NAME as 'kusama',
@@ -411,7 +411,7 @@ export const kusamaNetworksAndParachains: Partial<keyof typeof networkList>[] = 
 ];
 export const soloChains: Partial<keyof typeof networkList>[] = [
     // 'tanssi',
-    'zkVerify-mainnet',
+    // 'zkVerify-mainnet',
 ];
 export const testChains: Partial<keyof typeof networkList>[] = [
     // 'paseo',

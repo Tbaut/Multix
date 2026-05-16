@@ -11,7 +11,7 @@ import { chainsKusamaSVG } from './logos/kusamaSVG ';
 import { localSVG } from './logos/localSVG';
 import { chainsPolkadotCircleSVG } from './logos/polkadot-circleSVG';
 import { nodesAssetHubSVG } from './logos/assetHubSVG';
-import { hydrationSVG } from './logos/hydrationSVG';
+// import { hydrationSVG } from './logos/hydrationSVG';
 // import { nodesWestendColourSVG } from './logos/westend_colourSVG'
 // import { chainsAcalaSVG } from './logos/acalaSVG'
 // import { nodesBifrostSVG } from './logos/bifrostSVG';
@@ -232,21 +232,21 @@ export const networkList: Record<string, NetworkInfo> = {
     //     descriptor: 'bifrostDot',
     //     genesisHash: '0x262e1b2ad728475fd6fe88e62d34c200abe6fd693931ddad144059b1eb884e5b',
     // },
-    hydration: {
-        chainId: 'hydradx',
-        explorerNetworkName: 'hydration',
-        rpcUrls: [
-            'wss://rpc.helikon.io/hydration',
-            'wss://hydration-rpc.n.dwellir.com',
-            //'wss://rpc.ibp.network/hydration',
-            //'wss://hydration.dotters.network',
-            //'wss://rpc.hydradx.cloud',
-        ],
-        httpGraphqlUrl: 'https://hydration.graphql.multix.cloud/graphql',
-        networkLogo: hydrationSVG,
-        descriptor: 'hydration',
-        genesisHash: '0xafdc188f45c71dacbaa0b62e16a91f726c7b8699a9748cdf715459de6b7f366d',
-    },
+    // hydration: {
+    //     chainId: 'hydradx',
+    //     explorerNetworkName: 'hydration',
+    //     rpcUrls: [
+    //         'wss://rpc.helikon.io/hydration',
+    //         'wss://hydration-rpc.n.dwellir.com',
+    //         //'wss://rpc.ibp.network/hydration',
+    //         //'wss://hydration.dotters.network',
+    //         //'wss://rpc.hydradx.cloud',
+    //     ],
+    //     httpGraphqlUrl: 'https://hydration.graphql.multix.cloud/graphql',
+    //     networkLogo: hydrationSVG,
+    //     descriptor: 'hydration',
+    //     genesisHash: '0xafdc188f45c71dacbaa0b62e16a91f726c7b8699a9748cdf715459de6b7f366d',
+    // },
     // interlay: {
     //   chainId: 'interlay',
     //   explorerNetworkName: 'interlay',
@@ -396,7 +396,7 @@ export const polkadotNetworksAndParachains: Partial<keyof typeof networkList>[] 
     // 'acala',
     'astar',
     // 'bifrost-dot',
-    'hydration',
+    // 'hydration',
     // 'interlay',
     // 'moonbeam',
     // 'pendulum',

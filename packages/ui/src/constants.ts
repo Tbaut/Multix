@@ -1,4 +1,4 @@
-import { nodesAstarPNG } from './logos/astarPNG';
+// import { nodesAstarPNG } from './logos/astarPNG';
 // import { nodesInterlaySVG } from './logos/interlaySVG'
 // import { nodesMoonriverSVG } from './logos/moonriverSVG'
 // import { nodesMoonbeamSVG } from './logos/moonbeamSVG'
@@ -7,7 +7,7 @@ import { nodesAstarPNG } from './logos/astarPNG';
 // import { nodesJoystreamSVG } from './logos/joystreamSVG'
 // import { chainsWatrPNG } from './logos/watrPNG'
 // import { nodesCoretimeSVG } from './logos/coretimeSVG'
-import { chainsKusamaSVG } from './logos/kusamaSVG ';
+// import { chainsKusamaSVG } from './logos/kusamaSVG ';
 import { localSVG } from './logos/localSVG';
 import { chainsPolkadotCircleSVG } from './logos/polkadot-circleSVG';
 import { nodesAssetHubSVG } from './logos/assetHubSVG';
@@ -59,14 +59,14 @@ const polkadotPplChains = [
     // 'wss://people-polkadot.public.curie.radiumblock.co/ws'
 ];
 
-const kusamaPplChains = [
-    'wss://sys.ibp.network/people-kusama',
-    'wss://people-kusama.dotters.network',
-    //'wss://people-kusama-rpc.dwellir.com',
-    //'wss://rpc-people-kusama.luckyfriday.io',
-    //'wss://kusama-people-rpc.polkadot.io'
-    // 'wss://ksm-rpc.stakeworld.io/people'
-];
+// const kusamaPplChains = [
+//     'wss://sys.ibp.network/people-kusama',
+//     'wss://people-kusama.dotters.network',
+//     //'wss://people-kusama-rpc.dwellir.com',
+//     //'wss://rpc-people-kusama.luckyfriday.io',
+//     //'wss://kusama-people-rpc.polkadot.io'
+//     // 'wss://ksm-rpc.stakeworld.io/people'
+// ];
 
 export const networkList: Record<string, NetworkInfo> = {
     polkadot: {
@@ -92,28 +92,28 @@ export const networkList: Record<string, NetworkInfo> = {
         pplChainDescriptor: 'dotPpl',
         genesisHash: '0x91b171bb158e2d3848fa23a9f1c25182fb8e20313b2c1eb49219da7a70ce90c3',
     },
-    kusama: {
-        chainId: 'kusama',
-        explorerNetworkName: 'kusama',
-        pplChainRpcUrls: kusamaPplChains,
-        rpcUrls: [
-            'wss://rpc.ibp.network/kusama',
-            'wss://kusama.dotters.network',
-            'wss://rpc-kusama.luckyfriday.io',
-            'wss://kusama-rpc.n.dwellir.com',
-            'wss://kusama.api.onfinality.io/public-ws',
-            // 'wss://kusama-rpc.publicnode.com' //nope
-            // 'wss://kusama-rpc-tn.dwellir.com', //nope
-            // 'wss://rockx-ksm.w3node.com/polka-public-ksm/ws',
-            // 'wss://ksm-rpc.stakeworld.io',
-            // 'wss://kusama.rpc.subquery.network/public/ws'
-        ],
-        httpGraphqlUrl: 'https://kusama.graphql.multix.cloud/graphql',
-        networkLogo: chainsKusamaSVG,
-        descriptor: 'ksm',
-        pplChainDescriptor: 'ksmPpl',
-        genesisHash: '0xb0a8d493285c2df73290dfb7e61f870f17b41801197a149ca93654499ea3dafe',
-    },
+    // kusama: {
+    //     chainId: 'kusama',
+    //     explorerNetworkName: 'kusama',
+    //     pplChainRpcUrls: kusamaPplChains,
+    //     rpcUrls: [
+    //         'wss://rpc.ibp.network/kusama',
+    //         'wss://kusama.dotters.network',
+    //         'wss://rpc-kusama.luckyfriday.io',
+    //         'wss://kusama-rpc.n.dwellir.com',
+    //         'wss://kusama.api.onfinality.io/public-ws',
+    //         // 'wss://kusama-rpc.publicnode.com' //nope
+    //         // 'wss://kusama-rpc-tn.dwellir.com', //nope
+    //         // 'wss://rockx-ksm.w3node.com/polka-public-ksm/ws',
+    //         // 'wss://ksm-rpc.stakeworld.io',
+    //         // 'wss://kusama.rpc.subquery.network/public/ws'
+    //     ],
+    //     httpGraphqlUrl: 'https://kusama.graphql.multix.cloud/graphql',
+    //     networkLogo: chainsKusamaSVG,
+    //     descriptor: 'ksm',
+    //     pplChainDescriptor: 'ksmPpl',
+    //     genesisHash: '0xb0a8d493285c2df73290dfb7e61f870f17b41801197a149ca93654499ea3dafe',
+    // },
     'asset-hub-polkadot': {
         chainId: 'asset-hub-polkadot',
         explorerNetworkName: 'assethub-polkadot',
@@ -135,28 +135,28 @@ export const networkList: Record<string, NetworkInfo> = {
         pplChainDescriptor: 'dotPpl',
         genesisHash: '0x68d56f15f85d3136970ec16946040bc1752654e906147f7e43e9d539d7c3de2f',
     },
-    'asset-hub-kusama': {
-        chainId: 'asset-hub-kusama',
-        explorerNetworkName: 'assethub-kusama',
-        rpcUrls: [
-            'wss://sys.ibp.network/statemine',
-            'wss://asset-hub-kusama.dotters.network',
-            'wss://rpc-asset-hub-kusama.luckyfriday.io',
-            'wss://asset-hub-kusama-rpc.n.dwellir.com',
-            'wss://assethub-kusama.api.onfinality.io/public-ws',
-            // 'wss://statemine-rpc-tn.dwellir.com',
-            // 'wss://kusama-asset-hub-rpc.polkadot.io'
-            // 'wss://statemine.public.curie.radiumblock.co/ws',
-            // 'wss://ksm-rpc.stakeworld.io/assethub'
-        ],
-        pplChainRpcUrls: kusamaPplChains,
-        httpGraphqlUrl: 'https://asset-hub-kusama.graphql.multix.cloud/graphql',
-        nativeAssetLogo: chainsKusamaSVG,
-        networkLogo: nodesAssetHubSVG,
-        descriptor: 'ksmAssetHub',
-        pplChainDescriptor: 'ksmPpl',
-        genesisHash: '0x48239ef607d7928874027a43a67689209727dfb3d3dc5e5b03a39bdc2eda771a',
-    },
+    // 'asset-hub-kusama': {
+    //     chainId: 'asset-hub-kusama',
+    //     explorerNetworkName: 'assethub-kusama',
+    //     rpcUrls: [
+    //         'wss://sys.ibp.network/statemine',
+    //         'wss://asset-hub-kusama.dotters.network',
+    //         'wss://rpc-asset-hub-kusama.luckyfriday.io',
+    //         'wss://asset-hub-kusama-rpc.n.dwellir.com',
+    //         'wss://assethub-kusama.api.onfinality.io/public-ws',
+    //         // 'wss://statemine-rpc-tn.dwellir.com',
+    //         // 'wss://kusama-asset-hub-rpc.polkadot.io'
+    //         // 'wss://statemine.public.curie.radiumblock.co/ws',
+    //         // 'wss://ksm-rpc.stakeworld.io/assethub'
+    //     ],
+    //     pplChainRpcUrls: kusamaPplChains,
+    //     httpGraphqlUrl: 'https://asset-hub-kusama.graphql.multix.cloud/graphql',
+    //     nativeAssetLogo: chainsKusamaSVG,
+    //     networkLogo: nodesAssetHubSVG,
+    //     descriptor: 'ksmAssetHub',
+    //     pplChainDescriptor: 'ksmPpl',
+    //     genesisHash: '0x48239ef607d7928874027a43a67689209727dfb3d3dc5e5b03a39bdc2eda771a',
+    // },
     // 'coretime-polkadot': {
     //   chainId: 'coretime-polkadot',
     //   explorerNetworkName: 'coretime-polkadot',
@@ -202,21 +202,21 @@ export const networkList: Record<string, NetworkInfo> = {
     //   descriptor: 'acala',
     //   genesisHash: '0xfc41b9bd8ef8fe53d58c7ea67c794c7ec9a73daf05e6d54b14ff6342c99ba64c'
     // },
-    astar: {
-        chainId: 'astar',
-        explorerNetworkName: 'astar',
-        rpcUrls: [
-            'wss://astar-rpc.n.dwellir.com',
-            'wss://astar.public.curie.radiumblock.co/ws',
-            //'wss://rpc.astar.network',
-            //'wss://1rpc.io/astr',
-            //'wss://astar.api.onfinality.io/public-ws',
-        ],
-        httpGraphqlUrl: 'https://astar.graphql.multix.cloud/graphql',
-        networkLogo: nodesAstarPNG,
-        descriptor: 'astar',
-        genesisHash: '0x9eb76c5184c4ab8679d2d5d819fdf90b9c001403e9e17da2e14b6d8aec4029c6',
-    },
+    // astar: {
+    //     chainId: 'astar',
+    //     explorerNetworkName: 'astar',
+    //     rpcUrls: [
+    //         'wss://astar-rpc.n.dwellir.com',
+    //         'wss://astar.public.curie.radiumblock.co/ws',
+    //         //'wss://rpc.astar.network',
+    //         //'wss://1rpc.io/astr',
+    //         //'wss://astar.api.onfinality.io/public-ws',
+    //     ],
+    //     httpGraphqlUrl: 'https://astar.graphql.multix.cloud/graphql',
+    //     networkLogo: nodesAstarPNG,
+    //     descriptor: 'astar',
+    //     genesisHash: '0x9eb76c5184c4ab8679d2d5d819fdf90b9c001403e9e17da2e14b6d8aec4029c6',
+    // },
     // 'bifrost-dot': {
     //     chainId: 'bifrost-polkadot',
     //     explorerNetworkName: 'bifrost',

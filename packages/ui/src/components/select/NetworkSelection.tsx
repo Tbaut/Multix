@@ -4,11 +4,11 @@ import { styled } from '@mui/material/styles';
 import { HiOutlineChevronDown } from 'react-icons/hi2';
 import { useNetwork } from '../../contexts/NetworkContext';
 import {
-    kusamaNetworksAndParachains,
+    //kusamaNetworksAndParachains,
     networkList,
     polkadotNetworksAndParachains,
-    soloChains,
-    testChains,
+    //soloChains,
+    //testChains,
 } from '../../constants';
 import { theme } from '../../styles/theme';
 import { useApi } from '../../contexts/ApiContext';
@@ -70,12 +70,6 @@ const NetworkSelection = () => {
         >
             <ListSubheader>Polkadot & Parachains</ListSubheader>
             {renderNetworks(polkadotNetworksAndParachains)}
-            <ListSubheader>Kusama & Parachains</ListSubheader>
-            {renderNetworks(kusamaNetworksAndParachains)}
-            <ListSubheader>Solo chains</ListSubheader>
-            {renderNetworks(soloChains)}
-            <ListSubheader>Testnets</ListSubheader>
-            {renderNetworks(testChains)}
         </SelectStyled>
     );
 };
